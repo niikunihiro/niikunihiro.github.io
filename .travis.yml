@@ -1,5 +1,9 @@
 language: minimal
 
+branches:
+  except:
+  - gh-pages
+
 before_script:
   # Download and unzip the zola executable
   # Replace the version numbers in the URL by the version you want to use
