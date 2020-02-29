@@ -1,17 +1,21 @@
 name: CI
 
-on: [push]
+on: 
+  push:
+    branches: gh-pages
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
-    - name: Zola Deploy to Pages
-      uses: shalzz/zola-deploy-action@v0.10.0
-      env:
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
         PAGES_BRANCH: gh-pages
         BUILD_DIR: .
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
