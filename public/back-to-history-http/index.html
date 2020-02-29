@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> HTTP の歴史を 10 分で振り返る | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;back-to-history-http&#x2F;" id="article_link">HTTP の歴史を 10 分で振り返る</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-02-29">February 29, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 1601 words </li>
+    <span class="dotDivider" ></span>
+    <li> 9 min </li>
+</ul>
+
+      <p>このエントリはネットワークを効率的に利用する Web アプリケーションを開発するための前提知識をまとめようという試みです。</p>
+<p>ネットワークの視点から HTTP の歴史をバージョン順に見ていくと、通信回数とデータ量を減らすことと、通信の稼働率を上げることに力が注がれてきたことがわかります。なので TCP コネクションに絞って約 10 分でわかった気になれるようにします。</p>
+<h2 id="baziyongotono-tcp-konekusiyon">バージョンごとの TCP コネクション</h2>
+<p>HTTP はトランスポートプロトコルとして TCP を使っています。TCP は HTTP メッセージのやり取りの前にクライアント・サーバ間でコネクションの確立を行ってから通信を開始します。他にもパケットの再送制御や順序制御などデータの転送を制御するので、コネクション型通信や信頼性のある通信とも呼ばれています。</p>
+<h3 id="http-1-0-yi-qian">HTTP/1.0 以前</h3>
+<p>HTTP/1.0 まではリクエストごとに TCP コネクションを確立し切断していました。リクエストごとに3ウェイ・ハンドシェイクを行っていたので通信の効率が悪く無駄な通信が発生していました。</p>
+<h4 id="3ueihandosieiku">3ウェイ・ハンドシェイク</h4>
+<p><a title="Guojunzheng / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Three-way-handshake-example.gif"><img width="512" alt="Three-way-handshake-example" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Three-way-handshake-example.gif/512px-Three-way-handshake-example.gif"></a></p>
+<p>リクエストごとに上記の通信を行ってから HTTP メッセージを送っていました。毎回となるとやっぱりちょっと多い気がしますね。</p>
+<h3 id="http-1-1">HTTP/1.1</h3>
+<p>Keep-Alive の導入により TCP コネクションを確立したらコネクションを維持し、データのやり取りが終わってから切断するようになったので、ハンドシェーク削減分の通信回数を減らすことができるようになりネットワークの効率が向上されました。<br />
+また、HTTP パイプラインのサポートにより複数のリクエストを送るときにレスポンスを待たずに次のリクエストを送信できるようになりました。</p>
+<h4 id="http-paipurain">HTTP パイプライン</h4>
+<p><a title="Mwhitlock / Public domain" href="https://commons.wikimedia.org/wiki/File:HTTP_pipelining2.svg"><img width="512" alt="HTTP pipelining2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/HTTP_pipelining2.svg/512px-HTTP_pipelining2.svg.png"></a></p>
+<p>送信側は複数の TCP コネクションを確立して、ネットワークの稼働率を上げてネットワークのパフォーマンスを向上できるようになりましたが、受信側はリクエストが来た順番でレスポンスを返すという制約があり、複数のリクエストが同時期にきた場合、その中に重いリクエストやレスポンスの処理が含まれているとその処理が終わるまで以降のレスポンスは待たされるため Web ページの表示速度が遅くなるなどの問題点がありました。</p>
+<h3 id="http-2">HTTP/2</h3>
+<p>HTTP パイプラインは通信の順番を保持する制約により、重い通信がボトルネックになることから HTTP/1.1 で活かすことができませんでしたが HTTP/2 でストリームとして生まれ変わりました。</p>
+<h4 id="sutorimu">ストリーム</h4>
+<p>ストリームは、物理的に一つの TCP コネクションで、論理的に並列化された通信を行うものです。なんとなく細かく分けて送受信してるんだなという感じですね。</p>
+<p><img src="https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/assets/HTTP2_request_response_multiplexing_within_shared_connection.svg?sanitize=true" alt="Figure 12-3. HTTP/2 request and response multiplexing within a shared connection" title="Figure 12-3. HTTP/2 request and response multiplexing within a shared connection" /></p>
+<p>論理的なイメージとしては、下図の Stream 1 ~ Stream N のように TCP コネクション上に仮想的な通信経路を複数生成し、それぞれのストリーム内でリクエストとレスポンスのやり取りを行います。</p>
+<p><img src="https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/assets/HTTP2_streams_messages_frames.svg?sanitize=true" alt="Figure 12-2. HTTP/2 streams, messages, and frames" title="Figure 12-2. HTTP/2 streams, messages, and frames" /></p>
+<p>ストリーム内ではハンドシェークはなく、フラグを使ってストリームを作成したり閉じたりできるようになっています。
+ストリームのIDの最大値と通信容量が許す限り、数万接続でも並列化できるようになりました。<br />
+SPA を作るときなんかは通信回数が増える（特に初回は）ので、ストリームの恩恵を受けられる HTTP/2 にしときたいですね。</p>
+<h3 id="http-3">HTTP/3</h3>
+<p>HTTP-over-QUIC と呼ばれていた仕様策定中の規格です。<br />
+QUIC はトランスポートプロトコルとして UDP を使ってリクエストを行うのでハンドシェークを行いません。UDP はコネクションレス型通信なので信頼性のない通信ですが、ポート番号によるアプリケーションの識別やチェックサムによるデータの破損のチェックを行うことは可能です。QUIC は UDP の上で通信の再送信や多重化などの機能を提供し HTTP に利用しようとするものらしいです。まだ詳しくは理解できてないです。</p>
+<h2 id="detaxing-shi">データ形式</h2>
+<p>HTTP/1.1 まではテキスト形式で通信を行っていましたが、HTTP/2 では「フレーム」と呼ばれるバイナリ形式でデータを分割して送受信するようになりました。<br />
+テキストからバイナリへ変換する処理が不要になった分の通信時間を削減できるようになりました。</p>
+<h2 id="atogaki">あとがき</h2>
+<p>1990年末にティム・バーナーズ＝リーたちによって最初の Web サーバが作成されて以来、HTTP（アプリケーション層）も、ネットワークインターフェース層やインターネット層、トランスポート層と同じように、高速化と効率的な利用を行うための取り組みが行われて来たことがちょっとでも伝わっていたらうれしいです。</p>
+<p>本稿を書くにいたるまで Web アプリケーションの作成では HTTP ヘッダやボディを使って HTTP メッセージをやり取りするという Semantics の視点が主で、ネットワークを効率的に利用するということは意識できていませんでした。<br />
+これからはネットワークを効率的に使うという視野も持ちながら設計・開発を行っていきたいと気持ちを新たにしたので、次はキャッシュについて書こうかなと思ってます。</p>
+<p>この稿おわり</p>
+<hr />
+<h4 id="can-kao-wen-xian">参考文献</h4>
+<ol>
+<li>井上 直也、村山 公保、竹下 隆史、荒井 透、苅田 幸雄『マスタリングTCP/IP 入門編』第6版 2019年11月</li>
+<li>渋川よしき『Real World HTTP』O'REILLY 2017年6月</li>
+</ol>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
