@@ -2,7 +2,7 @@ name: CI
 
 on: 
   push:
-    branches: master
+    branches: gh-pages
 
 jobs:
   deploy:
@@ -16,6 +16,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./public
-        PAGES_BRANCH: gh-pages
-        BUILD_DIR: .
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: master
