@@ -1,0 +1,32 @@
+# The URL the site will be built for
+base_url = "https://niikunihiro.github.io"
+
+description = "\"Life is about courage and going into the unknown.\" The Secret Life of Walter Mitty"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+# The site theme to use.
+theme = "ergo"
+
+title = "Nii Note"
+
+[extra]
+
+# Specify a profile picture to use for the logos in the theme. It can be svg, png, jpg, whatever, just make sure to copy the logo you want and put it in img/${YOUR_PROFILE}.*
+# and update your config.toml accordingly
+profile_url = "https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/d2b561e132826a2e42470c9b4f28213701632e46/profile.jpg"
+
+# github
+github = "niikunihiro"
+
+# twitter
+#twitter = ""
+
