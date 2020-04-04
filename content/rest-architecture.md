@@ -38,8 +38,8 @@ REST はシステムの大きな枠の設計で、ネットワークシステム
 ---
 
 1. Leonard Richardson, Sam Ruby『RESTful Web サービス』O'REILLY 2007年12月
-2. https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm
-3. https://en.wikipedia.org/wiki/Representational_state_transfer
-4. http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm
-5. https://www.infoq.com/jp/news/2010/03/RESTLevels/
-6. https://speakerdeck.com/koriym/rest-6-plus-4falsezhi-yue
+2. [https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+3. [https://en.wikipedia.org/wiki/Representational_state_transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)
+4. [http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm](http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm)
+5. [https://www.infoq.com/jp/news/2010/03/RESTLevels/](https://www.infoq.com/jp/news/2010/03/RESTLevels/)
+6. [https://speakerdeck.com/koriym/rest-6-plus-4falsezhi-yue](https://speakerdeck.com/koriym/rest-6-plus-4falsezhi-yue)
