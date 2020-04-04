@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> REST を理解しようとしている | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-architecture&#x2F;" id="article_link">REST を理解しようとしている</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-04-04">April 04, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 446 words </li>
+    <span class="dotDivider" ></span>
+    <li> 3 min </li>
+</ul>
+
+      <p>Roy Fielding の REST (REpresentational State Transfer) を理解しようとしている。全然わからない。</p>
+<p>経緯としては、こういうことのよう。</p>
+<ul>
+<li>アプリケーションサーバが HTTP のセマンティクスを使用しないアーキテクチャを採用していた。</li>
+<li>アプリケーションサーバは一枚岩でスケールしない。</li>
+<li>REST はそのやり方を止めた。</li>
+<li>REST を使うことにより、容易にサーバを追加できるのでスケールしやすくなった。</li>
+</ul>
+<p>つまり REST は HTTP をちゃんと使うためのアーキテクチャの１つということなのだろうか。そういう観点で REST 制約を確認するとなんとなく腑に落ちる。</p>
+<h2 id="rest-zhi-yue">REST 制約</h2>
+<table><thead><tr><th align="left">制約</th><th align="left">概要</th></tr></thead><tbody>
+<tr><td align="left">1. Client-server archtecture</td><td align="left">ユーザーインターフェースと処理を分離する</td></tr>
+<tr><td align="left">2. Statelessness</td><td align="left">サーバでアプリケーション状態を持たない</td></tr>
+<tr><td align="left">3. Cacheablility</td><td align="left">クライアントとサーバの通信回数を減らす</td></tr>
+<tr><td align="left">4. Layered System</td><td align="left">システムを階層に分離する</td></tr>
+<tr><td align="left">5. Code on Demand (optional)</td><td align="left">プログラムをサーバからクライアントにダウンロードして実行する</td></tr>
+<tr><td align="left">6. Uniform Interface</td><td align="left">インターフェースを固定する</td></tr>
+<tr><td align="left">  6.1 Resource identification in requests</td><td align="left">アドレス可能性</td></tr>
+<tr><td align="left">  6.2 Resource manipulation through representations</td><td align="left">表現を通じたリソース操作</td></tr>
+<tr><td align="left">  6.3 Self-descriptive messages</td><td align="left">自己記述的メッセージ</td></tr>
+<tr><td align="left">  6.4 Hypermedia as the engine of application state (HATEOAS)</td><td align="left">ハイパーメディア制約</td></tr>
+</tbody></table>
+<p>REST はシステムの大きな枠の設計で、ネットワークシステムのアーキテクチャスタイルの１つ。ちなみに SWEBOK による分類だと OOP とか DDD とかはマイクロアーキテクチャパターン（デザインパターン）と呼ぶ。REST とは別のレイヤーの話になるので混同しないようにしたい。</p>
+<p>少し理解は進んだ気がするが、やっぱり全然わからない。</p>
+<hr />
+<ol>
+<li>Leonard Richardson, Sam Ruby『RESTful Web サービス』O'REILLY 2007年12月</li>
+<li>https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm</li>
+<li>https://en.wikipedia.org/wiki/Representational_state_transfer</li>
+<li>http://web.archive.org/web/20130330045743/http://www.geocities.jp/yamamotoyohei/rest/rest-to-my-wife.htm</li>
+<li>https://www.infoq.com/jp/news/2010/03/RESTLevels/</li>
+<li>https://speakerdeck.com/koriym/rest-6-plus-4falsezhi-yue</li>
+</ol>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
