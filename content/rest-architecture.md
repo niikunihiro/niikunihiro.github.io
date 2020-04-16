@@ -21,7 +21,7 @@ Roy Fielding の REST (REpresentational State Transfer) を理解しようとし
 | :-- | :-- |
 | 1. Client-server archtecture | ユーザーインターフェースと処理を分離する |
 | 2. Statelessness | サーバでアプリケーション状態を持たない |
-| 3. Cacheablility | クライアントとサーバの通信回数を減らす |
+| 3. Cacheability | クライアントとサーバの通信回数を減らす |
 | 4. Layered System | システムを階層に分離する |
 | 5. Code on Demand (optional) | プログラムをサーバからクライアントにダウンロードして実行する |
 | 6. Uniform Interface | インターフェースを固定する |
