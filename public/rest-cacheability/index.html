@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> REST 制約の Cacheability | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-cacheability&#x2F;" id="article_link">REST 制約の Cacheability</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-04-17">April 17, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 974 words </li>
+    <span class="dotDivider" ></span>
+    <li> 5 min </li>
+</ul>
+
+      <p>キャッシュはクライアントとサーバの通信回数の削減や通信量の節約のために使用する。<br />
+例えば今見ているこのページをリロードしたときのステータスを開発ツールで確認してもらうと 304 Not Modified が表示されると思うので見てもらいたい。<br />
+これは表示に使われたデータがリロード時に取得されたものではなく、ウェブブウラウザに保存されたキャッシュデータが再利用されたことを表していて、通信量の節約が行われていることが確認できる。</p>
+<p>まずは、サーバからクライアントにリソースをキャッシュさせる方法と、キャッシュさせない方法について述べる。</p>
+<h2 id="kiyatusiyusaseru">キャッシュさせる</h2>
+<p>サーバからクライアントにリソースをキャッシュするように知らせるには、レスポンスの HTTP ヘッダを使用する。<br />
+例えば次のレスポンスヘッダはキャッシュの有効期間を1時間に設定しており、1時間はリクエストしてこなくていいことをクライアントに明示している。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">Cache-Control: max-age=3600
+</span></pre>
+<p>Expires ヘッダをクライアントに返すとキャッシュの有効期限を日時で指定する事ができる。Cache-Control: max-age=xxx がある場合は Expires は無視される。</p>
+<p>では次に Cache-Controle: max-age=xxx で指定した時間を過ぎたときのブラウザの動きを説明する。</p>
+<p>レスポンスヘッダで指定されたキャッシュの有効期限が過ぎてもリソースが更新されていない場合もある。むしろ変更されていないほうが多いのではないだろうか。<br />
+更新されているかはサーバに問い合わせてみないとわからないのでクライアントはサーバにリクエストを送ることになるが、リソースが更新されていない場合、サーバはレスポンスボディを返さずにクライアントにキャッシュを使うように知らせることができる。このときのリクエストを条件付きリクエストと呼ぶ。</p>
+<p>ブラウザに条件付きリクエストを行わせるには、レスポンスヘッダに Etag を含めて返す。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">Etag: W/&quot;5e88d7cf-1e1e&quot;
+</span></pre>
+<p>Etag の値はリソースの状態を文字列で表したもので、ハッシュで実装したりする。リソースが変更されると Etag の値も変更される。<br />
+クライアントは受け取った Etag の値をリクエストの If-None-Match ヘッダの値として送信し、リソースに変更があった場合、サーバは新しいリソースをクライアントに返す。<br />
+リソースに変更がない場合、サーバはステータスコード 304 Not Modified を返し、レスポンスボディを空で返すので通信量を節約することができる。クライアントは Cache-Controle: max-age=xxx の有効期限内のときと同じようにクライアントキャッシュを表示に使用する。<br />
+Etag と If-None-Match のやり取りを条件付きリクエストと呼ぶ。</p>
+<p>レスポンスヘッダの Last-Modified と リクエストヘッダの If-Modified-Since については省略。</p>
+<p>紛らわしいのが次のキャッシュヘッダで、このレスポンスヘッダが返ったときブラウザはリソースをキャッシュする。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">Cache-Control: no-cache
+</span></pre>
+<p>これはキャッシュしないというものではなく、キャッシュの利用に関して毎回サーバに問い合わせるというもの。Cache-Controle: max-age=0 とほぼ同じで問い合わせには Etag を用いる。</p>
+<h2 id="kiyatusiyusasenai">キャッシュさせない</h2>
+<p>クライアントにリソースをキャッシュしないように示す場合は次のヘッダを返す。</p>
+<pre style="background-color:#2b303b;">
+<span style="color:#c0c5ce;">Cache-Control: no-store
+</span></pre>
+<p>ここまで出てきた no-cache や no-store はディレクティブと呼び、キャッシュ可能性を示すのに使用する。</p>
+<p>他にも private や public など共有キャシュ・プライベートキャッシュを表すディレクティブがあるが、このあたりは REST の Layered System について勉強してからプロキシなども交えて言及しようと思っている。</p>
+<hr />
+<ol>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Conditional_requests">HTTP 条件付きリクエスト</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Expires">Expires</a></li>
+<li>渋川よしき『Real World HTTP』O'REILLY 2017年6月</li>
+</ol>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
