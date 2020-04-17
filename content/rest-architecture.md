@@ -1,7 +1,7 @@
 +++
 title="REST を理解しようとしている"
 date=2020-04-04
-category="HTTP"
+category="REST"
 +++
 
 Roy Fielding の REST (REpresentational State Transfer) を理解しようとしている。全然わからない。

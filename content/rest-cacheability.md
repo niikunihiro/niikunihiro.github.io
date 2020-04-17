@@ -1,7 +1,7 @@
 +++
 title="REST 制約の Cacheability"
 date=2020-04-17
-category="HTTP"
+category="REST"
 +++
 
 キャッシュはクライアントとサーバの通信回数の削減や通信量の節約のために使用する。  
