@@ -51,3 +51,4 @@ Statelessness はサーバでセッション状態を持たないという話で
 1. [Roy Thomas Fielding. Architectural Styles and
 the Design of Network-based Software Architectures - 5.1.3 Stateless](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_3)
 2. Leonard Richardson, Sam Ruby『RESTful Web サービス』O'REILLY 2007年12月
+3. リクエストごとに必要な情報をすべて含める については [ステートレスとは何か](http://yohei-y.blogspot.com/2007/10/blog-post.html) を一読されるとサクッと理解できると思います
