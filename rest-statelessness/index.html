@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> REST 制約の Statelessness | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-statelessness&#x2F;" id="article_link">REST 制約の Statelessness</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-04-18">April 18, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 814 words </li>
+    <span class="dotDivider" ></span>
+    <li> 5 min </li>
+</ul>
+
+      <p>Hypertext Transfer Protocol はステートレス・プロトコルの代名詞みたいな物と思ってるんですが、REST ももちろんステートレス・プロトコルを利用しています。が、今回のテーマはプロトコルの話ではないのです。</p>
+<p>Fielding の論文でステートレスなアーキテクチャスタイルとは</p>
+<blockquote>
+<p>The client-stateless-server style derives from client-server with the additional constraint that no session state is allowed on the server component. Each request from client to server must contain all of the information necessary to understand the request, and cannot take advantage of any stored context on the server. Session state is kept entirely on the client.</p>
+</blockquote>
+<p>といっている。</p>
+<p>ざっくりいうとこういうことらしい</p>
+<ul>
+<li>サーバでセッション状態を持つことを禁止</li>
+<li>セッション状態はクライアントで保持</li>
+<li>リクエストごとに必要な情報をすべて含める</li>
+</ul>
+<p>で、これの何がいいのかというと</p>
+<blockquote>
+<p>These constraints improve the properties of visibility, reliability, and scalability. Visibility is improved because a monitoring system does not have to look beyond a single request datum in order to determine the full nature of the request. Reliability is improved because it eases the task of recovering from partial failures. Scalability is improved because not having to store state between requests allows the server component to quickly free resources and further simplifies implementation.</p>
+</blockquote>
+<ul>
+<li>監視しやすくなって</li>
+<li>復旧しやすくなって</li>
+<li>スケーラビリティが向上する</li>
+</ul>
+<p>といっている。</p>
+<p>ただ、リクエストごとに必要な情報をすべて含めるのでネットワークのパフォーマンスが低下する可能性があると言及している。</p>
+<blockquote>
+<p>The disadvantage of client-stateless-server is that it may decrease network performance by increasing the repetitive data (per-interaction overhead) sent in a series of requests, since that data cannot be left on the server in a shared context.</p>
+</blockquote>
+<p>Fielding が Client-Stateless-Server (CSS) の次に Client-Cache-Stateless-Server (C$SS) を続けているのはキャッシュで Statelessness の欠点を補おうという意図なのかも。</p>
+<p>セッション状態あたりに話を戻して、</p>
+<p>Statelessness はサーバでセッション状態を持たないという話ですが、これは RESTの Representational （表現）に続く話のような気がしている。<br />
+どういうことかというと Statelessness ではリクエストごとに必要な情報をすべて含めるとあるが、サーバはセッション状態を持つことを禁止するとしか書かれておらずサーバがやることについては言及していない。
+ただ、サーバでセッション状態を持たないと言っても、アプリケーションに状態は存在する。Restful Webサービスでは状態について、<q>クライアント側で維持されるアプリケーション状態と、サーバ上で維持されるリソース状態とを区別する</q>といっている。</p>
+<p>アプリケーション状態とはクライアントが表示しているページや経路に関する情報や入力データなどで、クライアントはアプリケーション状態の一部をサーバに送信することでリソース状態を変更する事ができる。<br />
+リソース状態とは画像やデータベースなどのデータで、アプリケーションの操作により状態が変化する。<br />
+サーバはレスポンスにクライアントがたどるための経路をハイパーリンクとして含めることでセッション状態を持つことなくクライアントの状態を変化させていく。<br />
+これが REpresentational State Transfer ということなのか。</p>
+<hr />
+<ol>
+<li><a href="https://www.ics.uci.edu/%7Efielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_3">Roy Thomas Fielding. Architectural Styles and
+the Design of Network-based Software Architectures - 5.1.3 Stateless</a></li>
+<li>Leonard Richardson, Sam Ruby『RESTful Web サービス』O'REILLY 2007年12月</li>
+</ol>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
