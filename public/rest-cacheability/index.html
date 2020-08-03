@@ -98,16 +98,16 @@
 <h2 id="kiyatusiyusaseru">キャッシュさせる</h2>
 <p>サーバからクライアントにリソースをキャッシュするように知らせるには、レスポンスの HTTP ヘッダを使用する。<br />
 例えば次のレスポンスヘッダはキャッシュの有効期間を1時間に設定しており、1時間はリクエストしてこなくていいことをクライアントに明示している。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Cache-Control: max-age=3600
+<pre style="background-color:#31333d;">
+<span style="color:#ffffffc4;">Cache-Control: max-age=3600
 </span></pre>
 <p>Expires ヘッダをクライアントに返すとキャッシュの有効期限を日時で指定する事ができる。Cache-Control: max-age=xxx がある場合は Expires は無視される。</p>
 <p>では次に Cache-Controle: max-age=xxx で指定した時間を過ぎたときのブラウザの動きを説明する。</p>
 <p>レスポンスヘッダで指定されたキャッシュの有効期限が過ぎてもリソースが更新されていない場合もある。むしろ変更されていないほうが多いのではないだろうか。<br />
 更新されているかはサーバに問い合わせてみないとわからないのでクライアントはサーバにリクエストを送ることになるが、リソースが更新されていない場合、サーバはレスポンスボディを返さずにクライアントにキャッシュを使うように知らせることができる。このときのリクエストを条件付きリクエストと呼ぶ。</p>
 <p>ブラウザに条件付きリクエストを行わせるには、レスポンスヘッダに Etag を含めて返す。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Etag: W/&quot;5e88d7cf-1e1e&quot;
+<pre style="background-color:#31333d;">
+<span style="color:#ffffffc4;">Etag: W/&quot;5e88d7cf-1e1e&quot;
 </span></pre>
 <p>Etag の値はリソースの状態を文字列で表したもので、ハッシュで実装したりする。リソースが変更されると Etag の値も変更される。<br />
 クライアントは受け取った Etag の値をリクエストの If-None-Match ヘッダの値として送信し、リソースに変更があった場合、サーバは新しいリソースをクライアントに返す。<br />
@@ -115,14 +115,14 @@
 Etag と If-None-Match のやり取りを条件付きリクエストと呼ぶ。</p>
 <p>レスポンスヘッダの Last-Modified と リクエストヘッダの If-Modified-Since については省略。</p>
 <p>紛らわしいのが次のキャッシュヘッダで、このレスポンスヘッダが返ったときブラウザはリソースをキャッシュする。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Cache-Control: no-cache
+<pre style="background-color:#31333d;">
+<span style="color:#ffffffc4;">Cache-Control: no-cache
 </span></pre>
 <p>これはキャッシュしないというものではなく、キャッシュの利用に関して毎回サーバに問い合わせるというもの。Cache-Controle: max-age=0 とほぼ同じで問い合わせには Etag を用いる。</p>
 <h2 id="kiyatusiyusasenai">キャッシュさせない</h2>
 <p>クライアントにリソースをキャッシュしないように示す場合は次のヘッダを返す。</p>
-<pre style="background-color:#2b303b;">
-<span style="color:#c0c5ce;">Cache-Control: no-store
+<pre style="background-color:#31333d;">
+<span style="color:#ffffffc4;">Cache-Control: no-store
 </span></pre>
 <p>ここまで出てきた no-cache や no-store はディレクティブと呼び、キャッシュ可能性を示すのに使用する。</p>
 <p>他にも private や public など共有キャシュ・プライベートキャッシュを表すディレクティブがあるが、このあたりは REST の Layered System について勉強してからプロキシなども交えて言及しようと思っている。</p>
