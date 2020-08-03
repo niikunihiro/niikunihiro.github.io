@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> Go のバイナリには静的ファイルは含まれないことを知った41歳の夏 | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;go-no-contain-static-file&#x2F;" id="article_link">Go のバイナリには静的ファイルは含まれないことを知った41歳の夏</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-08-04">August 04, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 875 words </li>
+    <span class="dotDivider" ></span>
+    <li> 5 min </li>
+</ul>
+
+      <p>言いたいことはタイトルのままです。<br />
+Go の文法をなんとなく理解して、API サーバを開発したときの話で、ワシャワシャとコードを書いて、さぁサーバにデプロイだぜってときに Go の素人が陥った罠というか、無知ゆえのドハマリの記録です。
+あと41歳ではないです。</p>
+<p>で、本題なんですが、超シンプルにこんなディレクトリ構成で開発してたとします。</p>
+<pre style="background-color:#31333d;">
+<span style="color:#db7c6d;">.
+</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> Makefile
+</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> README.md
+</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> etc
+</span><span style="font-weight:bold;color:#a3cbe3;">│</span><span style="color:#ffffffc4;">   └── conf.yaml
+</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> go.mod
+</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> go.sum
+</span><span style="font-weight:bold;color:#a3cbe3;">└──</span><span style="color:#ffffffc4;"> main.go
+</span></pre>
+<p>基本的には main.go があって、設定ファイルの conf.yaml があるだけです。</p>
+<hr />
+<p>main.go もシンプルにこんな感じとします。</p>
+<pre style="background-color:#31333d;">
+<span style="color:#a3cbe3;">func </span><span style="color:#a2ba43;">main</span><span style="color:#ffffffc4;">() {
+	</span><span style="font-weight:bold;color:#a3cbe3;">conf </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> flag.</span><span style="font-weight:bold;color:#a3cbe3;">String</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">config</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">etc/conf.yaml</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">configuration file path</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">)
+	</span><span style="font-weight:bold;color:#a3cbe3;">port </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> flag.</span><span style="font-weight:bold;color:#a3cbe3;">Int</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">port</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#db7c6d;">3333</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">server port</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">)
+	flag.</span><span style="font-weight:bold;color:#a3cbe3;">Parse</span><span style="color:#ffffffc4;">()
+
+	</span><span style="font-weight:bold;color:#a3cbe3;">file</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">dir </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> filepath.</span><span style="font-weight:bold;color:#a3cbe3;">Base</span><span style="color:#ffffffc4;">(</span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">conf), filepath.</span><span style="font-weight:bold;color:#a3cbe3;">Dir</span><span style="color:#ffffffc4;">(</span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">conf)
+
+	</span><span style="font-weight:bold;color:#a3cbe3;">fp</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> os.</span><span style="font-weight:bold;color:#a3cbe3;">Open</span><span style="color:#ffffffc4;">(fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Sprintf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">/</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, dir, file))
+	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
+		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	}
+	</span><span style="color:#db7c6d;">defer</span><span style="color:#ffffffc4;"> fp.</span><span style="font-weight:bold;color:#a3cbe3;">Close</span><span style="color:#ffffffc4;">()
+
+	</span><span style="font-weight:bold;color:#a3cbe3;">b</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">_ </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> ioutil.</span><span style="font-weight:bold;color:#a3cbe3;">ReadAll</span><span style="color:#ffffffc4;">(fp)
+
+	</span><span style="font-weight:bold;color:#a3cbe3;">r </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> chi.</span><span style="font-weight:bold;color:#a3cbe3;">NewRouter</span><span style="color:#ffffffc4;">()
+	r.</span><span style="font-weight:bold;color:#a3cbe3;">Get</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">/</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#a3cbe3;">func</span><span style="color:#ffffffc4;">(</span><span style="color:#ffffff;">w</span><span style="color:#ffffffc4;"> http.ResponseWriter, </span><span style="color:#ffffff;">r </span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">http.Request) {
+		w.</span><span style="font-weight:bold;color:#a3cbe3;">Write</span><span style="color:#ffffffc4;">(b)
+	})
+	err </span><span style="color:#db7c6d;">=</span><span style="color:#ffffffc4;"> http.</span><span style="font-weight:bold;color:#a3cbe3;">ListenAndServe</span><span style="color:#ffffffc4;">(fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Sprintf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">:</span><span style="font-weight:bold;color:#a2ba43;">%d</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">port), r)
+	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
+		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	}
+}
+</span></pre>
+<p>ルーターに <a href="https://github.com/go-chi/chi">chi</a> を使用していて、<a href="http://localhost:3333">localhost:3333</a> にアクセスしたら、設定ファイルの中身を出力するだけのサンプルです。タイトルに有った静的ファイルはこの設定ファイルを指しています。</p>
+<hr />
+<p>Makefile も Go らしく作っておきます</p>
+<pre style="background-color:#31333d;">
+<span style="font-weight:bold;color:#a3cbe3;">GO_CMD</span><span style="color:#db7c6d;">=</span><span style="color:#ffffffc4;">go</span><span style="font-weight:bold;color:#a3cbe3;">
+GO_BUILD</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> build</span><span style="font-weight:bold;color:#a3cbe3;">
+GO_CLEAN</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> clean</span><span style="font-weight:bold;color:#a3cbe3;">
+GO_TEST</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> test</span><span style="color:#a2ba43;">
+GO_GET=</span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#a2ba43;"> get
+BIN_NAME=goskeleton
+
+all</span><span style="color:#db7c6d;">: </span><span style="color:#ffffffc4;">test build
+</span><span style="color:#a2ba43;">build</span><span style="color:#db7c6d;">:
+	$(</span><span style="color:#ffffff;">GO_BUILD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -i -o </span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v .
+</span><span style="color:#a2ba43;">test</span><span style="color:#db7c6d;">:
+	$(</span><span style="color:#ffffff;">GO_TEST</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v ./...
+</span><span style="color:#a2ba43;">run</span><span style="color:#db7c6d;">:
+	$(</span><span style="color:#ffffff;">GO_BUILD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -o </span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v .
+	</span><span style="font-weight:bold;color:#a3cbe3;">./</span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)
+
+</span></pre>
+<p>これで make run あるいは go build して、開発中のディレクトリでバイナリを実行しても、何も問題は起きないです。なので無知だったあの頃の私は何も気づかずに幸せに暮らしていました。</p>
+<hr />
+<p>そして「ときは来た！それだけだ…」状態で、Dockerfile を作りました。<br />
+Go で Docker コンテナを作る時はマルチステージ・ビルドというやり方が推奨されてるっぽいので、なんとなくやってみました。<br />
+マルチステージ・ビルドをざっくり説明すると、ビルドするコンテナと運用するコンテナを分けることで、コンテナサイズを小さくできるというメリットが得られるというものです。<br />
+ビルドするコンテナから運用するコンテナにバイナリを COPY で送るんですが、設定ファイルはバイナリに含まれないことを知らない私は次のログを見てパニックに陥ってました。</p>
+<pre style="background-color:#31333d;">
+<span style="font-weight:bold;color:#a3cbe3;">Attaching</span><span style="color:#ffffffc4;"> to gochiapi
+</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="font-weight:bold;color:#a3cbe3;">panic:</span><span style="color:#ffffffc4;"> open etc/conf.yaml: no such file or directory
+</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| 
+</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="font-weight:bold;color:#a3cbe3;">goroutine</span><span style="color:#ffffffc4;"> 1 </span><span style="color:#db7c6d;">[</span><span style="color:#ffffffc4;">running</span><span style="color:#db7c6d;">]</span><span style="color:#ffffffc4;">:
+</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="color:#a2ba43;">main.main</span><span style="color:#ffffffc4;">()
+gochiapi    |   /go/src/github.com/niikunihiro/goskeleton/main.go:23 +0x4d1
+gochiapi exited with code 2
+</span></pre>
+<p>沈思黙考し、Dockerfile 内で </p>
+<pre style="background-color:#31333d;">
+<span style="font-weight:bold;color:#a3cbe3;">RUN</span><span style="color:#ffffffc4;"> ls いろんなディレクトリ
+</span></pre>
+<p>というローラー作戦を展開して、バイナリからコンテナのファイルシステムに静的ファイルを読み込みにいって指定されたパスにファイルが無いぜ panic だぜと、Go のバイナリが教えてくれてることに気づけました。こんなことに小一時間費やしてしまったんですが、忘れられない夏のメモリーとなりました。</p>
+<p>しかし、これって Go やってる人には当たり前なんですよね。当たり前過ぎて情報が見つけられず辛かった。</p>
+<p>最後に、マルチステージ・ビルドの Dockerfile も載せておきます。</p>
+<pre style="background-color:#31333d;">
+<span style="color:#ffffffc4;">FROM golang:latest as builder
+
+# for alpine
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOARCH=amd64
+
+WORKDIR /go/src/github.com/niikunihiro/goskeleton
+
+ENV GO114MODULE=&quot;on&quot;
+COPY go.mod go.sum ./
+RUN go mod download -x
+
+COPY . ./
+RUN make setup
+RUN make build
+
+# runtime image
+FROM alpine:latest
+RUN apk add --no-cache ca-certificates
+
+WORKDIR /app
+
+COPY --from=builder /go/src/github.com/niikunihiro/goskeleton/goskeleton .
+COPY --from=builder /go/src/github.com/niikunihiro/goskeleton/etc/go/conf.yaml ./etc/go/
+
+EXPOSE 3333
+CMD [&quot;/app/goskeleton&quot;]
+</span></pre>
+<p>おわり</p>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
