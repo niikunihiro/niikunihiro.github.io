@@ -93,6 +93,35 @@
 
 <section class="post_list">
     
+      <article id="UUID version4 が衝突しないのを実験する" class="post_list_item">
+        <h1 class="article_title" >
+          <a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;check-for-duplicate-uuid&#x2F;"  id="article_link" >UUID version4 が衝突しないのを実験する</a>
+        </h1>
+          
+            
+<ul class="frontmatter " id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-09-02">September 02, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 454 words </li>
+    <span class="dotDivider" ></span>
+    <li> 3 min </li>
+</ul>
+
+          
+          
+            <p class="article_content">UUID の衝突は気にしなくていいという記事を読んで、なるほどなーと思いつつも、数式分からぬ実際にコードで確かめてみたい。と思ったので実験です。
+方法はプログラムで UUID ver4 を生成して UNIQUE 制約を設定したデータベースカラムに挿入し、UNIQUE 制約エラーが起きないかを確かめるというものです。
+あとはバイナリを生成して、実行するマシンのコア数だけ実行するという方法にしました。
+特に理由はないですが goroutine は敢えて使ってません。
+DDL(MySQL)
+
+create ta…</p>
+          
+        <a class="button small" href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;check-for-duplicate-uuid&#x2F;">Continue Reading →</a>
+      </article>
+    
       <article id="Go のバイナリには静的ファイルは含まれないことを知った41歳の夏" class="post_list_item">
         <h1 class="article_title" >
           <a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;go-no-contain-static-file&#x2F;"  id="article_link" >Go のバイナリには静的ファイルは含まれないことを知った41歳の夏</a>
@@ -104,7 +133,7 @@
         <time class="article_time"  datetime="2020-08-04">August 04, 2020</time>
     </li>
     <span class="dotDivider"></span>
-    <li> 871 words </li>
+    <li> 862 words </li>
     <span class="dotDivider" ></span>
     <li> 5 min </li>
 </ul>
@@ -112,7 +141,7 @@
           
           
             <p class="article_content">Go の文法をなんとなく理解して、API サーバを開発したときの話で、ワシャワシャとコードを書いて、さぁサーバにデプロイだぜってときに Go の素人が陥った罠というか、無知ゆえのドハマリの記録です。
-あと41歳ではないです。もっと歳食ってます。
+あと41歳ではないです。
 で、本題なんですが、超シンプルにこんなディレクトリ構成で開発してたとします。
 
 .
@@ -124,7 +153,7 @@
 ├── go.sum
 └── main.go
 
-基本…</p>
+基本的には main.g…</p>
           
         <a class="button small" href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;go-no-contain-static-file&#x2F;">Continue Reading →</a>
       </article>
