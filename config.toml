@@ -1,7 +1,7 @@
 # The URL the site will be built for
 base_url = "https://niikunihiro.github.io"
 
-description = "\"Life is about courage and going into the unknown.\" The Secret Life of Walter Mitty"
+description = "\"みんなで幸せになろうよ\""
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
