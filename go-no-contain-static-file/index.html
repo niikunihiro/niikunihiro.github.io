@@ -94,65 +94,64 @@
       <p>Go の文法をなんとなく理解して、API サーバを開発したときの話で、ワシャワシャとコードを書いて、さぁサーバにデプロイだぜってときに Go の素人が陥った罠というか、無知ゆえのドハマリの記録です。
 あと41歳ではないです。</p>
 <p>で、本題なんですが、超シンプルにこんなディレクトリ構成で開発してたとします。</p>
-<pre style="background-color:#31333d;">
-<span style="color:#db7c6d;">.
-</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> Makefile
-</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> README.md
-</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> etc
-</span><span style="font-weight:bold;color:#a3cbe3;">│</span><span style="color:#ffffffc4;">   └── conf.yaml
-</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> go.mod
-</span><span style="font-weight:bold;color:#a3cbe3;">├──</span><span style="color:#ffffffc4;"> go.sum
-</span><span style="font-weight:bold;color:#a3cbe3;">└──</span><span style="color:#ffffffc4;"> main.go
+<pre style="background-color:#ffffff;">
+<span style="color:#62a35c;">.
+</span><span style="color:#323232;">├── Makefile
+├── README.md
+├── etc
+│   └── conf.yaml
+├── go.mod
+├── go.sum
+└── main.go
 </span></pre>
 <p>基本的には main.go があって、設定ファイルの conf.yaml があるだけです。</p>
 <hr />
 <p>main.go もシンプルにこんな感じとします。</p>
-<pre style="background-color:#31333d;">
-<span style="color:#a3cbe3;">func </span><span style="color:#a2ba43;">main</span><span style="color:#ffffffc4;">() {
-	</span><span style="font-weight:bold;color:#a3cbe3;">conf </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> flag.</span><span style="font-weight:bold;color:#a3cbe3;">String</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">config</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">etc/conf.yaml</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">configuration file path</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">)
-	</span><span style="font-weight:bold;color:#a3cbe3;">port </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> flag.</span><span style="font-weight:bold;color:#a3cbe3;">Int</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">port</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#db7c6d;">3333</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">server port</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">)
-	flag.</span><span style="font-weight:bold;color:#a3cbe3;">Parse</span><span style="color:#ffffffc4;">()
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
+	conf </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> flag.String(</span><span style="color:#183691;">&quot;config&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;etc/conf.yaml&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;configuration file path&quot;</span><span style="color:#323232;">)
+	port </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> flag.Int(</span><span style="color:#183691;">&quot;port&quot;</span><span style="color:#323232;">, </span><span style="color:#0086b3;">3333</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;server port&quot;</span><span style="color:#323232;">)
+	flag.Parse()
 
-	</span><span style="font-weight:bold;color:#a3cbe3;">file</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">dir </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> filepath.</span><span style="font-weight:bold;color:#a3cbe3;">Base</span><span style="color:#ffffffc4;">(</span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">conf), filepath.</span><span style="font-weight:bold;color:#a3cbe3;">Dir</span><span style="color:#ffffffc4;">(</span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">conf)
+	file, dir </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> filepath.Base(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">conf), filepath.Dir(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">conf)
 
-	</span><span style="font-weight:bold;color:#a3cbe3;">fp</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> os.</span><span style="font-weight:bold;color:#a3cbe3;">Open</span><span style="color:#ffffffc4;">(fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Sprintf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">/</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, dir, file))
-	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	fp, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> os.Open(fmt.Sprintf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">/</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, dir, file))
+	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
 	}
-	</span><span style="color:#db7c6d;">defer</span><span style="color:#ffffffc4;"> fp.</span><span style="font-weight:bold;color:#a3cbe3;">Close</span><span style="color:#ffffffc4;">()
+	</span><span style="font-weight:bold;color:#a71d5d;">defer</span><span style="color:#323232;"> fp.Close()
 
-	</span><span style="font-weight:bold;color:#a3cbe3;">b</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">_ </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> ioutil.</span><span style="font-weight:bold;color:#a3cbe3;">ReadAll</span><span style="color:#ffffffc4;">(fp)
+	b, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> ioutil.ReadAll(fp)
 
-	</span><span style="font-weight:bold;color:#a3cbe3;">r </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> chi.</span><span style="font-weight:bold;color:#a3cbe3;">NewRouter</span><span style="color:#ffffffc4;">()
-	r.</span><span style="font-weight:bold;color:#a3cbe3;">Get</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">/</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#a3cbe3;">func</span><span style="color:#ffffffc4;">(</span><span style="color:#ffffff;">w</span><span style="color:#ffffffc4;"> http.ResponseWriter, </span><span style="color:#ffffff;">r </span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">http.Request) {
-		w.</span><span style="font-weight:bold;color:#a3cbe3;">Write</span><span style="color:#ffffffc4;">(b)
+	r </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> chi.NewRouter()
+	r.Get(</span><span style="color:#183691;">&quot;/&quot;</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">func</span><span style="color:#323232;">(w http.ResponseWriter, r </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">http.Request) {
+		w.Write(b)
 	})
-	err </span><span style="color:#db7c6d;">=</span><span style="color:#ffffffc4;"> http.</span><span style="font-weight:bold;color:#a3cbe3;">ListenAndServe</span><span style="color:#ffffffc4;">(fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Sprintf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">:</span><span style="font-weight:bold;color:#a2ba43;">%d</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="color:#db7c6d;">*</span><span style="color:#ffffffc4;">port), r)
-	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> http.ListenAndServe(fmt.Sprintf(</span><span style="color:#183691;">&quot;:</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">port), r)
+	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
 	}
 }
 </span></pre>
 <p>ルーターに <a href="https://github.com/go-chi/chi">chi</a> を使用していて、<a href="http://localhost:3333">localhost:3333</a> にアクセスしたら、設定ファイルの中身を出力するだけのサンプルです。タイトルに有った静的ファイルはこの設定ファイルを指しています。</p>
 <hr />
 <p>Makefile も Go らしく作っておきます</p>
-<pre style="background-color:#31333d;">
-<span style="font-weight:bold;color:#a3cbe3;">GO_CMD</span><span style="color:#db7c6d;">=</span><span style="color:#ffffffc4;">go</span><span style="font-weight:bold;color:#a3cbe3;">
-GO_BUILD</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> build</span><span style="font-weight:bold;color:#a3cbe3;">
-GO_CLEAN</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> clean</span><span style="font-weight:bold;color:#a3cbe3;">
-GO_TEST</span><span style="color:#db7c6d;">=$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> test</span><span style="color:#a2ba43;">
-GO_GET=</span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">GO_CMD</span><span style="color:#db7c6d;">)</span><span style="color:#a2ba43;"> get
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">GO_CMD</span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#183691;">go</span><span style="color:#323232;">
+GO_BUILD</span><span style="font-weight:bold;color:#a71d5d;">=$(</span><span style="color:#323232;">GO_CMD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> build</span><span style="color:#323232;">
+GO_CLEAN</span><span style="font-weight:bold;color:#a71d5d;">=$(</span><span style="color:#323232;">GO_CMD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> clean</span><span style="color:#323232;">
+GO_TEST</span><span style="font-weight:bold;color:#a71d5d;">=$(</span><span style="color:#323232;">GO_CMD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> test</span><span style="font-weight:bold;color:#795da3;">
+GO_GET=</span><span style="font-weight:bold;color:#a71d5d;">$(</span><span style="font-weight:bold;color:#323232;">GO_CMD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="font-weight:bold;color:#795da3;"> get
 BIN_NAME=goskeleton
 
-all</span><span style="color:#db7c6d;">: </span><span style="color:#ffffffc4;">test build
-</span><span style="color:#a2ba43;">build</span><span style="color:#db7c6d;">:
-	$(</span><span style="color:#ffffff;">GO_BUILD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -i -o </span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v .
-</span><span style="color:#a2ba43;">test</span><span style="color:#db7c6d;">:
-	$(</span><span style="color:#ffffff;">GO_TEST</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v ./...
-</span><span style="color:#a2ba43;">run</span><span style="color:#db7c6d;">:
-	$(</span><span style="color:#ffffff;">GO_BUILD</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -o </span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)</span><span style="color:#ffffffc4;"> -v .
-	</span><span style="font-weight:bold;color:#a3cbe3;">./</span><span style="color:#db7c6d;">$(</span><span style="color:#ffffff;">BIN_NAME</span><span style="color:#db7c6d;">)
-
+all</span><span style="font-weight:bold;color:#a71d5d;">: </span><span style="color:#183691;">test build
+</span><span style="font-weight:bold;color:#795da3;">build</span><span style="font-weight:bold;color:#a71d5d;">:
+	$(</span><span style="color:#323232;">GO_BUILD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> -i -o </span><span style="font-weight:bold;color:#a71d5d;">$(</span><span style="color:#323232;">BIN_NAME</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> -v .
+</span><span style="font-weight:bold;color:#795da3;">test</span><span style="font-weight:bold;color:#a71d5d;">:
+	$(</span><span style="color:#323232;">GO_TEST</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> -v ./...
+</span><span style="font-weight:bold;color:#795da3;">run</span><span style="font-weight:bold;color:#a71d5d;">:
+	$(</span><span style="color:#323232;">GO_BUILD</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> -o </span><span style="font-weight:bold;color:#a71d5d;">$(</span><span style="color:#323232;">BIN_NAME</span><span style="font-weight:bold;color:#a71d5d;">)</span><span style="color:#183691;"> -v .
+	</span><span style="color:#323232;">./</span><span style="font-weight:bold;color:#a71d5d;">$(</span><span style="color:#323232;">BIN_NAME</span><span style="font-weight:bold;color:#a71d5d;">)
 </span></pre>
 <p>これで make run あるいは go build して、開発中のディレクトリでバイナリを実行しても、何も問題は起きないです。なので無知だったあの頃の私は何も気づかずに幸せに暮らしていました。</p>
 <hr />
@@ -160,24 +159,24 @@ all</span><span style="color:#db7c6d;">: </span><span style="color:#ffffffc4;">t
 Go で Docker コンテナを作る時はマルチステージ・ビルドというやり方が推奨されてるっぽいので、なんとなくやってみました。<br />
 マルチステージ・ビルドをざっくり説明すると、ビルドするコンテナと運用するコンテナを分けることで、コンテナサイズを小さくできるというメリットが得られるというものです。<br />
 ビルドするコンテナから運用するコンテナにバイナリを COPY で送るんですが、設定ファイルはバイナリに含まれないことを知らない私は次のログを見てパニックに陥ってました。</p>
-<pre style="background-color:#31333d;">
-<span style="font-weight:bold;color:#a3cbe3;">Attaching</span><span style="color:#ffffffc4;"> to gochiapi
-</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="font-weight:bold;color:#a3cbe3;">panic:</span><span style="color:#ffffffc4;"> open etc/conf.yaml: no such file or directory
-</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| 
-</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="font-weight:bold;color:#a3cbe3;">goroutine</span><span style="color:#ffffffc4;"> 1 </span><span style="color:#db7c6d;">[</span><span style="color:#ffffffc4;">running</span><span style="color:#db7c6d;">]</span><span style="color:#ffffffc4;">:
-</span><span style="font-weight:bold;color:#a3cbe3;">gochiapi    </span><span style="color:#db7c6d;">| </span><span style="color:#a2ba43;">main.main</span><span style="color:#ffffffc4;">()
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">Attaching to gochiapi
+gochiapi    </span><span style="font-weight:bold;color:#a71d5d;">| </span><span style="color:#323232;">panic: open etc/conf.yaml: no such file or directory
+gochiapi    </span><span style="font-weight:bold;color:#a71d5d;">| 
+</span><span style="color:#323232;">gochiapi    </span><span style="font-weight:bold;color:#a71d5d;">| </span><span style="color:#323232;">goroutine 1 </span><span style="font-weight:bold;color:#a71d5d;">[</span><span style="color:#323232;">running</span><span style="font-weight:bold;color:#a71d5d;">]</span><span style="color:#323232;">:
+gochiapi    </span><span style="font-weight:bold;color:#a71d5d;">| </span><span style="font-weight:bold;color:#795da3;">main.main</span><span style="color:#323232;">()
 gochiapi    |   /go/src/github.com/niikunihiro/goskeleton/main.go:23 +0x4d1
 gochiapi exited with code 2
 </span></pre>
 <p>沈思黙考し、Dockerfile 内で </p>
-<pre style="background-color:#31333d;">
-<span style="font-weight:bold;color:#a3cbe3;">RUN</span><span style="color:#ffffffc4;"> ls いろんなディレクトリ
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">RUN ls いろんなディレクトリ
 </span></pre>
 <p>というローラー作戦を展開して、バイナリからコンテナのファイルシステムに静的ファイルを読み込みにいって指定されたパスにファイルが無いぜ panic だぜと、Go のバイナリが教えてくれてることに気づけました。こんなことに小一時間費やしてしまったんですが、忘れられない夏のメモリーとなりました。</p>
 <p>しかし、これって Go やってる人には当たり前なんですよね。当たり前過ぎて情報が見つけられず辛かった。</p>
 <p>最後に、マルチステージ・ビルドの Dockerfile も載せておきます。</p>
-<pre style="background-color:#31333d;">
-<span style="color:#ffffffc4;">FROM golang:latest as builder
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">FROM golang:latest as builder
 
 # for alpine
 ENV CGO_ENABLED=0

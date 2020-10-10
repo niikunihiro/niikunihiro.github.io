@@ -96,70 +96,69 @@
 あとはバイナリを生成して、実行するマシンのコア数だけ実行するという方法にしました。<br />
 特に理由はないですが goroutine は敢えて使ってません。</p>
 <p>DDL(MySQL)</p>
-<pre style="background-color:#31333d;">
-<span style="color:#db7c6d;">create table </span><span style="color:#a2ba43;">uuids</span><span style="color:#ffffffc4;">
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">create table </span><span style="font-weight:bold;color:#795da3;">uuids</span><span style="color:#323232;">
 (
-	id </span><span style="color:#a3cbe3;">int</span><span style="color:#ffffffc4;"> auto_increment
-		</span><span style="color:#dbbb3d;">primary key</span><span style="color:#ffffffc4;">,
-	uuid </span><span style="color:#a3cbe3;">varchar</span><span style="color:#ffffffc4;">(</span><span style="color:#db7c6d;">36</span><span style="color:#ffffffc4;">) </span><span style="color:#db7c6d;">not null</span><span style="color:#ffffffc4;">,
-	</span><span style="color:#dbbb3d;">constraint</span><span style="color:#ffffffc4;"> uuids_uuid_uindex
+	id </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;"> auto_increment
+		</span><span style="font-weight:bold;color:#a71d5d;">primary key</span><span style="color:#323232;">,
+	uuid </span><span style="font-weight:bold;color:#a71d5d;">varchar</span><span style="color:#323232;">(</span><span style="color:#0086b3;">36</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">not null</span><span style="color:#323232;">,
+	</span><span style="font-weight:bold;color:#a71d5d;">constraint</span><span style="color:#323232;"> uuids_uuid_uindex
 		unique (uuid)
 );
-
 </span></pre>
 <p>Source Code(Go)</p>
 <p>試す場合は、userName、password、databaseName をご自身の環境に合わせてもらえれば動くかと。</p>
-<pre style="background-color:#31333d;">
-<span style="color:#db7c6d;">package</span><span style="color:#ffffffc4;"> main
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">package</span><span style="color:#323232;"> main
 
-</span><span style="color:#db7c6d;">import </span><span style="color:#ffffffc4;">(
-	</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">database/sql</span><span style="font-weight:bold;color:#dbbb3d;">&quot;
-	&quot;</span><span style="color:#ffffffc4;">fmt</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">
-	_ </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">github.com/go-sql-driver/mysql</span><span style="font-weight:bold;color:#dbbb3d;">&quot;
-	&quot;</span><span style="color:#ffffffc4;">github.com/google/uuid</span><span style="font-weight:bold;color:#dbbb3d;">&quot;
-	&quot;</span><span style="color:#ffffffc4;">log</span><span style="font-weight:bold;color:#dbbb3d;">&quot;
-</span><span style="color:#ffffffc4;">)
+</span><span style="font-weight:bold;color:#a71d5d;">import </span><span style="color:#323232;">(
+	</span><span style="color:#183691;">&quot;database/sql&quot;
+	&quot;fmt&quot;</span><span style="color:#323232;">
+	_ </span><span style="color:#183691;">&quot;github.com/go-sql-driver/mysql&quot;
+	&quot;github.com/google/uuid&quot;
+	&quot;log&quot;
+</span><span style="color:#323232;">)
 
-</span><span style="color:#a3cbe3;">var </span><span style="font-weight:bold;color:#a3cbe3;">query </span><span style="color:#db7c6d;">= </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">INSERT INTO uuids(uuid) VALUES(?)</span><span style="font-weight:bold;color:#dbbb3d;">&quot;
+</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">query </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;INSERT INTO uuids(uuid) VALUES(?)&quot;
 
-</span><span style="color:#a3cbe3;">func </span><span style="color:#a2ba43;">main</span><span style="color:#ffffffc4;">() {
-	</span><span style="font-weight:bold;color:#a3cbe3;">dataSourceName </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Sprintf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">:</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">@tcp(</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">)/</span><span style="font-weight:bold;color:#a2ba43;">%s</span><span style="color:#ffffffc4;">?charset=utf8&amp;parseTime=true</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">,
-		</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">userName</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">password</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">127.0.0.1:3306</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">databaseName</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">,
+</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
+	dataSourceName </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> fmt.Sprintf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">:</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">@tcp(</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">)/</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">?charset=utf8&amp;parseTime=true&quot;</span><span style="color:#323232;">,
+		</span><span style="color:#183691;">&quot;userName&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;password&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;127.0.0.1:3306&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;databaseName&quot;</span><span style="color:#323232;">,
 	)
-	</span><span style="font-weight:bold;color:#a3cbe3;">db</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> sql.</span><span style="font-weight:bold;color:#a3cbe3;">Open</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">mysql</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, dataSourceName)
-	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	db, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> sql.Open(</span><span style="color:#183691;">&quot;mysql&quot;</span><span style="color:#323232;">, dataSourceName)
+	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
 	}
-	</span><span style="color:#db7c6d;">defer</span><span style="color:#ffffffc4;"> db.</span><span style="font-weight:bold;color:#a3cbe3;">Close</span><span style="color:#ffffffc4;">()
+	</span><span style="font-weight:bold;color:#a71d5d;">defer</span><span style="color:#323232;"> db.Close()
 
-	</span><span style="font-weight:bold;color:#a3cbe3;">tx</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> db.</span><span style="font-weight:bold;color:#a3cbe3;">Begin</span><span style="color:#ffffffc4;">()
-	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	tx, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> db.Begin()
+	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
 	}
-	</span><span style="font-weight:bold;color:#a3cbe3;">stmt</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> tx.</span><span style="font-weight:bold;color:#a3cbe3;">Prepare</span><span style="color:#ffffffc4;">(query)
-	</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">panic</span><span style="color:#ffffffc4;">(err)
+	stmt, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> tx.Prepare(query)
+	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
 	}
-	</span><span style="color:#db7c6d;">defer</span><span style="color:#ffffffc4;"> stmt.</span><span style="font-weight:bold;color:#a3cbe3;">Close</span><span style="color:#ffffffc4;">()
+	</span><span style="font-weight:bold;color:#a71d5d;">defer</span><span style="color:#323232;"> stmt.Close()
 
-	</span><span style="color:#db7c6d;">for </span><span style="font-weight:bold;color:#a3cbe3;">i </span><span style="color:#db7c6d;">:= 0</span><span style="color:#ffffffc4;">; i </span><span style="color:#db7c6d;">&lt; 100000</span><span style="color:#ffffffc4;">; i</span><span style="color:#db7c6d;">++ </span><span style="color:#ffffffc4;">{
-		</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> i</span><span style="color:#db7c6d;">%10000 == 0 &amp;&amp;</span><span style="color:#ffffffc4;"> i </span><span style="color:#db7c6d;">!= 0 </span><span style="color:#ffffffc4;">{
-			log.</span><span style="font-weight:bold;color:#a3cbe3;">Printf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">now index: </span><span style="font-weight:bold;color:#a2ba43;">%d\n</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, i)
+	</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">100000</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
+		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> i</span><span style="font-weight:bold;color:#a71d5d;">%</span><span style="color:#0086b3;">10000 </span><span style="font-weight:bold;color:#a71d5d;">== </span><span style="color:#0086b3;">0 </span><span style="font-weight:bold;color:#a71d5d;">&amp;&amp;</span><span style="color:#323232;"> i </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">0 </span><span style="color:#323232;">{
+			log.Printf(</span><span style="color:#183691;">&quot;now index: </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, i)
 		}
-		</span><span style="font-weight:bold;color:#a3cbe3;">id</span><span style="color:#ffffffc4;">, </span><span style="font-weight:bold;color:#a3cbe3;">err </span><span style="color:#db7c6d;">:=</span><span style="color:#ffffffc4;"> uuid.</span><span style="font-weight:bold;color:#a3cbe3;">NewRandom</span><span style="color:#ffffffc4;">()
-		</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-			log.</span><span style="font-weight:bold;color:#a3cbe3;">Fatalf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">error in uuid generate </span><span style="font-weight:bold;color:#a2ba43;">%v\n</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, err.</span><span style="font-weight:bold;color:#a3cbe3;">Error</span><span style="color:#ffffffc4;">())
+		id, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> uuid.NewRandom()
+		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+			log.Fatalf(</span><span style="color:#183691;">&quot;error in uuid generate </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err.Error())
 		}
 
-		</span><span style="color:#db7c6d;">if</span><span style="color:#ffffffc4;"> _, err </span><span style="color:#db7c6d;">=</span><span style="color:#ffffffc4;"> stmt.</span><span style="font-weight:bold;color:#a3cbe3;">Exec</span><span style="color:#ffffffc4;">(id.</span><span style="font-weight:bold;color:#a3cbe3;">String</span><span style="color:#ffffffc4;">()); err </span><span style="color:#db7c6d;">!= </span><span style="color:#ffffff;">nil </span><span style="color:#ffffffc4;">{
-			tx.</span><span style="font-weight:bold;color:#a3cbe3;">Rollback</span><span style="color:#ffffffc4;">()
-			log.</span><span style="font-weight:bold;color:#a3cbe3;">Fatalf</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">rollback </span><span style="font-weight:bold;color:#a2ba43;">%v\n</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">, err)
+		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> _, err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> stmt.Exec(id.String()); err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+			tx.Rollback()
+			log.Fatalf(</span><span style="color:#183691;">&quot;rollback </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err)
 		}
 	}
 
-	tx.</span><span style="font-weight:bold;color:#a3cbe3;">Commit</span><span style="color:#ffffffc4;">()
+	tx.Commit()
 
-	fmt.</span><span style="font-weight:bold;color:#a3cbe3;">Println</span><span style="color:#ffffffc4;">(</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">finished</span><span style="font-weight:bold;color:#dbbb3d;">&quot;</span><span style="color:#ffffffc4;">)
+	fmt.Println(</span><span style="color:#183691;">&quot;finished&quot;</span><span style="color:#323232;">)
 }
 </span></pre>
 <p>で、結果ですが、今のところ衝突は起こせていないです。2コアはちょっと頼りないか。</p>
