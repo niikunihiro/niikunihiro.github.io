@@ -75,12 +75,16 @@ p,li,ul {
 
 pre {
     border-radius: 0.25em;
+    border: 1px solid #e1e4e8;
     padding: 0.65em;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    font-family: Menlo, Monaco, 'Courier New', Courier, monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
 }
 
 blockquote {

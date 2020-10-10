@@ -21,7 +21,6 @@ create table uuids
 	constraint uuids_uuid_uindex
 		unique (uuid)
 );
-
 ```
 
 Source Code(Go)
