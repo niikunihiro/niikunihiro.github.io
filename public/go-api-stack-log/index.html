@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> Go の errors パッケージを使ってエラースタックを出力する | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;go-api-stack-log&#x2F;" id="article_link">Go の errors パッケージを使ってエラースタックを出力する</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2020-10-10">October 10, 2020</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 662 words </li>
+    <span class="dotDivider" ></span>
+    <li> 4 min </li>
+</ul>
+
+      <p>どうも Nii です。2020年もあいかわらず Web 屋をやってるので Go の errors パッケージを使ってエラーログをスタックしていく方法を記します。</p>
+<p>Go でエラーのスタックトレースを取るときは github.com/pkg/errors か xerrors を使って、出力時のフォーマットで %+v を使うのが定石なんだなぁと思ってたんですが、<a href="https://techbookfest.org/product/5410766247165952">『Go祭2020』</a>の Go で作ろう! Web アプリのカスタムエラーの章で Go 1.13 からエラーのラッピングがサポートされてる事を知ったので早速やってみようと思います。それなりに実践ぽくしたいので、<a href="https://github.com/go-chi/chi">github.com/go-chi/chi</a> を使って API を実装してみます。</p>
+<p>リクエストでエラーが発生したときに、内部処理のエラーはスタックしたログを残し、レスポンスにはエラーコードを返す。ということをやります。</p>
+<p>まずは、アプリエラーを定義します。</p>
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">AppError </span><span style="font-weight:bold;color:#a71d5d;">struct </span><span style="color:#323232;">{
+	Err         </span><span style="font-weight:bold;color:#a71d5d;">error
+	</span><span style="color:#323232;">ErrorID     ErrorID
+	Description </span><span style="font-weight:bold;color:#a71d5d;">string
+</span><span style="color:#323232;">}
+
+</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError) </span><span style="font-weight:bold;color:#795da3;">Error</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">string </span><span style="color:#323232;">{
+	</span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> err.Description
+}
+
+</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError) </span><span style="font-weight:bold;color:#795da3;">Unwrap</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">error </span><span style="color:#323232;">{
+	</span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> err.Err
+}
+</span></pre>
+<p>Unwrap を実装しておくとスタックしたエラーを全部ポップできるようになります。</p>
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">ErrorID </span><span style="font-weight:bold;color:#a71d5d;">uint
+
+func </span><span style="color:#323232;">(eid ErrorID) </span><span style="font-weight:bold;color:#795da3;">Wrap</span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">error</span><span style="color:#323232;">, description </span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">error </span><span style="color:#323232;">{
+	</span><span style="font-weight:bold;color:#a71d5d;">return &amp;</span><span style="color:#323232;">AppError{
+		Err:         err,
+		ErrorID:     eid,
+		Description: description,
+	}
+}
+</span></pre>
+<p>ここうまく説明できないのですが、AppError をラップしたエラーを持つ。つまりスタックするところ、くらいの理解です。</p>
+<p>次は、クライアントに返すエラーコードをエラーIDと結びつけて定義します。</p>
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">const </span><span style="color:#323232;">(
+	Unknown ErrorID </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">iota
+	</span><span style="color:#323232;">Maintenance
+	OutOfService
+	ServerError
+)
+
+</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">ErrorCode </span><span style="font-weight:bold;color:#a71d5d;">= map</span><span style="color:#323232;">[ErrorID]</span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">{
+	Unknown:      </span><span style="color:#183691;">&quot;E0000&quot;</span><span style="color:#323232;">,
+	Maintenance:  </span><span style="color:#183691;">&quot;E0001&quot;</span><span style="color:#323232;">,
+	OutOfService: </span><span style="color:#183691;">&quot;E0002&quot;</span><span style="color:#323232;">,
+	ServerError:  </span><span style="color:#183691;">&quot;E0003&quot;</span><span style="color:#323232;">,
+}
+</span></pre>
+<p>エラーコードでもいいし、エラーテキストを返すのもありだと思います。</p>
+<p>次は、スタックしたエラーを出力するところです。</p>
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">init</span><span style="color:#323232;">() {
+	render.Respond </span><span style="font-weight:bold;color:#a71d5d;">= func</span><span style="color:#323232;">(w http.ResponseWriter, r </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">http.Request, v </span><span style="font-weight:bold;color:#a71d5d;">interface</span><span style="color:#323232;">{}) {
+		</span><span style="font-weight:bold;color:#a71d5d;">if </span><span style="color:#323232;">appErr, ok </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> v.(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError); ok {
+			fmt.Printf(</span><span style="color:#183691;">&quot;Logging err: </span><span style="color:#0086b3;">%s\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, appErr.Error())
+			err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> appErr.Err
+			</span><span style="font-weight:bold;color:#a71d5d;">for</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
+				fmt.Printf(</span><span style="color:#183691;">&quot;Logging err: </span><span style="color:#0086b3;">%s\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err.Error())
+				err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> errors.Unwrap(err)
+			}
+			render.DefaultResponder(w, r, render.M{</span><span style="color:#183691;">&quot;code&quot;</span><span style="color:#323232;">: ErrorCode[appErr.ErrorID]})
+			</span><span style="font-weight:bold;color:#a71d5d;">return
+		</span><span style="color:#323232;">}
+		render.DefaultResponder(w, r, v)
+	}
+}
+</span></pre>
+<p>レスポンスを返すときに、エラーがあればスタックしてるエラーを出力し、レスポンスにエラーコードを指定します。ログ出力が2か所になってるのはご愛嬌ということで。</p>
+<p>あとは、API の処理内でエラーを起こして確認です。</p>
+<pre style="background-color:#ffffff;">
+<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
+	r </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> chi.NewRouter()
+	r.Get(</span><span style="color:#183691;">&quot;/&quot;</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">func</span><span style="color:#323232;">(w http.ResponseWriter, r </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">http.Request) {
+		err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> errors.New(</span><span style="color:#183691;">&quot;xxx connection error&quot;</span><span style="color:#323232;">)
+		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> Maintenance.Wrap(err, </span><span style="color:#183691;">&quot;under maintenance&quot;</span><span style="color:#323232;">)
+		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> OutOfService.Wrap(err, </span><span style="color:#183691;">&quot;not available now&quot;</span><span style="color:#323232;">)
+		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> ServerError.Wrap(err, </span><span style="color:#183691;">&quot;server error&quot;</span><span style="color:#323232;">)
+		render.Respond(w, r, err)
+	})
+	http.ListenAndServe(</span><span style="color:#183691;">&quot;:3000&quot;</span><span style="color:#323232;">, r)
+}
+</span></pre>
+<p>スタックされたログが出力されてることが確認できます。</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">Logging err: server error
+Logging err: not available now
+Logging err: under maintenance
+Logging err: xxx connection error
+</span></pre>
+<p>ということで標準パッケージの errors でエラーをスタックして出力してみました。</p>
+<hr />
+<ol>
+<li>『Go 祭 2020』Women Who Go Tokyo 2020年9月</li>
+</ol>
+
+      
+  </article>
+</section>
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
