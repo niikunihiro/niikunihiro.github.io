@@ -23,7 +23,7 @@
         <url>
             <loc>https://niikunihiro.github.io/first-step-in-data-structures-with-go/</loc>
             
-                <lastmod>2020-12-27</lastmod>
+                <lastmod>2021-01-07</lastmod>
             
         </url>
     
@@ -64,6 +64,13 @@
             <loc>https://niikunihiro.github.io/rest-statelessness/</loc>
             
                 <lastmod>2020-04-18</lastmod>
+            
+        </url>
+    
+        <url>
+            <loc>https://niikunihiro.github.io/singly-linked-list-with-go/</loc>
+            
+                <lastmod>2021-03-17</lastmod>
             
         </url>
     
