@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> 再帰呼び出しについての考察 | Nii Note </title>
+        
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+        
+        <meta content="website" property="og:type"/>
+        <meta content="Nii Note" property="og:site_name"/>
+        <meta content="https://niikunihiro.github.io/algorithm-recursion-call/" property="og:url"/>
+        <meta content="https://niikunihiro.github.io/algorithm-recursion-call/" property="twitter:url"/>
+  
+        <meta content="再帰呼び出しについての考察" property="og:title"/>
+        <meta content="再帰呼び出しについての考察" property="twitter:title"/>
+  
+  
+  
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
+  
+
+        <!--  css -->
+        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      
+    </head>
+
+    <body>
+      
+        
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+</div>
+
+      
+
+      
+<nav id="overlord" class="overlord" >
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;algorithm-recursion-call&#x2F;" id="article_link">再帰呼び出しについての考察</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2021-05-20">May 20, 2021</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 2705 words </li>
+    <span class="dotDivider" ></span>
+    <li> 14 min </li>
+</ul>
+
+      <p>再帰関数は関数内で自分自身を呼び出し、そのたびに大きな問題が小さな問題になるように異なる引数を渡していく。ということだが感覚的に把握できてないので動きをできるだけ噛み砕いてみようと思う。</p>
+<p>内容的には以下について言及する</p>
+<ol>
+<li>階乗計算（factorial）</li>
+<li>フィボナッチ数の計算（fibonacci number）</li>
+<li>ユークリッドの互除法を使った最大公約数の計算（greatest common divisor）</li>
+<li>末尾再帰（tail recursion）</li>
+</ol>
+<h2 id="jie-cheng-ji-suan-factorial">階乗計算（factorial）</h2>
+<p>まずは次の階乗計算を行うコードを書いてみる</p>
+<p>$5! = 5  \times 4  \times 3  \times 2  \times 1 = 120$</p>
+<script src="https://gist.github.com/niikunihiro/8aea770d6e0b648e69cc43da3ed47874.js"></script>
+<p>実行結果</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">Factorial of 5 is 120
+</span></pre>
+<p>実行結果にあらわれるまでのプログラムは次のように動いている。</p>
+<ol>
+<li>まず最初に <code>main</code> 関数で <code>factorial(5)</code> を呼ぶ。</li>
+<li><code>factorial(5)</code> の中で <code>factorial(4)</code> を呼ぶ。</li>
+<li><code>factorial(4)</code> の中で <code>factorial(3)</code> を呼ぶ。</li>
+<li><code>factorial(3)</code> の中で <code>factorial(2)</code> を呼ぶ。</li>
+<li><code>factorial(2)</code> の中で <code>factorial(1)</code> を呼ぶ。</li>
+<li><code>factorial(1)</code> の中で <code>factorial(0)</code> を呼ぶ。</li>
+<li><code>factorial(0)</code> の中で終了条件に入る。ここから値が帰っていく。</li>
+<li><code>factorial(0)</code> が <code>factorial(1)</code> に <code>1</code> を返す。</li>
+<li><code>factorial(1)</code> が <code>1 * factorial(0)</code> を計算して <code>1</code> を <code>factorial(2)</code> に返す。</li>
+<li><code>factorial(2)</code> が <code>2 * factorial(1)</code> を計算して <code>2</code> を <code>factorial(3)</code> に返す。</li>
+<li><code>factorial(3)</code> が <code>3 * factorial(2)</code> を計算して <code>6</code> を <code>factorial(4)</code> に返す。</li>
+<li><code>factorial(4)</code> が <code>4 * factorial(3)</code> を計算して <code>24</code> を <code>factorial(5)</code> に返す。</li>
+<li><code>factorial(5)</code> が <code>5 * factorial(4)</code> を計算して <code>120</code> を呼び出し元の <code>main</code> 関数に返す。</li>
+</ol>
+<p>階乗の例では、再帰呼び出しは終了条件になるまで自分自身を繰り返し呼び続ける。終了条件で値を返すのをきっかけに値を呼び出し元へ返し続ける。</p>
+<p>ちなみにリストの 1~6 までを winding といい 7 以降を unwinding という。</p>
+<p>下の数式は一行目の $factorial(5)$ の内部で二行目の $5 \times factorial(4)$ を呼んでおり、$factorial(0)$ まで繰り返されていることをイメージしやすくなるように書いてみた。</p>
+<p>$$
+\begin{align}
+5! &amp;= factorial(5) \\
+5! &amp;= 5 \times factorial(4) \\
+5! &amp;= 5 \times 4 \times factorial(3) \\
+5! &amp;= 5 \times 4 \times 3 \times factorial(2) \\
+5! &amp;= 5 \times 4 \times 3 \times 2 \times factorial(1) \\
+5! &amp;= 5 \times 4 \times 3 \times 2 \times 1 \times factorial(0) \\
+\end{align}
+$$</p>
+<p>$factorial(0)$ まで再帰呼び出しを行ってから、$factorial(5)$ まで値を返していくということが分かった。</p>
+<p>ここでもう一度コードに戻って見てみると</p>
+<script src="https://gist.github.com/niikunihiro/8aea770d6e0b648e69cc43da3ed47874.js"></script>
+<p>前よりも動きが把握できている！（ような気がする）</p>
+<p>上記の単純な再帰呼び出しコードで階乗計算を行うことができるのだが、再帰関数の作り方は次のふたつが必要っぽいことが分かった。</p>
+<ul>
+<li>終了条件を作る</li>
+<li>終了条件が満たされるように再帰呼び出し時の引数を変化させていく<br />
+今回の例では終了条件 <code>n == 0</code> を満たすように再帰呼び出し時の引数を <code>m-1</code> して渡している</li>
+</ul>
+<h2 id="huibonatutishu-fibonacci-number">フィボナッチ数（fibonacci number）</h2>
+<p>次はフィボナッチ数を使って、階乗計算よりも少し複雑な例で動きを追ってみる</p>
+<p>フィボナッチ数とは以下の式で定義される。</p>
+<p>$$
+\begin{eqnarray}
+f_{0} &amp;=&amp; 0 \\
+f_{1} &amp;=&amp; 1 \\
+f_{n+2} &amp;=&amp; f_{n}+f_{n+1} (n \geq 0)
+\end{eqnarray}
+$$</p>
+<p>上記の式で計算される数列をフィボナッチ数列といい、以下のような数列になる。</p>
+<p>$0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55,..$</p>
+<p>では、フィボナッチ数を計算するコードを書いてみる</p>
+<script src="https://gist.github.com/niikunihiro/5b002f4a626312c0c74621df0aac880b.js"></script>
+<p>出力結果</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">Fibonacci(3)=2
+</span></pre>
+<p>実行結果にあらわれるまでのプログラムは次のように動いている。</p>
+<ol>
+<li><code>fibonacci(4)</code> をmain関数から呼ぶ</li>
+<li><code>fibonacci(4)</code> 内部の式を展開すると <code>v := fibonacci(3) + fibonacci(2)</code> となる。前方の <code>fibonacci(3)</code> を先に呼ぶ</li>
+<li><code>fibonacci(3)</code> 内部の式を展開すると <code>v := fibonacci(2) + fibonacci(1)</code> となる。前方の <code>fibonacci(2)</code> を先に呼ぶ</li>
+<li><code>fibonacci(2)</code> 内部の式を展開すると <code>v := fibonacci(1) + fibonacci(0)</code> となる。前方の <code>fibonacci(1)</code> を先に呼ぶ</li>
+<li><code>fibonacci(1)</code> は 1 を返しリスト4に戻る</li>
+<li>リスト4の後方の <code>fibonacci(0)</code> を呼ぶ</li>
+<li><code>fibonacci(0)</code> は 0 を返しリスト4に戻る</li>
+<li>リスト4では 1 + 0 を計算して 1 をリスト3に返す</li>
+<li>リスト3の後方の <code>fibonacci(1)</code>を呼ぶ</li>
+<li><code>fibonacci(1)</code> は 1 を返しリスト3に返す</li>
+<li>リスト3では 1 + 1 を計算して 2 をリスト2に返す</li>
+<li>リスト2の後方の <code>fibonacci(2)</code> を呼ぶ</li>
+<li><code>fibonacci(2)</code> 内部の式を展開すると <code>v := fibonacci(1) + fibonacci(0)</code> となる。前方の <code>fibonacci(1)</code> を先に呼ぶ</li>
+<li><code>fibonacci(1)</code> は 1 を返しリスト13に戻る</li>
+<li>リスト13の後方の <code>fibonacci(0)</code> を呼ぶ</li>
+<li><code>fibonacci(0)</code> は 0 を返しリスト13に戻る</li>
+<li>リスト13では 1+0 を計算して 1 をリスト2に返す</li>
+<li>リスト2ではリスト11の2とリスト13の1を合計して 3 をリスト1に返す</li>
+</ol>
+<p>再帰関数の呼び出しと戻りの動きがイメージができるようになってきた気がする。</p>
+<p>リスト4とリスト13で <code>fibonacci(2)</code> の計算を行っているので、このあと引数の値を 5,6... と上げていくと同じ計算を何度も行うことになり無駄な計算をすることになってしまうなぁと思ったので試しに手元のマシンで試したところ、引数を 40 にしたくらいからちょっともっさりしたレスポンスになり、45 では明らかにレスポンスが遅いと感じるようになってしまった。<br />
+ここでちょっと調べたところメモ化再帰という最適化技法があるとのことだったのでコードにしてみた</p>
+<script src="https://gist.github.com/niikunihiro/a5d9c5e0f102f6efd9d8dbdf2ae44d48.js"></script>
+<p>引数を 45 にしても 100 にしても全然速い。仕事でコード書くときに普通にやるような対応だなぁと思ったんですが、メモ化というのはプログラムの高速化のための最適化技法の一種であるとのことで、ちゃんとした名前のある方法だったとは思いもよらず勉強になりました。<br />
+私がどこかで「あぁ、メモ化しましょうか」って言葉を発したらここで学んだことを使ってるってわけです。</p>
+<h2 id="zui-da-gong-yue-shu-greatest-common-divisor">最大公約数（greatest common divisor）</h2>
+<p>次はユークリッドの互除法を使って最大公約数（GCD）を求める</p>
+<p>12560 と 18232 の最大公約数を求める場合</p>
+<ol>
+<li>最初に大きい方の値を小さい方の値で割ると余り 5672 が得られる</li>
+<li>次に「割る値」を「余り」で割る。これを割り切れるまで繰り返す。
+<ol>
+<li>12560 割る 5672 の余りは 1216</li>
+<li>5672 割る 1216 の余りは 808</li>
+<li>1216 割る 808 の余りは 408</li>
+<li>808 割る 408 の余りは 400</li>
+<li>408 割る 400 の余りは 8</li>
+<li>400 割る 8 の余りは 0</li>
+</ol>
+</li>
+<li>割り切れたときの「割る値」が最大公約数</li>
+</ol>
+<p>これをコードにするとこうなる</p>
+<script src="https://gist.github.com/niikunihiro/1b95a33eb20610838568311cadacb0ed.js"></script>
+<p>出力結果</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">GCD(18232, 12560) = 8
+</span></pre>
+<p>プログラムの動きはコードの前に書いたリストのままなので割愛するが、コードの11行目で再帰関数の値を直接返しているので、終了条件で返した値 8 がそのまま main 関数の呼び出し元まで返っている。</p>
+<h2 id="mo-wei-zai-gui-tail-recursion">末尾再帰（tail recursion）</h2>
+<blockquote>
+<p>末尾再帰（tail recursion）とは、再帰関数の中で実行する最後の処理ステップが再帰呼び出しになっている特別なケースの再帰のことである。<br />
+出典 : 『データ構造とプログラミング』鈴木一史 2018年3月</p>
+</blockquote>
+<p>うまく説明できないので引用させてもらったんですが、とりあえずコードを見てみよう。</p>
+<script src="https://gist.github.com/niikunihiro/b35f8d83c9ba74f064b8f7de7ad73721.js"></script>
+<p>実行結果</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">factorialTail(5) = 120
+</span></pre>
+<p>コードの動きは再帰呼び出しごとに第1引数を <code>n-1</code> して <code>n == 0</code> になるまで繰り返す。第2引数は <code>n*acc</code> と累積していく。</p>
+<p>実行結果に現れるまでの動きを追う</p>
+<ol>
+<li>main 関数で <code>factorialTail(5, 1)</code> を呼ぶ。第2引数は累積のデフォルト値なので 1</li>
+<li><code>factorialTail(5, 1)</code> の内部の式を展開すると、第1引数に 5-1 の結果と第2引数に 5*1 の結果を割り当てて <code>factorialTail(4, 5)</code> を呼ぶ</li>
+<li><code>factorialTail(4, 5)</code> の内部の式を展開すると、第1引数に 4-1 の結果と第2引数に 4*5 の結果を割り当てて <code>factorialTail(3, 20)</code> を呼ぶ</li>
+<li><code>factorialTail(3, 20)</code> の内部の式を展開すると、第1引数に 3-1 の結果と第2引数に 3*20 の結果を割り当てて <code>factorialTail(2, 60)</code> を呼ぶ</li>
+<li><code>factorialTail(2, 60)</code> の内部の式を展開すると、第1引数に 2-1 の結果と第2引数に 2*60 の結果を割り当てて <code>factorialTail(1, 120)</code> を呼ぶ</li>
+<li><code>factorialTail(1, 120)</code> の内部の式を展開すると、第1引数に 1-1 の結果と第2引数に 1*120 の結果を割り当てて <code>factorialTail(0, 120)</code> を呼ぶ</li>
+<li><code>factorialTail(0, 120)</code> では終了条件に入るので、第2引数の 120 をリスト6に返す</li>
+<li>リスト6から1の main 関数まで 120 をそのまま返す</li>
+</ol>
+<p>要は再帰呼び出ししてる関数の返り値をそのままリターンしてるってことっぽい。<br />
+よく見たらユークリッドの互除法のコードも同じ構造なので上記の <code>gcd()</code> 関数も末尾再帰になるのか。</p>
+<p>末尾再帰は</p>
+<blockquote>
+<p>コードを繰り返しや反復（ for ループや while ループ)などに変換することが可能で、計算処理の高速化ができる。<br />
+出典 : 『データ構造とプログラミング』鈴木一史 2018年3月</p>
+</blockquote>
+<p>とある。コードにするとこうかな。</p>
+<script src="https://gist.github.com/niikunihiro/1e8ad82f0e9081acdbe256dfc8c9753a.js"></script>
+<p>実行結果</p>
+<pre style="background-color:#ffffff;">
+<span style="color:#323232;">factorialLoop(5) = 120
+</span></pre><h2 id="gan-xiang-noyounamono">感想のようなもの</h2>
+<p>再帰呼び出しの動きは、読んでも分からないが書いたら分かるようになった気がする。</p>
+<p>おわり</p>
+
+      
+  </article>
+</section>
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+
+       
+
+      <footer>
+        
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+</h5>
+
+          
+<ul class="social_list foot_list" >
+    
+    
+    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</ul>
+
+        
+      </footer>
+    </body>
+</html>
