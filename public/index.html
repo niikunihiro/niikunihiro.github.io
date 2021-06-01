@@ -93,6 +93,33 @@
 
 <section class="post_list">
     
+      <article id="ヒープソートを理解する" class="post_list_item">
+        <h1 class="article_title" >
+          <a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;understainding-heap-sort&#x2F;"  id="article_link" >ヒープソートを理解する</a>
+        </h1>
+          
+            
+<ul class="frontmatter " id="frontmatter">
+    <li>
+        <time class="article_time"  datetime="2021-06-01">June 01, 2021</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 875 words </li>
+    <span class="dotDivider" ></span>
+    <li> 5 min </li>
+</ul>
+
+          
+          
+            <p class="article_content">「データ構造とプログラミング」で習ったヒープソートの実装の動きが理解できてないので、頑張って理解しようぜっていう取り組みです。まずは、C の実装を Go で書き直したやつです。
+
+とりあえず、28行目の (n - 2) / 2 の計算が何を意図してるのかが分かってないです。あと、配列一つだけで処理してるので理解が追いついてない。というわけで、一旦愚直に実装して追っ付けで理解していこうと思います。
+※配列と言ってますが Go なのでスライスです。
+その前にヒープソートのざっくりした挙動ですが、次のようになり…</p>
+          
+        <a class="button small" href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;understainding-heap-sort&#x2F;">Continue Reading →</a>
+      </article>
+    
       <article id="再帰呼び出しの動きを追う" class="post_list_item">
         <h1 class="article_title" >
           <a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;follow-behavior-of-recursive-call&#x2F;"  id="article_link" >再帰呼び出しの動きを追う</a>
@@ -362,37 +389,6 @@ The client-stateless-server style derives from client-server with the additional
 まずは、サーバからクライアントにリソースをキャッシュさせる方法と、キャッシュさせ…</p>
           
         <a class="button small" href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-cacheability&#x2F;">Continue Reading →</a>
-      </article>
-    
-      <article id="REST を理解しようとしている" class="post_list_item">
-        <h1 class="article_title" >
-          <a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-architecture&#x2F;"  id="article_link" >REST を理解しようとしている</a>
-        </h1>
-          
-            
-<ul class="frontmatter " id="frontmatter">
-    <li>
-        <time class="article_time"  datetime="2020-04-04">April 04, 2020</time>
-    </li>
-    <span class="dotDivider"></span>
-    <li> 483 words </li>
-    <span class="dotDivider" ></span>
-    <li> 3 min </li>
-</ul>
-
-          
-          
-            <p class="article_content">Roy Fielding の REST (REpresentational State Transfer) を理解しようとしている。全然わからない。
-経緯としては、こういうことのよう。
-
-アプリケーションサーバが HTTP のセマンティクスを使用しないアーキテクチャを採用していた。
-アプリケーションサーバは一枚岩でスケールしない。
-REST はそのやり方を止めた。
-REST を使うことにより、容易にサーバを追加できるのでスケールしやすくなった。
-
-つまり REST は HTTP をちゃんと使うためのアーキ…</p>
-          
-        <a class="button small" href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-architecture&#x2F;">Continue Reading →</a>
       </article>
     
 </section>
