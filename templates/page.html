@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+{% block metadata %}
+        <meta content="website" property="og:type"/>
+        <meta content="{{ config.title }}" property="og:site_name"/>
+        <meta content="{{ current_url | safe }}" property="og:url"/>
+        <meta content="{{ current_url | safe }}" property="twitter:url"/>
+  {% if page.title %}
+        <meta content="{{ page.title }}" property="og:title"/>
+        <meta content="{{ page.title }}" property="twitter:title"/>
+  {% endif %}
+  {% if page.description %}
+        <meta content="{{ page.description }}" property="description"/>
+        <meta content="{{ page.description }}" property="og:description"/>
+        <meta content="{{ page.description }}" property="twitter:description"/>
+  {% endif %}
+  {% if page.extra.metadata_image %}
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="{{ config.base_url | safe }}{{ page.extra.metadata_image }}" property="og:image"/>
+        <meta content="{{ config.base_url | safe }}{{ page.extra.metadata_image }}" property="twitter:image"/>
+  {% else %}
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="{{ config.base_url | safe }}/images/cover.png" property="og:image"/>
+        <meta content="{{ config.base_url | safe }}/images/cover.png" property="twitter:image"/>
+  {% endif %}
+{% endblock metadata %}
+{% block content %}
+<nav id="overlord" class="overlord" >
+  {% set base_url = get_url(path="/", lang=lang) %}
+  {{ macros::mini_logo(classes="", title=config.title, siteurl=base_url, logourl=config.extra.profile) }}
+  {% include "languages.html" %}
+</nav>
+
+<section class="post_container">
+  <article>
+    {% block post %}
+      <h1 class="article_title"><a href="{{page.permalink}}" id="article_link">{{ page.title }}</a></h1>
+      {{ macros::frontmatter(classes="frontmatter_page", date=page.date, word_count=page.word_count, read_time=page.reading_time) }}
+      {{ page.content | safe }}
+      {% endblock post %}
+  </article>
+</section>
+{% if config.extra.comments %}
+<script src="https://utteranc.es/client.js"
+        repo="{{config.extra.comments.repo}}"
+        {% if config.extra.comments.issue_number %}
+        issue-number="{{config.extra.comments.issue_number}}"
+        {% else %}
+        issue-term="{{config.extra.comments.term}}"
+        {% endif %}
+        {% if config.extra.comments.label %}
+        label="{{config.extra.comments.label}}"
+        {% endif %}
+        theme="{{config.extra.comments.theme}}"
+        crossorigin="anonymous"
+        async>
+</script>
+{% endif %}
+{% if page.extra.math %}
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+{% endif %}
+{% endblock content %}

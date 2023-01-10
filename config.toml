@@ -1,7 +1,7 @@
 # The URL the site will be built for
 base_url = "https://niikunihiro.github.io"
 
-description = "\"みんなで幸せになろうよ\""
+description = "\"Niiko はその時思った...\""
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -18,17 +18,24 @@ build_search_index = false
 # The site theme to use.
 theme = "ergo"
 
-title = "Nii Note"
+title = "Niiko thought at that time"
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
 
 [extra]
-
 # Specify a profile picture to use for the logos in the theme. It can be svg, png, jpg, whatever, just make sure to copy the logo you want and put it in img/${YOUR_PROFILE}.*
 # and update your config.toml accordingly
-profile_url = "https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/d2b561e132826a2e42470c9b4f28213701632e46/profile.jpg"
+profile = "profile.jpg"
+color_themes = ["default", "dark"]
+country_flags = true # Display languages as country flags. Defaults to false.
 
-# github
-github = "niikunihiro"
+[[extra.socials]]
+icon = "github"
+display = "niikunihiro"
+uri = "https://github.com/niikunihiro"
 
-# twitter
-#twitter = ""
-
+[extra.font_awesome]
+kit = "e307e34624"

@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
         <!-- SEO -->
         
-        <title> Go の errors パッケージを使ってエラースタックを出力する | Nii Note </title>
+        <title> Go の errors パッケージを使ってエラースタックを出力する | Niiko thought at that time </title>
         
 
         <!-- Enable responsiveness on mobile devices-->
-        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
-        
-        <meta content="website" property="og:type"/>
-        <meta content="Nii Note" property="og:site_name"/>
-        <meta content="https://niikunihiro.github.io/go-api-stack-log/" property="og:url"/>
-        <meta content="https://niikunihiro.github.io/go-api-stack-log/" property="twitter:url"/>
-  
-        <meta content="Go の errors パッケージを使ってエラースタックを出力する" property="og:title"/>
-        <meta content="Go の errors パッケージを使ってエラースタックを出力する" property="twitter:title"/>
-  
-  
-  
-        <meta content="summary_large_image" property="twitter:card"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
-  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
 
         <!--  css -->
-        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
 
         <!-- fonts -->
         <!-- preload  -->
         <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
-        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
         <!-- load -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-      
+        
     </head>
 
-    <body>
+    <body onload="main();">
       
-        
 <input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
 <label class="menu cross menu--1" for="openSidebarMenu">
     <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
@@ -58,36 +46,43 @@
     <div class="menu_wrapper">
         <ul class="sidebarMenuInner">
             <li>
-                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
                 <div class="menu_div" ></div>
             </li>
             
             
-            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
         </ul>
     </div>
 </div>
 
-      
+
 
       
 <nav id="overlord" class="overlord" >
   
+  
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
+
+  
+
+
 
 </nav>
 
@@ -98,7 +93,7 @@
       
 <ul class="frontmatter frontmatter_page" id="frontmatter">
     <li>
-        <time class="article_time"  datetime="2020-10-10">October 10, 2020</time>
+        <time class="article_time" datetime="2020-10-10">October 10, 2020</time>
     </li>
     <span class="dotDivider"></span>
     <li> 662 words </li>
@@ -110,91 +105,85 @@
 <p>Go でエラーのスタックトレースを取るときは github.com/pkg/errors か xerrors を使って、出力時のフォーマットで %+v を使うのが定石なんだなぁと思ってたんですが、<a href="https://techbookfest.org/product/5410766247165952">『Go祭2020』</a>の Go で作ろう! Web アプリのカスタムエラーの章で Go 1.13 からエラーのラッピングがサポートされてる事を知ったので早速やってみようと思います。それなりに実践ぽくしたいので、<a href="https://github.com/go-chi/chi">github.com/go-chi/chi</a> を使って API を実装してみます。</p>
 <p>リクエストでエラーが発生したときに、内部処理のエラーはスタックしたログを残し、レスポンスにはエラーコードを返す。ということをやります。</p>
 <p>まずは、アプリエラーを定義します。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">AppError </span><span style="font-weight:bold;color:#a71d5d;">struct </span><span style="color:#323232;">{
-	Err         </span><span style="font-weight:bold;color:#a71d5d;">error
-	</span><span style="color:#323232;">ErrorID     ErrorID
-	Description </span><span style="font-weight:bold;color:#a71d5d;">string
-</span><span style="color:#323232;">}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError) </span><span style="font-weight:bold;color:#795da3;">Error</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">string </span><span style="color:#323232;">{
-	</span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> err.Description
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError) </span><span style="font-weight:bold;color:#795da3;">Unwrap</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">error </span><span style="color:#323232;">{
-	</span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> err.Err
-}
-</span></pre>
+<pre data-lang="Go" style="background-color:#2b303b;color:#c0c5ce;" class="language-Go "><code class="language-Go" data-lang="Go"><span style="color:#b48ead;">type </span><span>AppError </span><span style="color:#b48ead;">struct </span><span>{
+</span><span>	</span><span style="color:#bf616a;">Err         </span><span style="color:#b48ead;">error
+</span><span>	</span><span style="color:#bf616a;">ErrorID     </span><span style="color:#b48ead;">ErrorID
+</span><span>	</span><span style="color:#bf616a;">Description </span><span style="color:#b48ead;">string
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">err </span><span>*</span><span style="color:#b48ead;">AppError</span><span>) </span><span style="color:#8fa1b3;">Error</span><span>() </span><span style="color:#b48ead;">string </span><span>{
+</span><span>	</span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">err</span><span>.</span><span style="color:#bf616a;">Description
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">err </span><span>*</span><span style="color:#b48ead;">AppError</span><span>) </span><span style="color:#8fa1b3;">Unwrap</span><span>() </span><span style="color:#b48ead;">error </span><span>{
+</span><span>	</span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">err</span><span>.</span><span style="color:#bf616a;">Err
+</span><span>}
+</span></code></pre>
 <p>Unwrap を実装しておくとスタックしたエラーを全部ポップできるようになります。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">ErrorID </span><span style="font-weight:bold;color:#a71d5d;">uint
-
-func </span><span style="color:#323232;">(eid ErrorID) </span><span style="font-weight:bold;color:#795da3;">Wrap</span><span style="color:#323232;">(err </span><span style="font-weight:bold;color:#a71d5d;">error</span><span style="color:#323232;">, description </span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">error </span><span style="color:#323232;">{
-	</span><span style="font-weight:bold;color:#a71d5d;">return &amp;</span><span style="color:#323232;">AppError{
-		Err:         err,
-		ErrorID:     eid,
-		Description: description,
-	}
-}
-</span></pre>
+<pre data-lang="Go" style="background-color:#2b303b;color:#c0c5ce;" class="language-Go "><code class="language-Go" data-lang="Go"><span style="color:#b48ead;">type </span><span>ErrorID </span><span style="color:#b48ead;">uint
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">eid </span><span style="color:#b48ead;">ErrorID</span><span>) </span><span style="color:#8fa1b3;">Wrap</span><span>(</span><span style="color:#bf616a;">err </span><span style="color:#b48ead;">error</span><span>, </span><span style="color:#bf616a;">description </span><span style="color:#b48ead;">string</span><span>) </span><span style="color:#b48ead;">error </span><span>{
+</span><span>	</span><span style="color:#b48ead;">return </span><span>&amp;</span><span style="color:#bf616a;">AppError</span><span>{
+</span><span>		</span><span style="color:#bf616a;">Err</span><span>:         </span><span style="color:#bf616a;">err</span><span>,
+</span><span>		</span><span style="color:#bf616a;">ErrorID</span><span>:     </span><span style="color:#bf616a;">eid</span><span>,
+</span><span>		</span><span style="color:#bf616a;">Description</span><span>: </span><span style="color:#bf616a;">description</span><span>,
+</span><span>	}
+</span><span>}
+</span></code></pre>
 <p>ここうまく説明できないのですが、AppError をラップしたエラーを持つ。つまりスタックするところ、くらいの理解です。</p>
 <p>次は、クライアントに返すエラーコードをエラーIDと結びつけて定義します。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">const </span><span style="color:#323232;">(
-	Unknown ErrorID </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">iota
-	</span><span style="color:#323232;">Maintenance
-	OutOfService
-	ServerError
-)
-
-</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">ErrorCode </span><span style="font-weight:bold;color:#a71d5d;">= map</span><span style="color:#323232;">[ErrorID]</span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">{
-	Unknown:      </span><span style="color:#183691;">&quot;E0000&quot;</span><span style="color:#323232;">,
-	Maintenance:  </span><span style="color:#183691;">&quot;E0001&quot;</span><span style="color:#323232;">,
-	OutOfService: </span><span style="color:#183691;">&quot;E0002&quot;</span><span style="color:#323232;">,
-	ServerError:  </span><span style="color:#183691;">&quot;E0003&quot;</span><span style="color:#323232;">,
-}
-</span></pre>
+<pre data-lang="Go" style="background-color:#2b303b;color:#c0c5ce;" class="language-Go "><code class="language-Go" data-lang="Go"><span style="color:#b48ead;">const </span><span>(
+</span><span>	</span><span style="color:#bf616a;">Unknown </span><span style="color:#b48ead;">ErrorID </span><span>= </span><span style="color:#d08770;">iota
+</span><span>	</span><span style="color:#bf616a;">Maintenance
+</span><span>	</span><span style="color:#bf616a;">OutOfService
+</span><span>	</span><span style="color:#bf616a;">ServerError
+</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">ErrorCode </span><span>= </span><span style="color:#b48ead;">map</span><span>[</span><span style="color:#b48ead;">ErrorID</span><span>]</span><span style="color:#b48ead;">string</span><span>{
+</span><span>	</span><span style="color:#bf616a;">Unknown</span><span>:      &quot;</span><span style="color:#a3be8c;">E0000</span><span>&quot;,
+</span><span>	</span><span style="color:#bf616a;">Maintenance</span><span>:  &quot;</span><span style="color:#a3be8c;">E0001</span><span>&quot;,
+</span><span>	</span><span style="color:#bf616a;">OutOfService</span><span>: &quot;</span><span style="color:#a3be8c;">E0002</span><span>&quot;,
+</span><span>	</span><span style="color:#bf616a;">ServerError</span><span>:  &quot;</span><span style="color:#a3be8c;">E0003</span><span>&quot;,
+</span><span>}
+</span></code></pre>
 <p>エラーコードでもいいし、エラーテキストを返すのもありだと思います。</p>
 <p>次は、スタックしたエラーを出力するところです。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">init</span><span style="color:#323232;">() {
-	render.Respond </span><span style="font-weight:bold;color:#a71d5d;">= func</span><span style="color:#323232;">(w http.ResponseWriter, r </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">http.Request, v </span><span style="font-weight:bold;color:#a71d5d;">interface</span><span style="color:#323232;">{}) {
-		</span><span style="font-weight:bold;color:#a71d5d;">if </span><span style="color:#323232;">appErr, ok </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> v.(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">AppError); ok {
-			fmt.Printf(</span><span style="color:#183691;">&quot;Logging err: </span><span style="color:#0086b3;">%s\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, appErr.Error())
-			err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> appErr.Err
-			</span><span style="font-weight:bold;color:#a71d5d;">for</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-				fmt.Printf(</span><span style="color:#183691;">&quot;Logging err: </span><span style="color:#0086b3;">%s\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err.Error())
-				err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> errors.Unwrap(err)
-			}
-			render.DefaultResponder(w, r, render.M{</span><span style="color:#183691;">&quot;code&quot;</span><span style="color:#323232;">: ErrorCode[appErr.ErrorID]})
-			</span><span style="font-weight:bold;color:#a71d5d;">return
-		</span><span style="color:#323232;">}
-		render.DefaultResponder(w, r, v)
-	}
-}
-</span></pre>
+<pre data-lang="Go" style="background-color:#2b303b;color:#c0c5ce;" class="language-Go "><code class="language-Go" data-lang="Go"><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">init</span><span>() {
+</span><span>	</span><span style="color:#bf616a;">render</span><span>.</span><span style="color:#bf616a;">Respond </span><span>= </span><span style="color:#b48ead;">func</span><span>(</span><span style="color:#bf616a;">w http</span><span>.</span><span style="color:#b48ead;">ResponseWriter</span><span>, </span><span style="color:#bf616a;">r </span><span>*</span><span style="color:#bf616a;">http</span><span>.</span><span style="color:#b48ead;">Request</span><span>, </span><span style="color:#bf616a;">v </span><span style="color:#b48ead;">interface</span><span>{}) {
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">appErr</span><span>, </span><span style="color:#bf616a;">ok </span><span>:= </span><span style="color:#bf616a;">v</span><span>.(*</span><span style="color:#b48ead;">AppError</span><span>); </span><span style="color:#bf616a;">ok </span><span>{
+</span><span>			</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Logging err: </span><span style="color:#d08770;">%s</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">appErr</span><span>.</span><span style="color:#bf616a;">Error</span><span>())
+</span><span>			</span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">appErr</span><span>.</span><span style="color:#bf616a;">Err
+</span><span>			</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>				</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Logging err: </span><span style="color:#d08770;">%s</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">err</span><span>.</span><span style="color:#bf616a;">Error</span><span>())
+</span><span>				</span><span style="color:#bf616a;">err </span><span>= </span><span style="color:#bf616a;">errors</span><span>.</span><span style="color:#bf616a;">Unwrap</span><span>(</span><span style="color:#bf616a;">err</span><span>)
+</span><span>			}
+</span><span>			</span><span style="color:#bf616a;">render</span><span>.</span><span style="color:#bf616a;">DefaultResponder</span><span>(</span><span style="color:#bf616a;">w</span><span>, </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">render</span><span>.</span><span style="color:#bf616a;">M</span><span>{&quot;</span><span style="color:#a3be8c;">code</span><span>&quot;: </span><span style="color:#bf616a;">ErrorCode</span><span>[</span><span style="color:#bf616a;">appErr</span><span>.</span><span style="color:#bf616a;">ErrorID</span><span>]})
+</span><span>			</span><span style="color:#b48ead;">return
+</span><span>		}
+</span><span>		</span><span style="color:#bf616a;">render</span><span>.</span><span style="color:#bf616a;">DefaultResponder</span><span>(</span><span style="color:#bf616a;">w</span><span>, </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">v</span><span>)
+</span><span>	}
+</span><span>}
+</span></code></pre>
 <p>レスポンスを返すときに、エラーがあればスタックしてるエラーを出力し、レスポンスにエラーコードを指定します。ログ出力が2か所になってるのはご愛嬌ということで。</p>
 <p>あとは、API の処理内でエラーを起こして確認です。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
-	r </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> chi.NewRouter()
-	r.Get(</span><span style="color:#183691;">&quot;/&quot;</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">func</span><span style="color:#323232;">(w http.ResponseWriter, r </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">http.Request) {
-		err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> errors.New(</span><span style="color:#183691;">&quot;xxx connection error&quot;</span><span style="color:#323232;">)
-		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> Maintenance.Wrap(err, </span><span style="color:#183691;">&quot;under maintenance&quot;</span><span style="color:#323232;">)
-		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> OutOfService.Wrap(err, </span><span style="color:#183691;">&quot;not available now&quot;</span><span style="color:#323232;">)
-		err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> ServerError.Wrap(err, </span><span style="color:#183691;">&quot;server error&quot;</span><span style="color:#323232;">)
-		render.Respond(w, r, err)
-	})
-	http.ListenAndServe(</span><span style="color:#183691;">&quot;:3000&quot;</span><span style="color:#323232;">, r)
-}
-</span></pre>
+<pre data-lang="Go" style="background-color:#2b303b;color:#c0c5ce;" class="language-Go "><code class="language-Go" data-lang="Go"><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#bf616a;">r </span><span>:= </span><span style="color:#bf616a;">chi</span><span>.</span><span style="color:#bf616a;">NewRouter</span><span>()
+</span><span>	</span><span style="color:#bf616a;">r</span><span>.</span><span style="color:#bf616a;">Get</span><span>(&quot;</span><span style="color:#a3be8c;">/</span><span>&quot;, </span><span style="color:#b48ead;">func</span><span>(</span><span style="color:#bf616a;">w http</span><span>.</span><span style="color:#b48ead;">ResponseWriter</span><span>, </span><span style="color:#bf616a;">r </span><span>*</span><span style="color:#bf616a;">http</span><span>.</span><span style="color:#b48ead;">Request</span><span>) {
+</span><span>		</span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">errors</span><span>.</span><span style="color:#bf616a;">New</span><span>(&quot;</span><span style="color:#a3be8c;">xxx connection error</span><span>&quot;)
+</span><span>		</span><span style="color:#bf616a;">err </span><span>= </span><span style="color:#bf616a;">Maintenance</span><span>.</span><span style="color:#bf616a;">Wrap</span><span>(</span><span style="color:#bf616a;">err</span><span>, &quot;</span><span style="color:#a3be8c;">under maintenance</span><span>&quot;)
+</span><span>		</span><span style="color:#bf616a;">err </span><span>= </span><span style="color:#bf616a;">OutOfService</span><span>.</span><span style="color:#bf616a;">Wrap</span><span>(</span><span style="color:#bf616a;">err</span><span>, &quot;</span><span style="color:#a3be8c;">not available now</span><span>&quot;)
+</span><span>		</span><span style="color:#bf616a;">err </span><span>= </span><span style="color:#bf616a;">ServerError</span><span>.</span><span style="color:#bf616a;">Wrap</span><span>(</span><span style="color:#bf616a;">err</span><span>, &quot;</span><span style="color:#a3be8c;">server error</span><span>&quot;)
+</span><span>		</span><span style="color:#bf616a;">render</span><span>.</span><span style="color:#bf616a;">Respond</span><span>(</span><span style="color:#bf616a;">w</span><span>, </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">err</span><span>)
+</span><span>	})
+</span><span>	</span><span style="color:#bf616a;">http</span><span>.</span><span style="color:#bf616a;">ListenAndServe</span><span>(&quot;</span><span style="color:#a3be8c;">:3000</span><span>&quot;, </span><span style="color:#bf616a;">r</span><span>)
+</span><span>}
+</span></code></pre>
 <p>スタックされたログが出力されてることが確認できます。</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">Logging err: server error
-Logging err: not available now
-Logging err: under maintenance
-Logging err: xxx connection error
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Logging err: server error
+</span><span>Logging err: not available now
+</span><span>Logging err: under maintenance
+</span><span>Logging err: xxx connection error
+</span></code></pre>
 <p>ということで標準パッケージの errors でエラーをスタックして出力してみました。</p>
 <hr />
 <ol>
@@ -206,33 +195,44 @@ Logging err: xxx connection error
 </section>
 
 
+
        
 
       <footer>
         
           
+          
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
 
           
-<ul class="social_list foot_list" >
+<ul class="social_list foot_list">
     
-    
-    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
 </ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
 
         
       </footer>
