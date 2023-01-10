@@ -1,103 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    
-        <url>
-            <loc>https://niikunihiro.github.io/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/back-to-history-http/</loc>
-            
-                <lastmod>2020-02-29</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/check-for-duplicate-uuid/</loc>
-            
-                <lastmod>2020-09-02</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/first-step-in-data-structures-with-go/</loc>
-            
-                <lastmod>2021-01-07</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/follow-behavior-of-recursive-call/</loc>
-            
-                <lastmod>2021-05-20</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/go-api-stack-log/</loc>
-            
-                <lastmod>2020-10-10</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/go-no-contain-static-file/</loc>
-            
-                <lastmod>2020-08-04</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/page/1/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/page/2/</loc>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/rest-architecture/</loc>
-            
-                <lastmod>2020-04-04</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/rest-cacheability/</loc>
-            
-                <lastmod>2020-04-17</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/rest-statelessness/</loc>
-            
-                <lastmod>2020-04-18</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/singly-linked-list-with-go/</loc>
-            
-                <lastmod>2021-03-17</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/study-high-school-math-progression/</loc>
-            
-                <lastmod>2021-03-25</lastmod>
-            
-        </url>
-    
-        <url>
-            <loc>https://niikunihiro.github.io/understainding-heap-sort/</loc>
-            
-                <lastmod>2021-06-01</lastmod>
-            
-        </url>
-    
+    <url>
+        <loc>https://niikunihiro.github.io/</loc>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/back-to-history-http/</loc>
+        <lastmod>2020-02-29</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/check-for-duplicate-uuid/</loc>
+        <lastmod>2020-09-02</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/first-step-in-data-structures-with-go/</loc>
+        <lastmod>2021-01-07</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/follow-behavior-of-recursive-call/</loc>
+        <lastmod>2021-05-20</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/go-api-stack-log/</loc>
+        <lastmod>2020-10-10</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/go-no-contain-static-file/</loc>
+        <lastmod>2020-08-04</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/page/2/</loc>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/rest-architecture/</loc>
+        <lastmod>2020-04-04</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/rest-cacheability/</loc>
+        <lastmod>2020-04-17</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/rest-statelessness/</loc>
+        <lastmod>2020-04-18</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/singly-linked-list-with-go/</loc>
+        <lastmod>2021-03-17</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/study-high-school-math-progression/</loc>
+        <lastmod>2021-03-25</lastmod>
+    </url>
+    <url>
+        <loc>https://niikunihiro.github.io/understainding-heap-sort/</loc>
+        <lastmod>2021-06-01</lastmod>
+    </url>
 </urlset>

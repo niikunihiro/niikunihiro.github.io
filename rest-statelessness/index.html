@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
         <!-- SEO -->
         
-        <title> REST 制約の Statelessness | Nii Note </title>
+        <title> REST 制約の Statelessness | Niiko thought at that time </title>
         
 
         <!-- Enable responsiveness on mobile devices-->
-        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
-        
-        <meta content="website" property="og:type"/>
-        <meta content="Nii Note" property="og:site_name"/>
-        <meta content="https://niikunihiro.github.io/rest-statelessness/" property="og:url"/>
-        <meta content="https://niikunihiro.github.io/rest-statelessness/" property="twitter:url"/>
-  
-        <meta content="REST 制約の Statelessness" property="og:title"/>
-        <meta content="REST 制約の Statelessness" property="twitter:title"/>
-  
-  
-  
-        <meta content="summary_large_image" property="twitter:card"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
-  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
 
         <!--  css -->
-        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
 
         <!-- fonts -->
         <!-- preload  -->
         <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
-        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
         <!-- load -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-      
+        
     </head>
 
-    <body>
+    <body onload="main();">
       
-        
 <input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
 <label class="menu cross menu--1" for="openSidebarMenu">
     <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
@@ -58,36 +46,43 @@
     <div class="menu_wrapper">
         <ul class="sidebarMenuInner">
             <li>
-                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
                 <div class="menu_div" ></div>
             </li>
             
             
-            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
         </ul>
     </div>
 </div>
 
-      
+
 
       
 <nav id="overlord" class="overlord" >
   
+  
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
+
+  
+
+
 
 </nav>
 
@@ -98,7 +93,7 @@
       
 <ul class="frontmatter frontmatter_page" id="frontmatter">
     <li>
-        <time class="article_time"  datetime="2020-04-18">April 18, 2020</time>
+        <time class="article_time" datetime="2020-04-18">April 18, 2020</time>
     </li>
     <span class="dotDivider"></span>
     <li> 867 words </li>
@@ -143,7 +138,7 @@
 これが REpresentational State Transfer ということなのか。</p>
 <hr />
 <ol>
-<li><a href="https://www.ics.uci.edu/%7Efielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_3">Roy Thomas Fielding. Architectural Styles and
+<li><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm#sec_5_1_3">Roy Thomas Fielding. Architectural Styles and
 the Design of Network-based Software Architectures - 5.1.3 Stateless</a></li>
 <li>Leonard Richardson, Sam Ruby『RESTful Web サービス』O'REILLY 2007年12月</li>
 <li>リクエストごとに必要な情報をすべて含める については <a href="http://yohei-y.blogspot.com/2007/10/blog-post.html">ステートレスとは何か</a> を一読されるとサクッと理解できると思います</li>
@@ -154,33 +149,44 @@ the Design of Network-based Software Architectures - 5.1.3 Stateless</a></li>
 </section>
 
 
+
        
 
       <footer>
         
           
+          
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
 
           
-<ul class="social_list foot_list" >
+<ul class="social_list foot_list">
     
-    
-    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
 </ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
 
         
       </footer>

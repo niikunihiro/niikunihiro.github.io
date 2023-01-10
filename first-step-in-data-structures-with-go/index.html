@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
         <!-- SEO -->
         
-        <title> Goによるデータ構造 はじめの一歩 | Nii Note </title>
+        <title> Goによるデータ構造 はじめの一歩 | Niiko thought at that time </title>
         
 
         <!-- Enable responsiveness on mobile devices-->
-        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
-        
-        <meta content="website" property="og:type"/>
-        <meta content="Nii Note" property="og:site_name"/>
-        <meta content="https://niikunihiro.github.io/first-step-in-data-structures-with-go/" property="og:url"/>
-        <meta content="https://niikunihiro.github.io/first-step-in-data-structures-with-go/" property="twitter:url"/>
-  
-        <meta content="Goによるデータ構造 はじめの一歩" property="og:title"/>
-        <meta content="Goによるデータ構造 はじめの一歩" property="twitter:title"/>
-  
-  
-  
-        <meta content="summary_large_image" property="twitter:card"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
-  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
 
         <!--  css -->
-        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
 
         <!-- fonts -->
         <!-- preload  -->
         <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
-        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
         <!-- load -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-      
+        
     </head>
 
-    <body>
+    <body onload="main();">
       
-        
 <input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
 <label class="menu cross menu--1" for="openSidebarMenu">
     <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
@@ -58,36 +46,43 @@
     <div class="menu_wrapper">
         <ul class="sidebarMenuInner">
             <li>
-                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
                 <div class="menu_div" ></div>
             </li>
             
             
-            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
         </ul>
     </div>
 </div>
 
-      
+
 
       
 <nav id="overlord" class="overlord" >
   
+  
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
+
+  
+
+
 
 </nav>
 
@@ -98,7 +93,7 @@
       
 <ul class="frontmatter frontmatter_page" id="frontmatter">
     <li>
-        <time class="article_time"  datetime="2021-01-07">January 07, 2021</time>
+        <time class="article_time" datetime="2021-01-07">January 07, 2021</time>
     </li>
     <span class="dotDivider"></span>
     <li> 3130 words </li>
@@ -110,77 +105,69 @@
 <h2 id="detagou-zao">データ構造</h2>
 <h3 id="pei-lie">配列</h3>
 <p>なにはともあれ配列の定義方法です</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">a [</span><span style="color:#0086b3;">10</span><span style="color:#323232;">]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">
-a[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">1</span><span style="color:#323232;">
-...
-a[</span><span style="color:#0086b3;">9</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">9
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a </span><span>[</span><span style="color:#d08770;">10</span><span>]</span><span style="color:#b48ead;">int
+</span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#d08770;">0</span><span>] = </span><span style="color:#d08770;">1
+</span><span>...
+</span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#d08770;">9</span><span>] = </span><span style="color:#d08770;">9
+</span></code></pre>
 <p>逐一書くのは面倒なのでループで入れる</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">const</span><span style="color:#323232;"> arraySize </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">10
-</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">a [arraySize]</span><span style="font-weight:bold;color:#a71d5d;">int
-for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt;</span><span style="color:#323232;"> arraySize; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    a[i] </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> i
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">const </span><span style="color:#bf616a;">arraySize </span><span>= </span><span style="color:#d08770;">10
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a </span><span>[</span><span style="color:#bf616a;">arraySize</span><span>]</span><span style="color:#b48ead;">int
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">arraySize</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#bf616a;">i</span><span>] = </span><span style="color:#bf616a;">i
+</span><span>}
+</span></code></pre>
 <p>定義と一緒にデータも入れる</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">a </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">[</span><span style="color:#0086b3;">10</span><span style="color:#323232;">]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">{</span><span style="color:#0086b3;">0</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1</span><span style="color:#323232;">, </span><span style="color:#0086b3;">2</span><span style="color:#323232;">, </span><span style="color:#0086b3;">3</span><span style="color:#323232;">, </span><span style="color:#0086b3;">4</span><span style="color:#323232;">, </span><span style="color:#0086b3;">5</span><span style="color:#323232;">, </span><span style="color:#0086b3;">6</span><span style="color:#323232;">, </span><span style="color:#0086b3;">7</span><span style="color:#323232;">, </span><span style="color:#0086b3;">8</span><span style="color:#323232;">, </span><span style="color:#0086b3;">9</span><span style="color:#323232;">}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">a </span><span>:= [</span><span style="color:#d08770;">10</span><span>]</span><span style="color:#b48ead;">int</span><span>{</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>}
+</span></code></pre>
 <p>要素数の省略も可能</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">a </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">[...]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">{</span><span style="color:#0086b3;">0</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1</span><span style="color:#323232;">, </span><span style="color:#0086b3;">2</span><span style="color:#323232;">, </span><span style="color:#0086b3;">3</span><span style="color:#323232;">, </span><span style="color:#0086b3;">4</span><span style="color:#323232;">, </span><span style="color:#0086b3;">5</span><span style="color:#323232;">, </span><span style="color:#0086b3;">6</span><span style="color:#323232;">, </span><span style="color:#0086b3;">7</span><span style="color:#323232;">, </span><span style="color:#0086b3;">8</span><span style="color:#323232;">, </span><span style="color:#0086b3;">9</span><span style="color:#323232;">}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">a </span><span>:= [...]</span><span style="color:#b48ead;">int</span><span>{</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>, </span><span style="color:#d08770;">5</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">7</span><span>, </span><span style="color:#d08770;">8</span><span>, </span><span style="color:#d08770;">9</span><span>}
+</span></code></pre>
 <p>要素数を省略した場合の型は初期値の数が要素数になる。<br />
 この場合は <code>[10]int</code> になる。</p>
 <p>要素は構造体でもいい</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">Student </span><span style="font-weight:bold;color:#a71d5d;">struct </span><span style="color:#323232;">{
-    id      </span><span style="font-weight:bold;color:#a71d5d;">int
-    </span><span style="color:#323232;">grade   </span><span style="font-weight:bold;color:#a71d5d;">string
-    </span><span style="color:#323232;">average </span><span style="font-weight:bold;color:#a71d5d;">float64
-</span><span style="color:#323232;">}
-
-</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">a [</span><span style="color:#0086b3;">3</span><span style="color:#323232;">]Student
-a[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> Student{id: </span><span style="color:#0086b3;">100</span><span style="color:#323232;">, grade: </span><span style="color:#183691;">&quot;A&quot;</span><span style="color:#323232;">, average: </span><span style="color:#0086b3;">510.20</span><span style="color:#323232;">}
-a[</span><span style="color:#0086b3;">1</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> Student{id: </span><span style="color:#0086b3;">101</span><span style="color:#323232;">, grade: </span><span style="color:#183691;">&quot;C&quot;</span><span style="color:#323232;">, average: </span><span style="color:#0086b3;">350.00</span><span style="color:#323232;">}
-a[</span><span style="color:#0086b3;">2</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> Student{id: </span><span style="color:#0086b3;">105</span><span style="color:#323232;">, grade: </span><span style="color:#183691;">&quot;B&quot;</span><span style="color:#323232;">, average: </span><span style="color:#0086b3;">450.50</span><span style="color:#323232;">}
-
-fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%#v</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, a)
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">type </span><span>Student </span><span style="color:#b48ead;">struct </span><span>{
+</span><span>    </span><span style="color:#bf616a;">id      </span><span style="color:#b48ead;">int
+</span><span>    </span><span style="color:#bf616a;">grade   </span><span style="color:#b48ead;">string
+</span><span>    </span><span style="color:#bf616a;">average </span><span style="color:#b48ead;">float64
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a </span><span>[</span><span style="color:#d08770;">3</span><span>]</span><span style="color:#b48ead;">Student
+</span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#d08770;">0</span><span>] = </span><span style="color:#bf616a;">Student</span><span>{</span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#d08770;">100</span><span>, </span><span style="color:#bf616a;">grade</span><span>: &quot;</span><span style="color:#a3be8c;">A</span><span>&quot;, </span><span style="color:#bf616a;">average</span><span>: </span><span style="color:#d08770;">510.20</span><span>}
+</span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#d08770;">1</span><span>] = </span><span style="color:#bf616a;">Student</span><span>{</span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#d08770;">101</span><span>, </span><span style="color:#bf616a;">grade</span><span>: &quot;</span><span style="color:#a3be8c;">C</span><span>&quot;, </span><span style="color:#bf616a;">average</span><span>: </span><span style="color:#d08770;">350.00</span><span>}
+</span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#d08770;">2</span><span>] = </span><span style="color:#bf616a;">Student</span><span>{</span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#d08770;">105</span><span>, </span><span style="color:#bf616a;">grade</span><span>: &quot;</span><span style="color:#a3be8c;">B</span><span>&quot;, </span><span style="color:#bf616a;">average</span><span>: </span><span style="color:#d08770;">450.50</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%#v</span><span>&quot;, </span><span style="color:#bf616a;">a</span><span>)
+</span></code></pre>
 <p>二次元配列を使って九九を出力する</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">a [</span><span style="color:#0086b3;">9</span><span style="color:#323232;">][</span><span style="color:#0086b3;">9</span><span style="color:#323232;">]</span><span style="font-weight:bold;color:#a71d5d;">int
-for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">9</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    </span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">j </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; j </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">9</span><span style="color:#323232;">; j</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-        a[i][j] </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">(i </span><span style="font-weight:bold;color:#a71d5d;">+ </span><span style="color:#0086b3;">1</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">* </span><span style="color:#323232;">(j </span><span style="font-weight:bold;color:#a71d5d;">+ </span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
-    }
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">9</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    </span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">j </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; j </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">9</span><span style="color:#323232;">; j</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-        fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%02d </span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, a[i][j])
-    }
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">var </span><span style="color:#bf616a;">a </span><span>[</span><span style="color:#d08770;">9</span><span>][</span><span style="color:#d08770;">9</span><span>]</span><span style="color:#b48ead;">int
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">9</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">j </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">j </span><span>&lt; </span><span style="color:#d08770;">9</span><span>; </span><span style="color:#bf616a;">j</span><span>++ {
+</span><span>        </span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#bf616a;">i</span><span>][</span><span style="color:#bf616a;">j</span><span>] = (</span><span style="color:#bf616a;">i </span><span>+ </span><span style="color:#d08770;">1</span><span>) * (</span><span style="color:#bf616a;">j </span><span>+ </span><span style="color:#d08770;">1</span><span>)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">9</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">j </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">j </span><span>&lt; </span><span style="color:#d08770;">9</span><span>; </span><span style="color:#bf616a;">j</span><span>++ {
+</span><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%02d </span><span>&quot;, </span><span style="color:#bf616a;">a</span><span>[</span><span style="color:#bf616a;">i</span><span>][</span><span style="color:#bf616a;">j</span><span>])
+</span><span>    }
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>}
+</span></code></pre>
 <p>配列は最初にサイズを指定するので、ゆるっとコード書くときは次に出てくるスライスが可変長配列のように使えるので取り回しがいいです。</p>
 <h3 id="suraisu">スライス</h3>
 <p>定義とデータ挿入。配列のリテラルと同じような書き方が可能</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">s []</span><span style="font-weight:bold;color:#a71d5d;">int
-for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">10</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(s, i)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">var </span><span style="color:#bf616a;">s </span><span>[]</span><span style="color:#b48ead;">int
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">10</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">i</span><span>)
+</span><span>}
+</span></code></pre>
 <p>Go のスライスは参照型なので <code>make()</code> でも作れる</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">([]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">10</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(s, i)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">s </span><span>:= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">10</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">i</span><span>)
+</span><span>}
+</span></code></pre>
 <p>定義してからデータを挿入する場合は <code>append()</code> を使うところが配列と異なります。<br />
 添字を使ってアクセスするところは配列と同じですが、スライスの実装は配列とは異なるので後述したいと思ってます。</p>
 <hr />
@@ -190,116 +177,109 @@ for </span><span style="color:#323232;">i </span><span style="font-weight:bold;c
 <p>配列の先頭からデータを探索していく方法。先頭から順に探索を行うので、最悪のケースの計算量はデータの個数に比例する。ちなみに計算量の指標には最悪実行時間、最悪コストというパンチの強い表現があるけど、気分的なものではないので気にしないでください。</p>
 <h4 id="xian-xing-tan-suo-woxing-tutesutetupushu-tojie-guo-wochu-li-suruli">線形探索を行ってステップ数と結果を出力する例</h4>
 <p>線形探索の関数</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">linerSearch</span><span style="color:#323232;">(arr []</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, key </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="color:#323232;">{
-    max </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(arr)
-    </span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt;</span><span style="color:#323232;"> max; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-        fmt.Printf(</span><span style="color:#183691;">&quot;step </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, i</span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
-        </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> arr[i] </span><span style="font-weight:bold;color:#a71d5d;">==</span><span style="color:#323232;"> key {
-            </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> i
-        }
-    }
-    </span><span style="font-weight:bold;color:#a71d5d;">return -</span><span style="color:#0086b3;">1
-</span><span style="color:#323232;">}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">linerSearch</span><span>(</span><span style="color:#bf616a;">arr </span><span>[]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#bf616a;">key </span><span style="color:#b48ead;">int</span><span>) </span><span style="color:#b48ead;">int </span><span>{
+</span><span>    </span><span style="color:#bf616a;">max </span><span>:= </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">arr</span><span>)
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">max</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">step </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">i</span><span>+</span><span style="color:#d08770;">1</span><span>)
+</span><span>        </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">arr</span><span>[</span><span style="color:#bf616a;">i</span><span>] == </span><span style="color:#bf616a;">key </span><span>{
+</span><span>            </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">i
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">return </span><span>-</span><span style="color:#d08770;">1
+</span><span>}
+</span></code></pre>
 <p>呼び出し側</p>
-<pre style="background-color:#ffffff;">
-<span style="font-style:italic;color:#969896;">// データは順序配列（順序スライス？）
-</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">[]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">{
-    </span><span style="color:#0086b3;">50</span><span style="color:#323232;">, </span><span style="color:#0086b3;">80</span><span style="color:#323232;">, </span><span style="color:#0086b3;">150</span><span style="color:#323232;">, </span><span style="color:#0086b3;">210</span><span style="color:#323232;">, </span><span style="color:#0086b3;">250</span><span style="color:#323232;">, </span><span style="color:#0086b3;">280</span><span style="color:#323232;">, </span><span style="color:#0086b3;">330</span><span style="color:#323232;">, </span><span style="color:#0086b3;">470</span><span style="color:#323232;">, </span><span style="color:#0086b3;">510</span><span style="color:#323232;">, </span><span style="color:#0086b3;">530</span><span style="color:#323232;">, </span><span style="color:#0086b3;">800</span><span style="color:#323232;">, </span><span style="color:#0086b3;">900</span><span style="color:#323232;">, </span><span style="color:#0086b3;">990</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1000</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1011</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1209</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1244</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1291</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1299</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1333</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1354</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1359</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1389</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1390</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1400</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1402</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1490</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1499</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1509</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1573</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1588</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1591</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1605</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1654</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1662</span><span style="color:#323232;">,
-}
-key </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">1509
-</span><span style="color:#323232;">index </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">linerSearch(s, key)
-</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> index </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s) </span><span style="font-weight:bold;color:#a71d5d;">&amp;&amp;</span><span style="color:#323232;"> s[index] </span><span style="font-weight:bold;color:#a71d5d;">==</span><span style="color:#323232;"> key {
-    fmt.Printf(</span><span style="color:#183691;">&quot;found </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> at index </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key, index)
-} </span><span style="font-weight:bold;color:#a71d5d;">else </span><span style="color:#323232;">{
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> not found</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#65737e;">// データは順序配列（順序スライス？）
+</span><span style="color:#bf616a;">s </span><span>:= []</span><span style="color:#b48ead;">int</span><span>{
+</span><span>    </span><span style="color:#d08770;">50</span><span>, </span><span style="color:#d08770;">80</span><span>, </span><span style="color:#d08770;">150</span><span>, </span><span style="color:#d08770;">210</span><span>, </span><span style="color:#d08770;">250</span><span>, </span><span style="color:#d08770;">280</span><span>, </span><span style="color:#d08770;">330</span><span>, </span><span style="color:#d08770;">470</span><span>, </span><span style="color:#d08770;">510</span><span>, </span><span style="color:#d08770;">530</span><span>, </span><span style="color:#d08770;">800</span><span>, </span><span style="color:#d08770;">900</span><span>, </span><span style="color:#d08770;">990</span><span>,
+</span><span>    </span><span style="color:#d08770;">1000</span><span>, </span><span style="color:#d08770;">1011</span><span>, </span><span style="color:#d08770;">1209</span><span>, </span><span style="color:#d08770;">1244</span><span>, </span><span style="color:#d08770;">1291</span><span>, </span><span style="color:#d08770;">1299</span><span>, </span><span style="color:#d08770;">1333</span><span>, </span><span style="color:#d08770;">1354</span><span>, </span><span style="color:#d08770;">1359</span><span>, </span><span style="color:#d08770;">1389</span><span>, </span><span style="color:#d08770;">1390</span><span>,
+</span><span>    </span><span style="color:#d08770;">1400</span><span>, </span><span style="color:#d08770;">1402</span><span>, </span><span style="color:#d08770;">1490</span><span>, </span><span style="color:#d08770;">1499</span><span>, </span><span style="color:#d08770;">1509</span><span>, </span><span style="color:#d08770;">1573</span><span>, </span><span style="color:#d08770;">1588</span><span>, </span><span style="color:#d08770;">1591</span><span>, </span><span style="color:#d08770;">1605</span><span>, </span><span style="color:#d08770;">1654</span><span>, </span><span style="color:#d08770;">1662</span><span>,
+</span><span>}
+</span><span style="color:#bf616a;">key </span><span>:= </span><span style="color:#d08770;">1509
+</span><span style="color:#bf616a;">index </span><span>:= </span><span style="color:#bf616a;">linerSearch</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">key</span><span>)
+</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">index </span><span>&lt; </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>) &amp;&amp; </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">index</span><span>] == </span><span style="color:#bf616a;">key </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">found </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> at index </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>, </span><span style="color:#bf616a;">index</span><span>)
+</span><span>} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> not found</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>)
+</span><span>}
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">step 1
-step 2
-step 3
-...
-step 27
-step 28
-step 29
-found 1509 at index 28
-</span></pre><h3 id="er-fen-tan-suo-bainarisati">二分探索（バイナリサーチ）</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>step 1
+</span><span>step 2
+</span><span>step 3
+</span><span>...
+</span><span>step 27
+</span><span>step 28
+</span><span>step 29
+</span><span>found 1509 at index 28
+</span></code></pre>
+<h3 id="er-fen-tan-suo-bainarisati">二分探索（バイナリサーチ）</h3>
 <p>順序配列（ソート済みの配列）に対して探索を行う。データ数が多い場合に、線形探索に比べて計算量が非常に少なく済む探索方法。<br />
 検索したい値とソート済み配列の中央値とを比較して、一致すれば探索終了、小さければ中央値よりも前の値を対象に再帰的に探索を続け、大きければ中央値よりも後ろの値を対象に再帰的に探索を続ける。</p>
 <h4 id="er-fen-tan-suo-woxing-tutesutetupushu-tojie-guo-wochu-li-suruli">二分探索を行ってステップ数と結果を出力する例</h4>
 <p>二分探索の関数を定義</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">binarySearch</span><span style="color:#323232;">(s []</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, key </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="color:#323232;">{
-    low </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0
-    </span><span style="color:#323232;">high </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s) </span><span style="font-weight:bold;color:#a71d5d;">- </span><span style="color:#0086b3;">1
-    </span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; low </span><span style="font-weight:bold;color:#a71d5d;">&lt;=</span><span style="color:#323232;"> high; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-        fmt.Printf(</span><span style="color:#183691;">&quot;step </span><span style="color:#0086b3;">%d </span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, i</span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
-        middle </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(low </span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#323232;"> high) </span><span style="font-weight:bold;color:#a71d5d;">/ </span><span style="color:#0086b3;">2</span><span style="color:#323232;">
-        fmt.Printf(</span><span style="color:#183691;">&quot;low: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;">, mid: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;">, high: </span><span style="color:#0086b3;">%d </span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, low, middle, high)
-        </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> key </span><span style="font-weight:bold;color:#a71d5d;">==</span><span style="color:#323232;"> s[middle] {
-            fmt.Println(</span><span style="color:#183691;">&quot;一致&quot;</span><span style="color:#323232;">)
-            </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> middle
-        } </span><span style="font-weight:bold;color:#a71d5d;">else if</span><span style="color:#323232;"> key </span><span style="font-weight:bold;color:#a71d5d;">&lt;</span><span style="color:#323232;"> s[middle] {
-            fmt.Println(</span><span style="color:#183691;">&quot;前半分を再探索&quot;</span><span style="color:#323232;">)
-            high </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> middle </span><span style="font-weight:bold;color:#a71d5d;">- </span><span style="color:#0086b3;">1
-        </span><span style="color:#323232;">} </span><span style="font-weight:bold;color:#a71d5d;">else </span><span style="color:#323232;">{
-            fmt.Println(</span><span style="color:#183691;">&quot;後半分を再探索&quot;</span><span style="color:#323232;">)
-            low </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> middle </span><span style="font-weight:bold;color:#a71d5d;">+ </span><span style="color:#0086b3;">1
-        </span><span style="color:#323232;">}
-    }
-    </span><span style="font-weight:bold;color:#a71d5d;">return -</span><span style="color:#0086b3;">1
-</span><span style="color:#323232;">}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">binarySearch</span><span>(</span><span style="color:#bf616a;">s </span><span>[]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#bf616a;">key </span><span style="color:#b48ead;">int</span><span>) </span><span style="color:#b48ead;">int </span><span>{
+</span><span>    </span><span style="color:#bf616a;">low </span><span>:= </span><span style="color:#d08770;">0
+</span><span>    </span><span style="color:#bf616a;">high </span><span>:= </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>) - </span><span style="color:#d08770;">1
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">low </span><span>&lt;= </span><span style="color:#bf616a;">high</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">step </span><span style="color:#d08770;">%d </span><span>&quot;, </span><span style="color:#bf616a;">i</span><span>+</span><span style="color:#d08770;">1</span><span>)
+</span><span>        </span><span style="color:#bf616a;">middle </span><span>:= (</span><span style="color:#bf616a;">low </span><span>+ </span><span style="color:#bf616a;">high</span><span>) / </span><span style="color:#d08770;">2
+</span><span>        </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">low: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">, mid: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">, high: </span><span style="color:#d08770;">%d </span><span>&quot;, </span><span style="color:#bf616a;">low</span><span>, </span><span style="color:#bf616a;">middle</span><span>, </span><span style="color:#bf616a;">high</span><span>)
+</span><span>        </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">key </span><span>== </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">middle</span><span>] {
+</span><span>            </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">一致</span><span>&quot;)
+</span><span>            </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">middle
+</span><span>        } </span><span style="color:#b48ead;">else if </span><span style="color:#bf616a;">key </span><span>&lt; </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">middle</span><span>] {
+</span><span>            </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">前半分を再探索</span><span>&quot;)
+</span><span>            </span><span style="color:#bf616a;">high </span><span>= </span><span style="color:#bf616a;">middle </span><span>- </span><span style="color:#d08770;">1
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">後半分を再探索</span><span>&quot;)
+</span><span>            </span><span style="color:#bf616a;">low </span><span>= </span><span style="color:#bf616a;">middle </span><span>+ </span><span style="color:#d08770;">1
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">return </span><span>-</span><span style="color:#d08770;">1
+</span><span>}
+</span></code></pre>
 <p>呼び出し側</p>
-<pre style="background-color:#ffffff;">
-<span style="font-style:italic;color:#969896;">// 比較のため線形探索のときと同じデータを使う
-</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">[]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">{
-    </span><span style="color:#0086b3;">50</span><span style="color:#323232;">, </span><span style="color:#0086b3;">80</span><span style="color:#323232;">, </span><span style="color:#0086b3;">150</span><span style="color:#323232;">, </span><span style="color:#0086b3;">210</span><span style="color:#323232;">, </span><span style="color:#0086b3;">250</span><span style="color:#323232;">, </span><span style="color:#0086b3;">280</span><span style="color:#323232;">, </span><span style="color:#0086b3;">330</span><span style="color:#323232;">, </span><span style="color:#0086b3;">470</span><span style="color:#323232;">, </span><span style="color:#0086b3;">510</span><span style="color:#323232;">, </span><span style="color:#0086b3;">530</span><span style="color:#323232;">, </span><span style="color:#0086b3;">800</span><span style="color:#323232;">, </span><span style="color:#0086b3;">900</span><span style="color:#323232;">, </span><span style="color:#0086b3;">990</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1000</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1011</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1209</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1244</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1291</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1299</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1333</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1354</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1359</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1389</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1390</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1400</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1402</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1490</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1499</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1509</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1573</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1588</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1591</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1605</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1654</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1662</span><span style="color:#323232;">,
-}
-key </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">1509
-</span><span style="color:#323232;">index </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">binarySearch(s, key)
-</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> index </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s) </span><span style="font-weight:bold;color:#a71d5d;">&amp;&amp;</span><span style="color:#323232;"> s[index] </span><span style="font-weight:bold;color:#a71d5d;">==</span><span style="color:#323232;"> key {
-    fmt.Printf(</span><span style="color:#183691;">&quot;found </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> at index </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key, index)
-} </span><span style="font-weight:bold;color:#a71d5d;">else </span><span style="color:#323232;">{
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> not found</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#65737e;">// 比較のため線形探索のときと同じデータを使う
+</span><span style="color:#bf616a;">s </span><span>:= []</span><span style="color:#b48ead;">int</span><span>{
+</span><span>    </span><span style="color:#d08770;">50</span><span>, </span><span style="color:#d08770;">80</span><span>, </span><span style="color:#d08770;">150</span><span>, </span><span style="color:#d08770;">210</span><span>, </span><span style="color:#d08770;">250</span><span>, </span><span style="color:#d08770;">280</span><span>, </span><span style="color:#d08770;">330</span><span>, </span><span style="color:#d08770;">470</span><span>, </span><span style="color:#d08770;">510</span><span>, </span><span style="color:#d08770;">530</span><span>, </span><span style="color:#d08770;">800</span><span>, </span><span style="color:#d08770;">900</span><span>, </span><span style="color:#d08770;">990</span><span>,
+</span><span>    </span><span style="color:#d08770;">1000</span><span>, </span><span style="color:#d08770;">1011</span><span>, </span><span style="color:#d08770;">1209</span><span>, </span><span style="color:#d08770;">1244</span><span>, </span><span style="color:#d08770;">1291</span><span>, </span><span style="color:#d08770;">1299</span><span>, </span><span style="color:#d08770;">1333</span><span>, </span><span style="color:#d08770;">1354</span><span>, </span><span style="color:#d08770;">1359</span><span>, </span><span style="color:#d08770;">1389</span><span>, </span><span style="color:#d08770;">1390</span><span>,
+</span><span>    </span><span style="color:#d08770;">1400</span><span>, </span><span style="color:#d08770;">1402</span><span>, </span><span style="color:#d08770;">1490</span><span>, </span><span style="color:#d08770;">1499</span><span>, </span><span style="color:#d08770;">1509</span><span>, </span><span style="color:#d08770;">1573</span><span>, </span><span style="color:#d08770;">1588</span><span>, </span><span style="color:#d08770;">1591</span><span>, </span><span style="color:#d08770;">1605</span><span>, </span><span style="color:#d08770;">1654</span><span>, </span><span style="color:#d08770;">1662</span><span>,
+</span><span>}
+</span><span style="color:#bf616a;">key </span><span>:= </span><span style="color:#d08770;">1509
+</span><span style="color:#bf616a;">index </span><span>:= </span><span style="color:#bf616a;">binarySearch</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">key</span><span>)
+</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">index </span><span>&lt; </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>) &amp;&amp; </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">index</span><span>] == </span><span style="color:#bf616a;">key </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">found </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> at index </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>, </span><span style="color:#bf616a;">index</span><span>)
+</span><span>} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> not found</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>)
+</span><span>}
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">step 1 low: 0, mid: 17, high: 34 後半分を再探索
-step 2 low: 18, mid: 26, high: 34 後半分を再探索
-step 3 low: 27, mid: 30, high: 34 前半分を再探索
-step 4 low: 27, mid: 28, high: 29 一致
-found 1509 at index 28
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>step 1 low: 0, mid: 17, high: 34 後半分を再探索
+</span><span>step 2 low: 18, mid: 26, high: 34 後半分を再探索
+</span><span>step 3 low: 27, mid: 30, high: 34 前半分を再探索
+</span><span>step 4 low: 27, mid: 28, high: 29 一致
+</span><span>found 1509 at index 28
+</span></code></pre>
 <p>最初のステップでは探索するデータの 1509 が中央値よりも後ろなので、次のステップでは後ろ半分を対象に再探索し、一致するまで続ける。<br />
 このケースでは線形探索に比べてステップ数が少なく済んでいることがわかる。</p>
 <p>こちらは Go の sort パッケージを使用した例</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">[]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">{
-    </span><span style="color:#0086b3;">50</span><span style="color:#323232;">, </span><span style="color:#0086b3;">80</span><span style="color:#323232;">, </span><span style="color:#0086b3;">150</span><span style="color:#323232;">, </span><span style="color:#0086b3;">210</span><span style="color:#323232;">, </span><span style="color:#0086b3;">250</span><span style="color:#323232;">, </span><span style="color:#0086b3;">280</span><span style="color:#323232;">, </span><span style="color:#0086b3;">330</span><span style="color:#323232;">, </span><span style="color:#0086b3;">470</span><span style="color:#323232;">, </span><span style="color:#0086b3;">510</span><span style="color:#323232;">, </span><span style="color:#0086b3;">530</span><span style="color:#323232;">, </span><span style="color:#0086b3;">800</span><span style="color:#323232;">, </span><span style="color:#0086b3;">900</span><span style="color:#323232;">, </span><span style="color:#0086b3;">990</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1000</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1011</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1209</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1244</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1291</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1299</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1333</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1354</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1359</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1389</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1390</span><span style="color:#323232;">,
-    </span><span style="color:#0086b3;">1400</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1402</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1490</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1499</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1509</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1573</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1588</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1591</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1605</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1654</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1662</span><span style="color:#323232;">,
-}
-key </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">1509
-</span><span style="color:#323232;">index </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> sort.Search(</span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s), </span><span style="font-weight:bold;color:#a71d5d;">func</span><span style="color:#323232;">(i </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">bool</span><span style="color:#323232;"> { </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> s[i] </span><span style="font-weight:bold;color:#a71d5d;">&gt;=</span><span style="color:#323232;"> key })
-</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> index </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s) </span><span style="font-weight:bold;color:#a71d5d;">&amp;&amp;</span><span style="color:#323232;"> s[index] </span><span style="font-weight:bold;color:#a71d5d;">==</span><span style="color:#323232;"> key {
-    fmt.Printf(</span><span style="color:#183691;">&quot;found </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> at index </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key, index)
-} </span><span style="font-weight:bold;color:#a71d5d;">else </span><span style="color:#323232;">{
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> not found</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, key)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">s </span><span>:= []</span><span style="color:#b48ead;">int</span><span>{
+</span><span>    </span><span style="color:#d08770;">50</span><span>, </span><span style="color:#d08770;">80</span><span>, </span><span style="color:#d08770;">150</span><span>, </span><span style="color:#d08770;">210</span><span>, </span><span style="color:#d08770;">250</span><span>, </span><span style="color:#d08770;">280</span><span>, </span><span style="color:#d08770;">330</span><span>, </span><span style="color:#d08770;">470</span><span>, </span><span style="color:#d08770;">510</span><span>, </span><span style="color:#d08770;">530</span><span>, </span><span style="color:#d08770;">800</span><span>, </span><span style="color:#d08770;">900</span><span>, </span><span style="color:#d08770;">990</span><span>,
+</span><span>    </span><span style="color:#d08770;">1000</span><span>, </span><span style="color:#d08770;">1011</span><span>, </span><span style="color:#d08770;">1209</span><span>, </span><span style="color:#d08770;">1244</span><span>, </span><span style="color:#d08770;">1291</span><span>, </span><span style="color:#d08770;">1299</span><span>, </span><span style="color:#d08770;">1333</span><span>, </span><span style="color:#d08770;">1354</span><span>, </span><span style="color:#d08770;">1359</span><span>, </span><span style="color:#d08770;">1389</span><span>, </span><span style="color:#d08770;">1390</span><span>,
+</span><span>    </span><span style="color:#d08770;">1400</span><span>, </span><span style="color:#d08770;">1402</span><span>, </span><span style="color:#d08770;">1490</span><span>, </span><span style="color:#d08770;">1499</span><span>, </span><span style="color:#d08770;">1509</span><span>, </span><span style="color:#d08770;">1573</span><span>, </span><span style="color:#d08770;">1588</span><span>, </span><span style="color:#d08770;">1591</span><span>, </span><span style="color:#d08770;">1605</span><span>, </span><span style="color:#d08770;">1654</span><span>, </span><span style="color:#d08770;">1662</span><span>,
+</span><span>}
+</span><span style="color:#bf616a;">key </span><span>:= </span><span style="color:#d08770;">1509
+</span><span style="color:#bf616a;">index </span><span>:= </span><span style="color:#bf616a;">sort</span><span>.</span><span style="color:#bf616a;">Search</span><span>(</span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#b48ead;">func</span><span>(</span><span style="color:#bf616a;">i </span><span style="color:#b48ead;">int</span><span>) </span><span style="color:#b48ead;">bool </span><span>{ </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">i</span><span>] &gt;= </span><span style="color:#bf616a;">key </span><span>})
+</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">index </span><span>&lt; </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>) &amp;&amp; </span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">index</span><span>] == </span><span style="color:#bf616a;">key </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">found </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> at index </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>, </span><span style="color:#bf616a;">index</span><span>)
+</span><span>} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> not found</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">key</span><span>)
+</span><span>}
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">found 1509 at index 28
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>found 1509 at index 28
+</span></code></pre>
 <p>以下、参考資料より二分探索について抜粋</p>
 <blockquote>
 <p>データ数を 100,000,000個（1億個）とした時、線形探索では最悪の場合、1億回の比較、平均では5千万回の比較が必要である。<br />
@@ -321,159 +301,152 @@ key </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="
 <p>補助的に、頂上のデータを参照する <code>Peek</code> や、頂上のデータとそのひとつ下のデータを交換する <code>Swap</code> などがある。</p>
 <h4 id="suraisuwoshi-tute-int-xing-nodetawosutatukusuruli">スライスを使って int 型のデータをスタックする例</h4>
 <p>int 型のスタックを定義</p>
-<pre style="background-color:#ffffff;">
-<span style="font-style:italic;color:#969896;">// 型で定義
-</span><span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">Stack []</span><span style="font-weight:bold;color:#a71d5d;">int
-
-const</span><span style="color:#323232;"> StackMax </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">10
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">Stack) </span><span style="font-weight:bold;color:#795da3;">Size</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="color:#323232;">{
-    </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">Stack) </span><span style="font-weight:bold;color:#795da3;">Push</span><span style="color:#323232;">(data </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">error </span><span style="color:#323232;">{
-    </span><span style="font-style:italic;color:#969896;">// サイズの上限を定義する時の例
-    </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> s.Size() </span><span style="font-weight:bold;color:#a71d5d;">&gt;=</span><span style="color:#323232;"> StackMax {
-        </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> errors.New(</span><span style="color:#183691;">&quot;stack overflow&quot;</span><span style="color:#323232;">)
-    }
-    fmt.Printf(</span><span style="color:#183691;">&quot;push: </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, data)
-    </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s, data)
-    </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#0086b3;">nil
-</span><span style="color:#323232;">}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">Stack) </span><span style="font-weight:bold;color:#795da3;">Pop</span><span style="color:#323232;">() (</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">error</span><span style="color:#323232;">) {
-    </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> s.Size() </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">1 </span><span style="color:#323232;">{
-        </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#0086b3;">0</span><span style="color:#323232;">, errors.New(</span><span style="color:#183691;">&quot;stack empty&quot;</span><span style="color:#323232;">)
-    }
-    </span><span style="font-style:italic;color:#969896;">// スタックの頂上の要素を取り出す
-    </span><span style="color:#323232;">top </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)[s.Size()</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">]
-    </span><span style="font-style:italic;color:#969896;">// 頂上の要素を除いてスタックに入れ直す
-    </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)[:s.Size()</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">]
-    fmt.Printf(</span><span style="color:#183691;">&quot;pop: </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, top)
-    </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> top, </span><span style="color:#0086b3;">nil
-</span><span style="color:#323232;">}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">Stack) </span><span style="font-weight:bold;color:#795da3;">Peek</span><span style="color:#323232;">() (</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">error</span><span style="color:#323232;">) {
-    </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> s.Size() </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">1 </span><span style="color:#323232;">{
-        </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#0086b3;">0</span><span style="color:#323232;">, fmt.Errorf(</span><span style="color:#183691;">&quot;stack empty&quot;</span><span style="color:#323232;">)
-    }
-    top </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)[s.Size()</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">]
-    fmt.Printf(</span><span style="color:#183691;">&quot;peek: </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, top)
-    </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> top, </span><span style="color:#0086b3;">nil
-</span><span style="color:#323232;">}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">NewStack</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">Stack {
-    s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">(Stack, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-    </span><span style="font-weight:bold;color:#a71d5d;">return &amp;</span><span style="color:#323232;">s
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#65737e;">// 型で定義
+</span><span style="color:#b48ead;">type </span><span>Stack []</span><span style="color:#b48ead;">int
+</span><span>
+</span><span style="color:#b48ead;">const </span><span style="color:#bf616a;">StackMax </span><span>= </span><span style="color:#d08770;">10
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">Stack</span><span>) </span><span style="color:#8fa1b3;">Size</span><span>() </span><span style="color:#b48ead;">int </span><span>{
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#96b5b4;">len</span><span>(*</span><span style="color:#bf616a;">s</span><span>)
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">Stack</span><span>) </span><span style="color:#8fa1b3;">Push</span><span>(</span><span style="color:#bf616a;">data </span><span style="color:#b48ead;">int</span><span>) </span><span style="color:#b48ead;">error </span><span>{
+</span><span>    </span><span style="color:#65737e;">// サイズの上限を定義する時の例
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>() &gt;= </span><span style="color:#bf616a;">StackMax </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">errors</span><span>.</span><span style="color:#bf616a;">New</span><span>(&quot;</span><span style="color:#a3be8c;">stack overflow</span><span>&quot;)
+</span><span>    }
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">push: </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">data</span><span>)
+</span><span>    *</span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(*</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">data</span><span>)
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">nil
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">Stack</span><span>) </span><span style="color:#8fa1b3;">Pop</span><span>() (</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#b48ead;">error</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>() &lt; </span><span style="color:#d08770;">1 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#bf616a;">errors</span><span>.</span><span style="color:#bf616a;">New</span><span>(&quot;</span><span style="color:#a3be8c;">stack empty</span><span>&quot;)
+</span><span>    }
+</span><span>    </span><span style="color:#65737e;">// スタックの頂上の要素を取り出す
+</span><span>    </span><span style="color:#bf616a;">top </span><span>:= (*</span><span style="color:#bf616a;">s</span><span>)[</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>()-</span><span style="color:#d08770;">1</span><span>]
+</span><span>    </span><span style="color:#65737e;">// 頂上の要素を除いてスタックに入れ直す
+</span><span>    *</span><span style="color:#bf616a;">s </span><span>= (*</span><span style="color:#bf616a;">s</span><span>)[:</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>()-</span><span style="color:#d08770;">1</span><span>]
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">pop: </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">top</span><span>)
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">top</span><span>, </span><span style="color:#d08770;">nil
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">Stack</span><span>) </span><span style="color:#8fa1b3;">Peek</span><span>() (</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#b48ead;">error</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>() &lt; </span><span style="color:#d08770;">1 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Errorf</span><span>(&quot;</span><span style="color:#a3be8c;">stack empty</span><span>&quot;)
+</span><span>    }
+</span><span>    </span><span style="color:#bf616a;">top </span><span>:= (*</span><span style="color:#bf616a;">s</span><span>)[</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>()-</span><span style="color:#d08770;">1</span><span>]
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">peek: </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">top</span><span>)
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">top</span><span>, </span><span style="color:#d08770;">nil
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">NewStack</span><span>() *</span><span style="color:#b48ead;">Stack </span><span>{
+</span><span>    </span><span style="color:#bf616a;">s </span><span>:= </span><span style="color:#96b5b4;">make</span><span>(</span><span style="color:#b48ead;">Stack</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span>    </span><span style="color:#b48ead;">return </span><span>&amp;</span><span style="color:#bf616a;">s
+</span><span>}
+</span></code></pre>
 <p>呼び出し側</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">NewStack()
-
-s.Push(</span><span style="color:#0086b3;">300</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;Stack (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s.Size(), </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)
-
-s.Push(</span><span style="color:#0086b3;">401</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;Stack (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s.Size(), </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)
-
-s.Pop()
-fmt.Printf(</span><span style="color:#183691;">&quot;Stack (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s.Size(), </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)
-
-s.Peek()
-fmt.Printf(</span><span style="color:#183691;">&quot;Stack (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s.Size(), </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">s </span><span>:= </span><span style="color:#bf616a;">NewStack</span><span>()
+</span><span>
+</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#d08770;">300</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Stack (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>(), *</span><span style="color:#bf616a;">s</span><span>)
+</span><span>
+</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#d08770;">401</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Stack (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>(), *</span><span style="color:#bf616a;">s</span><span>)
+</span><span>
+</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Pop</span><span>()
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Stack (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>(), *</span><span style="color:#bf616a;">s</span><span>)
+</span><span>
+</span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Peek</span><span>()
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Stack (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>.</span><span style="color:#bf616a;">Size</span><span>(), *</span><span style="color:#bf616a;">s</span><span>)
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">push: 300
-Stack (1) [300]
-push: 401
-Stack (2) [300 401]
-pop: 401
-Stack (1) [300]
-peek: 300
-Stack (1) [300]
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>push: 300
+</span><span>Stack (1) [300]
+</span><span>push: 401
+</span><span>Stack (2) [300 401]
+</span><span>pop: 401
+</span><span>Stack (1) [300]
+</span><span>peek: 300
+</span><span>Stack (1) [300]
+</span></code></pre>
 <p>2回 Push したあと、1回 Pop したので、1回目に Push した値が Peek で確認できる。</p>
 <h4 id="sutatukuwoshi-tutewen-zi-lie-wofan-zhuan-saseruli">スタックを使って文字列を反転させる例</h4>
 <p>文字列のスタックを定義（簡略版）</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">StringStack []</span><span style="font-weight:bold;color:#a71d5d;">string
-
-func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">StringStack) </span><span style="font-weight:bold;color:#795da3;">Push</span><span style="color:#323232;">(v </span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">) {
-	</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s, v)
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(s </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">StringStack) </span><span style="font-weight:bold;color:#795da3;">Pop</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">string </span><span style="color:#323232;">{
-	top </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)[</span><span style="color:#62a35c;">len</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">]
-	</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)[:</span><span style="color:#62a35c;">len</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">s)</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">]
-	</span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> top
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">type </span><span>StringStack []</span><span style="color:#b48ead;">string
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">StringStack</span><span>) </span><span style="color:#8fa1b3;">Push</span><span>(</span><span style="color:#bf616a;">v </span><span style="color:#b48ead;">string</span><span>) {
+</span><span>	*</span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(*</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">v</span><span>)
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">s </span><span>*</span><span style="color:#b48ead;">StringStack</span><span>) </span><span style="color:#8fa1b3;">Pop</span><span>() </span><span style="color:#b48ead;">string </span><span>{
+</span><span>	</span><span style="color:#bf616a;">top </span><span>:= (*</span><span style="color:#bf616a;">s</span><span>)[</span><span style="color:#96b5b4;">len</span><span>(*</span><span style="color:#bf616a;">s</span><span>)-</span><span style="color:#d08770;">1</span><span>]
+</span><span>	*</span><span style="color:#bf616a;">s </span><span>= (*</span><span style="color:#bf616a;">s</span><span>)[:</span><span style="color:#96b5b4;">len</span><span>(*</span><span style="color:#bf616a;">s</span><span>)-</span><span style="color:#d08770;">1</span><span>]
+</span><span>	</span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">top
+</span><span>}
+</span></code></pre>
 <p>呼び出し側（一文字ずつ Push するのも何なのでループで入れ込む）</p>
-<pre style="background-color:#ffffff;">
-<span style="font-style:italic;color:#969896;">// 文字列をスライスに入れる
-</span><span style="color:#323232;">str </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#183691;">&quot;なぜベストを尽くさないのか？&quot;</span><span style="color:#323232;">
-fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%s\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, str)
-s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">([]</span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">_, v </span><span style="font-weight:bold;color:#a71d5d;">:= range </span><span style="color:#323232;">[]</span><span style="font-weight:bold;color:#a71d5d;">rune</span><span style="color:#323232;">(str) {
-    s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(s, </span><span style="font-weight:bold;color:#a71d5d;">string</span><span style="color:#323232;">(v))
-}
-</span><span style="font-style:italic;color:#969896;">// スタックに格納
-</span><span style="color:#323232;">stack </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">(StringStack, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s); i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    stack.Push(s[i])
-}
-</span><span style="font-style:italic;color:#969896;">// スタックからデータを取り出すと文字列が反転する
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i, l </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(stack); i </span><span style="font-weight:bold;color:#a71d5d;">&lt;</span><span style="color:#323232;"> l; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, stack.Pop())
-}
-fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">)
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#65737e;">// 文字列をスライスに入れる
+</span><span style="color:#bf616a;">str </span><span>:= &quot;</span><span style="color:#a3be8c;">なぜベストを尽くさないのか？</span><span>&quot;
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%s</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">str</span><span>)
+</span><span style="color:#bf616a;">s </span><span>:= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">string</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_</span><span>, </span><span style="color:#bf616a;">v </span><span>:= </span><span style="color:#b48ead;">range </span><span>[]</span><span style="color:#b48ead;">rune</span><span>(</span><span style="color:#bf616a;">str</span><span>) {
+</span><span>    </span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#bf616a;">string</span><span>(</span><span style="color:#bf616a;">v</span><span>))
+</span><span>}
+</span><span style="color:#65737e;">// スタックに格納
+</span><span style="color:#bf616a;">stack </span><span>:= </span><span style="color:#96b5b4;">make</span><span>(</span><span style="color:#b48ead;">StringStack</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>); </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#bf616a;">i</span><span>])
+</span><span>}
+</span><span style="color:#65737e;">// スタックからデータを取り出すと文字列が反転する
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">l </span><span>:= </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">stack</span><span>); </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">l</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%s</span><span>&quot;, </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>}
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">なぜベストを尽くさないのか？
-？かのいなさく尽をトスベぜな
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>なぜベストを尽くさないのか？
+</span><span>？かのいなさく尽をトスベぜな
+</span></code></pre>
 <p>スタックに入れなくても文字列の反転はできると思うんですが、入れたほうがイメージしやすい気がします。</p>
 <h4 id="ni-porandoji-fa-denoji-suan-li">逆ポーランド記法での計算例</h4>
 <p><code>80 * 20 - 5</code> の計算を行う</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">rpn </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#183691;">&quot;80 20 * 5 -&quot;
-</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">stack StringStack
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">_, v </span><span style="font-weight:bold;color:#a71d5d;">:= range</span><span style="color:#323232;"> strings.Split(rpn, </span><span style="color:#183691;">&quot; &quot;</span><span style="color:#323232;">) {
-    </span><span style="font-weight:bold;color:#a71d5d;">switch</span><span style="color:#323232;"> v {
-    </span><span style="font-weight:bold;color:#a71d5d;">case </span><span style="color:#183691;">&quot;+&quot;</span><span style="color:#323232;">:
-        r, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        l, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        result </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> l </span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#323232;"> r
-        stack.Push(strconv.Itoa(result))
-    </span><span style="font-weight:bold;color:#a71d5d;">case </span><span style="color:#183691;">&quot;-&quot;</span><span style="color:#323232;">:
-        r, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        l, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        result </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> l </span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#323232;"> r
-        stack.Push(strconv.Itoa(result))
-    </span><span style="font-weight:bold;color:#a71d5d;">case </span><span style="color:#183691;">&quot;*&quot;</span><span style="color:#323232;">:
-        r, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        l, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        result </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> l </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;"> r
-        stack.Push(strconv.Itoa(result))
-    </span><span style="font-weight:bold;color:#a71d5d;">case </span><span style="color:#183691;">&quot;/&quot;</span><span style="color:#323232;">:
-        r, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        l, _ </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> strconv.Atoi(stack.Pop())
-        result </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> l </span><span style="font-weight:bold;color:#a71d5d;">/</span><span style="color:#323232;"> r
-        stack.Push(strconv.Itoa(result))
-    </span><span style="font-weight:bold;color:#a71d5d;">default</span><span style="color:#323232;">:
-        stack.Push(v)
-    }
-}
-
-fmt.Println(stack.Pop())
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">rpn </span><span>:= &quot;</span><span style="color:#a3be8c;">80 20 * 5 -</span><span>&quot;
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">stack </span><span style="color:#b48ead;">StringStack
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_</span><span>, </span><span style="color:#bf616a;">v </span><span>:= </span><span style="color:#b48ead;">range </span><span style="color:#bf616a;">strings</span><span>.</span><span style="color:#bf616a;">Split</span><span>(</span><span style="color:#bf616a;">rpn</span><span>, &quot; &quot;) {
+</span><span>    </span><span style="color:#b48ead;">switch </span><span style="color:#bf616a;">v </span><span>{
+</span><span>    </span><span style="color:#b48ead;">case </span><span>&quot;</span><span style="color:#a3be8c;">+</span><span>&quot;:
+</span><span>        </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">result </span><span>:= </span><span style="color:#bf616a;">l </span><span>+ </span><span style="color:#bf616a;">r
+</span><span>        </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Itoa</span><span>(</span><span style="color:#bf616a;">result</span><span>))
+</span><span>    </span><span style="color:#b48ead;">case </span><span>&quot;</span><span style="color:#a3be8c;">-</span><span>&quot;:
+</span><span>        </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">result </span><span>:= </span><span style="color:#bf616a;">l </span><span>- </span><span style="color:#bf616a;">r
+</span><span>        </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Itoa</span><span>(</span><span style="color:#bf616a;">result</span><span>))
+</span><span>    </span><span style="color:#b48ead;">case </span><span>&quot;</span><span style="color:#a3be8c;">*</span><span>&quot;:
+</span><span>        </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">result </span><span>:= </span><span style="color:#bf616a;">l </span><span>* </span><span style="color:#bf616a;">r
+</span><span>        </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Itoa</span><span>(</span><span style="color:#bf616a;">result</span><span>))
+</span><span>    </span><span style="color:#b48ead;">case </span><span>&quot;</span><span style="color:#a3be8c;">/</span><span>&quot;:
+</span><span>        </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#bf616a;">_ </span><span>:= </span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Atoi</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span><span>        </span><span style="color:#bf616a;">result </span><span>:= </span><span style="color:#bf616a;">l </span><span>/ </span><span style="color:#bf616a;">r
+</span><span>        </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">strconv</span><span>.</span><span style="color:#bf616a;">Itoa</span><span>(</span><span style="color:#bf616a;">result</span><span>))
+</span><span>    </span><span style="color:#b48ead;">default</span><span>:
+</span><span>        </span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Push</span><span>(</span><span style="color:#bf616a;">v</span><span>)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(</span><span style="color:#bf616a;">stack</span><span>.</span><span style="color:#bf616a;">Pop</span><span>())
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">1595
-</span></pre><h3 id="kiyu">キュー</h3>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>1595
+</span></code></pre>
+<h3 id="kiyu">キュー</h3>
 <p>キュー（Queue）は待ち行列のデータ構造です。FIFO で処理を行います。</p>
 <p>基本操作は次の2つ</p>
 <ul>
@@ -482,116 +455,110 @@ fmt.Println(stack.Pop())
 </ul>
 <h4 id="suraisuwoshi-tuta-int-xing-nokiyunoli">スライスを使った int 型のキューの例</h4>
 <p>定義</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">intQueue []</span><span style="font-weight:bold;color:#a71d5d;">int
-
-func </span><span style="color:#323232;">(q </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">intQueue) </span><span style="font-weight:bold;color:#795da3;">EnQueue</span><span style="color:#323232;">(v </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) {
-    </span><span style="font-style:italic;color:#969896;">// Queue はデータを最後尾に追加する
-    </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">q </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">q, v)
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(q </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">intQueue) </span><span style="font-weight:bold;color:#795da3;">DeQueue</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="color:#323232;">{
-    </span><span style="font-style:italic;color:#969896;">// Queue はデータを最前列から取得する
-    </span><span style="color:#323232;">v </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">q)[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">]
-    </span><span style="font-style:italic;color:#969896;">// 二番目以降のデータを Queue に入れ直す
-    </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">q </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">q)[</span><span style="color:#0086b3;">1</span><span style="color:#323232;">:]
-    </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> v
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">type </span><span>intQueue []</span><span style="color:#b48ead;">int
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">q </span><span>*</span><span style="color:#b48ead;">intQueue</span><span>) </span><span style="color:#8fa1b3;">EnQueue</span><span>(</span><span style="color:#bf616a;">v </span><span style="color:#b48ead;">int</span><span>) {
+</span><span>    </span><span style="color:#65737e;">// Queue はデータを最後尾に追加する
+</span><span>    *</span><span style="color:#bf616a;">q </span><span>= </span><span style="color:#96b5b4;">append</span><span>(*</span><span style="color:#bf616a;">q</span><span>, </span><span style="color:#bf616a;">v</span><span>)
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">q </span><span>*</span><span style="color:#b48ead;">intQueue</span><span>) </span><span style="color:#8fa1b3;">DeQueue</span><span>() </span><span style="color:#b48ead;">int </span><span>{
+</span><span>    </span><span style="color:#65737e;">// Queue はデータを最前列から取得する
+</span><span>    </span><span style="color:#bf616a;">v </span><span>:= (*</span><span style="color:#bf616a;">q</span><span>)[</span><span style="color:#d08770;">0</span><span>]
+</span><span>    </span><span style="color:#65737e;">// 二番目以降のデータを Queue に入れ直す
+</span><span>    *</span><span style="color:#bf616a;">q </span><span>= (*</span><span style="color:#bf616a;">q</span><span>)[</span><span style="color:#d08770;">1</span><span>:]
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">v
+</span><span>}
+</span></code></pre>
 <p>利用側</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">queue </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">(intQueue, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-queue.EnQueue(</span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-queue.EnQueue(</span><span style="color:#0086b3;">2</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-queue.DeQueue()
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-queue.EnQueue(</span><span style="color:#0086b3;">3</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-queue.DeQueue()
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-queue.DeQueue()
-fmt.Printf(</span><span style="color:#183691;">&quot;Queue (</span><span style="color:#0086b3;">%d</span><span style="color:#183691;">) </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(queue), queue)
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">queue </span><span>:= </span><span style="color:#96b5b4;">make</span><span>(</span><span style="color:#b48ead;">intQueue</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">2</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">DeQueue</span><span>()
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">3</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">DeQueue</span><span>()
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span><span style="color:#bf616a;">queue</span><span>.</span><span style="color:#bf616a;">DeQueue</span><span>()
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">Queue (</span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">) </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">queue</span><span>), </span><span style="color:#bf616a;">queue</span><span>)
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">Queue (1) [1]
-Queue (2) [1 2]
-Queue (1) [2]
-Queue (2) [2 3]
-Queue (1) [3]
-Queue (0) []
-</span></pre><h4 id="suraisuwoshi-tutayou-xian-du-fu-kikiyunoli">スライスを使った優先度付きキューの例</h4>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Queue (1) [1]
+</span><span>Queue (2) [1 2]
+</span><span>Queue (1) [2]
+</span><span>Queue (2) [2 3]
+</span><span>Queue (1) [3]
+</span><span>Queue (0) []
+</span></code></pre>
+<h4 id="suraisuwoshi-tutayou-xian-du-fu-kikiyunoli">スライスを使った優先度付きキューの例</h4>
 <p>int 型の順序配列での優先度付きキューの定義</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">type </span><span style="color:#323232;">priorityQueue []</span><span style="font-weight:bold;color:#a71d5d;">int
-
-func </span><span style="color:#323232;">(pq </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">priorityQueue) </span><span style="font-weight:bold;color:#795da3;">EnQueue</span><span style="color:#323232;">(v </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) {
-    </span><span style="font-weight:bold;color:#a71d5d;">if </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq) </span><span style="font-weight:bold;color:#a71d5d;">== </span><span style="color:#0086b3;">0 </span><span style="color:#323232;">{
-        </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq, v)
-    } </span><span style="font-weight:bold;color:#a71d5d;">else </span><span style="color:#323232;">{
-        </span><span style="font-style:italic;color:#969896;">// 順序配列にする
-        </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> sort.Search(</span><span style="color:#62a35c;">len</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq), </span><span style="font-weight:bold;color:#a71d5d;">func</span><span style="color:#323232;">(i </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">bool</span><span style="color:#323232;"> {
-            </span><span style="font-weight:bold;color:#a71d5d;">return </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[i] </span><span style="font-weight:bold;color:#a71d5d;">&gt;=</span><span style="color:#323232;"> v
-        })
-        </span><span style="font-style:italic;color:#969896;">// 既存データは index の前後に入れる
-        </span><span style="color:#323232;">t </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">([]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">((</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">:i]))
-        </span><span style="color:#62a35c;">copy</span><span style="color:#323232;">(t, (</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">:i])
-        </span><span style="font-style:italic;color:#969896;">// index の位置にデータを入れる
-</span><span style="color:#323232;">        t </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(t, v)
-        t </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(t, (</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[i:]...)
-        </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> t
-    }
-}
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="color:#323232;">(pq </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">priorityQueue) </span><span style="font-weight:bold;color:#795da3;">DeQueue</span><span style="color:#323232;">() </span><span style="font-weight:bold;color:#a71d5d;">int </span><span style="color:#323232;">{
-    v </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">]
-    </span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">*</span><span style="color:#323232;">pq)[</span><span style="color:#0086b3;">1</span><span style="color:#323232;">:]
-    </span><span style="font-weight:bold;color:#a71d5d;">return</span><span style="color:#323232;"> v
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">type </span><span>priorityQueue []</span><span style="color:#b48ead;">int
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">pq </span><span>*</span><span style="color:#b48ead;">priorityQueue</span><span>) </span><span style="color:#8fa1b3;">EnQueue</span><span>(</span><span style="color:#bf616a;">v </span><span style="color:#b48ead;">int</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">len</span><span>(*</span><span style="color:#bf616a;">pq</span><span>) == </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        *</span><span style="color:#bf616a;">pq </span><span>= </span><span style="color:#96b5b4;">append</span><span>(*</span><span style="color:#bf616a;">pq</span><span>, </span><span style="color:#bf616a;">v</span><span>)
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        </span><span style="color:#65737e;">// 順序配列にする
+</span><span>        </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#bf616a;">sort</span><span>.</span><span style="color:#bf616a;">Search</span><span>(</span><span style="color:#96b5b4;">len</span><span>(*</span><span style="color:#bf616a;">pq</span><span>), </span><span style="color:#b48ead;">func</span><span>(</span><span style="color:#bf616a;">i </span><span style="color:#b48ead;">int</span><span>) </span><span style="color:#b48ead;">bool </span><span>{
+</span><span>            </span><span style="color:#b48ead;">return </span><span>(*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#bf616a;">i</span><span>] &gt;= </span><span style="color:#bf616a;">v
+</span><span>        })
+</span><span>        </span><span style="color:#65737e;">// 既存データは index の前後に入れる
+</span><span>        </span><span style="color:#bf616a;">t </span><span>:= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#96b5b4;">len</span><span>((*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#d08770;">0</span><span>:</span><span style="color:#bf616a;">i</span><span>]))
+</span><span>        </span><span style="color:#96b5b4;">copy</span><span>(</span><span style="color:#bf616a;">t</span><span>, (*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#d08770;">0</span><span>:</span><span style="color:#bf616a;">i</span><span>])
+</span><span>        </span><span style="color:#65737e;">// index の位置にデータを入れる
+</span><span>        </span><span style="color:#bf616a;">t </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">t</span><span>, </span><span style="color:#bf616a;">v</span><span>)
+</span><span>        </span><span style="color:#bf616a;">t </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">t</span><span>, (*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#bf616a;">i</span><span>:]...)
+</span><span>        *</span><span style="color:#bf616a;">pq </span><span>= </span><span style="color:#bf616a;">t
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">func </span><span>(</span><span style="color:#bf616a;">pq </span><span>*</span><span style="color:#b48ead;">priorityQueue</span><span>) </span><span style="color:#8fa1b3;">DeQueue</span><span>() </span><span style="color:#b48ead;">int </span><span>{
+</span><span>    </span><span style="color:#bf616a;">v </span><span>:= (*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#d08770;">0</span><span>]
+</span><span>    *</span><span style="color:#bf616a;">pq </span><span>= (*</span><span style="color:#bf616a;">pq</span><span>)[</span><span style="color:#d08770;">1</span><span>:]
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">v
+</span><span>}
+</span></code></pre>
 <p>利用側</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">pq </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">(priorityQueue, </span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="color:#0086b3;">31</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="color:#0086b3;">2</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="color:#0086b3;">200</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="color:#0086b3;">0</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="font-weight:bold;color:#a71d5d;">-</span><span style="color:#0086b3;">1</span><span style="color:#323232;">)
-pq.EnQueue(</span><span style="color:#0086b3;">7</span><span style="color:#323232;">)
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i, max </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(pq); i </span><span style="font-weight:bold;color:#a71d5d;">&lt;</span><span style="color:#323232;"> max; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-    fmt.Printf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%d </span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, pq.DeQueue())
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#bf616a;">pq </span><span>:= </span><span style="color:#96b5b4;">make</span><span>(</span><span style="color:#b48ead;">priorityQueue</span><span>, </span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">31</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">2</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">200</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(-</span><span style="color:#d08770;">1</span><span>)
+</span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">EnQueue</span><span>(</span><span style="color:#d08770;">7</span><span>)
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i</span><span>, </span><span style="color:#bf616a;">max </span><span>:= </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">pq</span><span>); </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#bf616a;">max</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>    </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#d08770;">%d </span><span>&quot;, </span><span style="color:#bf616a;">pq</span><span>.</span><span style="color:#bf616a;">DeQueue</span><span>())
+</span><span>}
+</span></code></pre>
 <p>出力結果</p>
-<pre style="background-color:#ffffff;">
-<span style="color:#323232;">-1 0 2 7 31 200 
-</span></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>-1 0 2 7 31 200 
+</span></code></pre>
 <p>EnQueue のタイミングで順序配列にしてデータを保持する構造を採用しました。<br />
 順序配列ではなく、配列を使う場合は DeQueue のタイミングで優先度を調べることになります。<br />
 一般に優先度付きキューはデータ構造にヒープを使うらしい（まだよくわかってない）</p>
 <h3 id="suraisubu-zu">スライス補足</h3>
 <p>len() や cap() をもとにスライスの挙動</p>
-<pre style="background-color:#ffffff;">
-<span style="font-style:italic;color:#969896;">// int 型で要素数 1、容量 2のスライスを定義
-</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#62a35c;">make</span><span style="color:#323232;">([]</span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;">, </span><span style="color:#0086b3;">1</span><span style="color:#323232;">, </span><span style="color:#0086b3;">2</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;p: </span><span style="color:#0086b3;">%p</span><span style="color:#183691;"> len: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> capa: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> values: </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s), </span><span style="color:#62a35c;">cap</span><span style="color:#323232;">(s), s)
-</span><span style="font-style:italic;color:#969896;">// 要素数が定義の範囲内であれば添字でアクセス可能
-</span><span style="color:#323232;">s[</span><span style="color:#0086b3;">0</span><span style="color:#323232;">] </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">1</span><span style="color:#323232;">
-fmt.Printf(</span><span style="color:#183691;">&quot;p: </span><span style="color:#0086b3;">%p</span><span style="color:#183691;"> len: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> capa: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> values: </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s), </span><span style="color:#62a35c;">cap</span><span style="color:#323232;">(s), s)
-</span><span style="font-style:italic;color:#969896;">// 要素数が定義の範囲を超える場合は append でデータを追加する
-</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(s, </span><span style="color:#0086b3;">2</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;p: </span><span style="color:#0086b3;">%p</span><span style="color:#183691;"> len: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> capa: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> values: </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s), </span><span style="color:#62a35c;">cap</span><span style="color:#323232;">(s), s)
-</span><span style="font-style:italic;color:#969896;">// 定義時の容量を超える際に新たなメモリ領域を確保するのでポインタの値が変わっている事がわかる
-</span><span style="color:#323232;">s </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#62a35c;">append</span><span style="color:#323232;">(s, </span><span style="color:#0086b3;">3</span><span style="color:#323232;">)
-fmt.Printf(</span><span style="color:#183691;">&quot;p: </span><span style="color:#0086b3;">%p</span><span style="color:#183691;"> len: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> capa: </span><span style="color:#0086b3;">%d</span><span style="color:#183691;"> values: </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, s, </span><span style="color:#62a35c;">len</span><span style="color:#323232;">(s), </span><span style="color:#62a35c;">cap</span><span style="color:#323232;">(s), s)
-</span></pre><pre style="background-color:#ffffff;">
-<span style="color:#323232;">p: 0xc000016070 len: 1 capa: 2 values: [0]
-p: 0xc000016070 len: 1 capa: 2 values: [1]
-p: 0xc000016070 len: 2 capa: 2 values: [1 2]
-p: 0xc0000140e0 len: 3 capa: 4 values: [1 2 3]
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#65737e;">// int 型で要素数 1、容量 2のスライスを定義
+</span><span style="color:#bf616a;">s </span><span>:= </span><span style="color:#96b5b4;">make</span><span>([]</span><span style="color:#b48ead;">int</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">p: </span><span style="color:#d08770;">%p</span><span style="color:#a3be8c;"> len: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> capa: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> values: </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#96b5b4;">cap</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#bf616a;">s</span><span>)
+</span><span style="color:#65737e;">// 要素数が定義の範囲内であれば添字でアクセス可能
+</span><span style="color:#bf616a;">s</span><span>[</span><span style="color:#d08770;">0</span><span>] = </span><span style="color:#d08770;">1
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">p: </span><span style="color:#d08770;">%p</span><span style="color:#a3be8c;"> len: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> capa: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> values: </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#96b5b4;">cap</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#bf616a;">s</span><span>)
+</span><span style="color:#65737e;">// 要素数が定義の範囲を超える場合は append でデータを追加する
+</span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#d08770;">2</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">p: </span><span style="color:#d08770;">%p</span><span style="color:#a3be8c;"> len: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> capa: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> values: </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#96b5b4;">cap</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#bf616a;">s</span><span>)
+</span><span style="color:#65737e;">// 定義時の容量を超える際に新たなメモリ領域を確保するのでポインタの値が変わっている事がわかる
+</span><span style="color:#bf616a;">s </span><span>= </span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#d08770;">3</span><span>)
+</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">p: </span><span style="color:#d08770;">%p</span><span style="color:#a3be8c;"> len: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> capa: </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;"> values: </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">s</span><span>, </span><span style="color:#96b5b4;">len</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#96b5b4;">cap</span><span>(</span><span style="color:#bf616a;">s</span><span>), </span><span style="color:#bf616a;">s</span><span>)
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>p: 0xc000016070 len: 1 capa: 2 values: [0]
+</span><span>p: 0xc000016070 len: 1 capa: 2 values: [1]
+</span><span>p: 0xc000016070 len: 2 capa: 2 values: [1 2]
+</span><span>p: 0xc0000140e0 len: 3 capa: 4 values: [1 2 3]
+</span></code></pre>
 <hr />
 <ol>
 <li>『データ構造とプログラミング』鈴木一史 2018年3月</li>
@@ -602,33 +569,44 @@ p: 0xc0000140e0 len: 3 capa: 4 values: [1 2 3]
 </section>
 
 
+
        
 
       <footer>
         
           
+          
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
 
           
-<ul class="social_list foot_list" >
+<ul class="social_list foot_list">
     
-    
-    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
 </ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
 
         
       </footer>

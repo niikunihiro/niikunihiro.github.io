@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      
+        
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
         <!-- SEO -->
         
-        <title> UUID version4 が衝突しないのを実験する | Nii Note </title>
+        <title> UUID version4 が衝突しないのを実験する | Niiko thought at that time </title>
         
 
         <!-- Enable responsiveness on mobile devices-->
-        <meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1" >
-        
-        <meta content="website" property="og:type"/>
-        <meta content="Nii Note" property="og:site_name"/>
-        <meta content="https://niikunihiro.github.io/check-for-duplicate-uuid/" property="og:url"/>
-        <meta content="https://niikunihiro.github.io/check-for-duplicate-uuid/" property="twitter:url"/>
-  
-        <meta content="UUID version4 が衝突しないのを実験する" property="og:title"/>
-        <meta content="UUID version4 が衝突しないのを実験する" property="twitter:title"/>
-  
-  
-  
-        <meta content="summary_large_image" property="twitter:card"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
-        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
-  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
 
         <!--  css -->
-        <link rel="stylesheet"  href="https:&#x2F;&#x2F;niikunihiro.github.io/ergo.css" >
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
 
         <!-- fonts -->
         <!-- preload  -->
         <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
-        <link rel="preload"  href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" as="style" >
         <!-- load -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-      
+        
     </head>
 
-    <body>
+    <body onload="main();">
       
-        
 <input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
 <label class="menu cross menu--1" for="openSidebarMenu">
     <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
@@ -58,36 +46,43 @@
     <div class="menu_wrapper">
         <ul class="sidebarMenuInner">
             <li>
-                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Nii Note</a>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
                 <div class="menu_div" ></div>
             </li>
             
             
-            <li><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
         </ul>
     </div>
 </div>
 
-      
+
 
       
 <nav id="overlord" class="overlord" >
   
+  
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
+
+  
+
+
 
 </nav>
 
@@ -98,7 +93,7 @@
       
 <ul class="frontmatter frontmatter_page" id="frontmatter">
     <li>
-        <time class="article_time"  datetime="2020-09-02">September 02, 2020</time>
+        <time class="article_time" datetime="2020-09-02">September 02, 2020</time>
     </li>
     <span class="dotDivider"></span>
     <li> 454 words </li>
@@ -111,71 +106,69 @@
 あとはバイナリを生成して、実行するマシンのコア数だけ実行するという方法にしました。<br />
 特に理由はないですが goroutine は敢えて使ってません。</p>
 <p>DDL(MySQL)</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">create table </span><span style="font-weight:bold;color:#795da3;">uuids</span><span style="color:#323232;">
-(
-	id </span><span style="font-weight:bold;color:#a71d5d;">int</span><span style="color:#323232;"> auto_increment
-		</span><span style="font-weight:bold;color:#a71d5d;">primary key</span><span style="color:#323232;">,
-	uuid </span><span style="font-weight:bold;color:#a71d5d;">varchar</span><span style="color:#323232;">(</span><span style="color:#0086b3;">36</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">not null</span><span style="color:#323232;">,
-	</span><span style="font-weight:bold;color:#a71d5d;">constraint</span><span style="color:#323232;"> uuids_uuid_uindex
-		unique (uuid)
-);
-</span></pre>
+<pre data-lang="sql" style="background-color:#2b303b;color:#c0c5ce;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#b48ead;">create table </span><span style="color:#8fa1b3;">uuids
+</span><span>(
+</span><span>	id </span><span style="color:#b48ead;">int</span><span> auto_increment
+</span><span>		</span><span style="color:#b48ead;">primary key</span><span>,
+</span><span>	uuid </span><span style="color:#b48ead;">varchar</span><span>(</span><span style="color:#d08770;">36</span><span>) not </span><span style="color:#d08770;">null</span><span>,
+</span><span>	</span><span style="color:#b48ead;">constraint</span><span> uuids_uuid_uindex
+</span><span>		unique (uuid)
+</span><span>);
+</span></code></pre>
 <p>Source Code(Go)</p>
 <p>試す場合は、userName、password、databaseName をご自身の環境に合わせてもらえれば動くかと。</p>
-<pre style="background-color:#ffffff;">
-<span style="font-weight:bold;color:#a71d5d;">package</span><span style="color:#323232;"> main
-
-</span><span style="font-weight:bold;color:#a71d5d;">import </span><span style="color:#323232;">(
-	</span><span style="color:#183691;">&quot;database/sql&quot;
-	&quot;fmt&quot;</span><span style="color:#323232;">
-	_ </span><span style="color:#183691;">&quot;github.com/go-sql-driver/mysql&quot;
-	&quot;github.com/google/uuid&quot;
-	&quot;log&quot;
-</span><span style="color:#323232;">)
-
-</span><span style="font-weight:bold;color:#a71d5d;">var </span><span style="color:#323232;">query </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#183691;">&quot;INSERT INTO uuids(uuid) VALUES(?)&quot;
-
-</span><span style="font-weight:bold;color:#a71d5d;">func </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
-	dataSourceName </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> fmt.Sprintf(</span><span style="color:#183691;">&quot;</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">:</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">@tcp(</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">)/</span><span style="color:#0086b3;">%s</span><span style="color:#183691;">?charset=utf8&amp;parseTime=true&quot;</span><span style="color:#323232;">,
-		</span><span style="color:#183691;">&quot;userName&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;password&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;127.0.0.1:3306&quot;</span><span style="color:#323232;">, </span><span style="color:#183691;">&quot;databaseName&quot;</span><span style="color:#323232;">,
-	)
-	db, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> sql.Open(</span><span style="color:#183691;">&quot;mysql&quot;</span><span style="color:#323232;">, dataSourceName)
-	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
-	}
-	</span><span style="font-weight:bold;color:#a71d5d;">defer</span><span style="color:#323232;"> db.Close()
-
-	tx, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> db.Begin()
-	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
-	}
-	stmt, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> tx.Prepare(query)
-	</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-		</span><span style="color:#62a35c;">panic</span><span style="color:#323232;">(err)
-	}
-	</span><span style="font-weight:bold;color:#a71d5d;">defer</span><span style="color:#323232;"> stmt.Close()
-
-	</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">i </span><span style="font-weight:bold;color:#a71d5d;">:= </span><span style="color:#0086b3;">0</span><span style="color:#323232;">; i </span><span style="font-weight:bold;color:#a71d5d;">&lt; </span><span style="color:#0086b3;">100000</span><span style="color:#323232;">; i</span><span style="font-weight:bold;color:#a71d5d;">++ </span><span style="color:#323232;">{
-		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> i</span><span style="font-weight:bold;color:#a71d5d;">%</span><span style="color:#0086b3;">10000 </span><span style="font-weight:bold;color:#a71d5d;">== </span><span style="color:#0086b3;">0 </span><span style="font-weight:bold;color:#a71d5d;">&amp;&amp;</span><span style="color:#323232;"> i </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">0 </span><span style="color:#323232;">{
-			log.Printf(</span><span style="color:#183691;">&quot;now index: </span><span style="color:#0086b3;">%d\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, i)
-		}
-		id, err </span><span style="font-weight:bold;color:#a71d5d;">:=</span><span style="color:#323232;"> uuid.NewRandom()
-		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-			log.Fatalf(</span><span style="color:#183691;">&quot;error in uuid generate </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err.Error())
-		}
-
-		</span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> _, err </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> stmt.Exec(id.String()); err </span><span style="font-weight:bold;color:#a71d5d;">!= </span><span style="color:#0086b3;">nil </span><span style="color:#323232;">{
-			tx.Rollback()
-			log.Fatalf(</span><span style="color:#183691;">&quot;rollback </span><span style="color:#0086b3;">%v\n</span><span style="color:#183691;">&quot;</span><span style="color:#323232;">, err)
-		}
-	}
-
-	tx.Commit()
-
-	fmt.Println(</span><span style="color:#183691;">&quot;finished&quot;</span><span style="color:#323232;">)
-}
-</span></pre>
+<pre data-lang="go" style="background-color:#2b303b;color:#c0c5ce;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#b48ead;">package </span><span style="color:#bf616a;">main
+</span><span>
+</span><span style="color:#b48ead;">import </span><span>(
+</span><span>	&quot;</span><span style="color:#a3be8c;">database/sql</span><span>&quot;
+</span><span>	&quot;</span><span style="color:#a3be8c;">fmt</span><span>&quot;
+</span><span>	</span><span style="color:#bf616a;">_ </span><span>&quot;</span><span style="color:#a3be8c;">github.com/go-sql-driver/mysql</span><span>&quot;
+</span><span>	&quot;</span><span style="color:#a3be8c;">github.com/google/uuid</span><span>&quot;
+</span><span>	&quot;</span><span style="color:#a3be8c;">log</span><span>&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">query </span><span>= &quot;</span><span style="color:#a3be8c;">INSERT INTO uuids(uuid) VALUES(?)</span><span>&quot;
+</span><span>
+</span><span style="color:#b48ead;">func </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#bf616a;">dataSourceName </span><span>:= </span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Sprintf</span><span>(&quot;</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;">:</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;">@tcp(</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;">)/</span><span style="color:#d08770;">%s</span><span style="color:#a3be8c;">?charset=utf8&amp;parseTime=true</span><span>&quot;,
+</span><span>		&quot;</span><span style="color:#a3be8c;">userName</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">password</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">127.0.0.1:3306</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">databaseName</span><span>&quot;,
+</span><span>	)
+</span><span>	</span><span style="color:#bf616a;">db</span><span>, </span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">sql</span><span>.</span><span style="color:#bf616a;">Open</span><span>(&quot;</span><span style="color:#a3be8c;">mysql</span><span>&quot;, </span><span style="color:#bf616a;">dataSourceName</span><span>)
+</span><span>	</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>		</span><span style="color:#96b5b4;">panic</span><span>(</span><span style="color:#bf616a;">err</span><span>)
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">defer </span><span style="color:#bf616a;">db</span><span>.</span><span style="color:#bf616a;">Close</span><span>()
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">tx</span><span>, </span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">db</span><span>.</span><span style="color:#bf616a;">Begin</span><span>()
+</span><span>	</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>		</span><span style="color:#96b5b4;">panic</span><span>(</span><span style="color:#bf616a;">err</span><span>)
+</span><span>	}
+</span><span>	</span><span style="color:#bf616a;">stmt</span><span>, </span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">tx</span><span>.</span><span style="color:#bf616a;">Prepare</span><span>(</span><span style="color:#bf616a;">query</span><span>)
+</span><span>	</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>		</span><span style="color:#96b5b4;">panic</span><span>(</span><span style="color:#bf616a;">err</span><span>)
+</span><span>	}
+</span><span>	</span><span style="color:#b48ead;">defer </span><span style="color:#bf616a;">stmt</span><span>.</span><span style="color:#bf616a;">Close</span><span>()
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">i </span><span>:= </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#bf616a;">i </span><span>&lt; </span><span style="color:#d08770;">100000</span><span>; </span><span style="color:#bf616a;">i</span><span>++ {
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">i</span><span>%</span><span style="color:#d08770;">10000 </span><span>== </span><span style="color:#d08770;">0 </span><span>&amp;&amp; </span><span style="color:#bf616a;">i </span><span>!= </span><span style="color:#d08770;">0 </span><span>{
+</span><span>			</span><span style="color:#bf616a;">log</span><span>.</span><span style="color:#bf616a;">Printf</span><span>(&quot;</span><span style="color:#a3be8c;">now index: </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">i</span><span>)
+</span><span>		}
+</span><span>		</span><span style="color:#bf616a;">id</span><span>, </span><span style="color:#bf616a;">err </span><span>:= </span><span style="color:#bf616a;">uuid</span><span>.</span><span style="color:#bf616a;">NewRandom</span><span>()
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>			</span><span style="color:#bf616a;">log</span><span>.</span><span style="color:#bf616a;">Fatalf</span><span>(&quot;</span><span style="color:#a3be8c;">error in uuid generate </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">err</span><span>.</span><span style="color:#bf616a;">Error</span><span>())
+</span><span>		}
+</span><span>
+</span><span>		</span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">_</span><span>, </span><span style="color:#bf616a;">err </span><span>= </span><span style="color:#bf616a;">stmt</span><span>.</span><span style="color:#bf616a;">Exec</span><span>(</span><span style="color:#bf616a;">id</span><span>.</span><span style="color:#bf616a;">String</span><span>()); </span><span style="color:#bf616a;">err </span><span>!= </span><span style="color:#d08770;">nil </span><span>{
+</span><span>			</span><span style="color:#bf616a;">tx</span><span>.</span><span style="color:#bf616a;">Rollback</span><span>()
+</span><span>			</span><span style="color:#bf616a;">log</span><span>.</span><span style="color:#bf616a;">Fatalf</span><span>(&quot;</span><span style="color:#a3be8c;">rollback </span><span style="color:#d08770;">%v</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#bf616a;">err</span><span>)
+</span><span>		}
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">tx</span><span>.</span><span style="color:#bf616a;">Commit</span><span>()
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">fmt</span><span>.</span><span style="color:#bf616a;">Println</span><span>(&quot;</span><span style="color:#a3be8c;">finished</span><span>&quot;)
+</span><span>}
+</span></code></pre>
 <p>で、結果ですが、今のところ衝突は起こせていないです。2コアはちょっと頼りないか。</p>
 <p>今回はサーバで生成する前提で書いてるんですけど、用途によっては MACアドレスを元に生成する ver1 使って、サーバで生成せずにクライアント端末で生成した UUID を集めたほうが限りなく衝突しないんじゃないかなと思ったり。</p>
 
@@ -184,33 +177,44 @@
 </section>
 
 
+
        
 
       <footer>
         
           
+          
 <figure class="mini_logo ">
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;niikunihiro&#x2F;niikunihiro.github.io&#x2F;d2b561e132826a2e42470c9b4f28213701632e46&#x2F;profile.jpg)"></a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
 </figure>
 <h5>
-    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Nii Note</a>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
 </h5>
 
           
-<ul class="social_list foot_list" >
+<ul class="social_list foot_list">
     
-    
-    <li class="button extra_small font_faint"><a href="https://github.com/niikunihiro" target="_blank" >niikunihiro</a><i class="fab fa-github" ></i></li>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
 </ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
 
         
       </footer>
