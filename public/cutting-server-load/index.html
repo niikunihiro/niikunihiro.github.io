@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> リクエストが多すぎて困る？ | Niiko thought at that time </title>
+        
+        
+        <meta content="website" property="og:type"/>
+        <meta content="Niiko thought at that time" property="og:site_name"/>
+        <meta content="https://niikunihiro.github.io/cutting-server-load/" property="og:url"/>
+        <meta content="https://niikunihiro.github.io/cutting-server-load/" property="twitter:url"/>
+  
+        <meta content="リクエストが多すぎて困る？" property="og:title"/>
+        <meta content="リクエストが多すぎて困る？" property="twitter:title"/>
+  
+  
+  
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
+  
+
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
+
+        <!--  css -->
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        
+    </head>
+
+    <body onload="main();">
+      
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+        </ul>
+    </div>
+</div>
+
+
+
+      
+<nav id="overlord" class="overlord" >
+  
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+  
+
+
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;cutting-server-load&#x2F;" id="article_link">リクエストが多すぎて困る？</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time" datetime="2023-12-09">December 09, 2023</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 1957 words </li>
+    <span class="dotDivider" ></span>
+    <li> 10 min </li>
+</ul>
+
+      <p>利用者の多いサービスを展開しているとリクエストが跳ね上がることも多々ありますよね。うれしい悲鳴とでもいいましょうか有難い面もあればレスポンスが遅い状態が続くとユーザーの不満足にもなるので、そうはいってられないこともあります。リクエストが増加する要因はサービスの性質によりいろんなケースがあると思いますが、予期せぬリクエストの増加はスケールが追いつかない時もありなかなか悩ましいものです。<br />
+今回はいくつかある対応のうちサーバ負荷を上げずにリクエストを捌く方法について考察を行いたいと思います。</p>
+<h3 id="inhurakaranoapuroti">インフラからのアプローチ</h3>
+<p>これは基本的に水平スケールにより負荷分散を試みます。
+ロードバランサーを使って負荷分散し、リソースが足りなくなってきたらオートスケーリングを実施。
+クラウドを利用している場合は設定を行うことで利用可能。<br />
+お財布と相談がいる方法（継続的にお金がかかる）</p>
+<h3 id="apurikesiyonkaranoapuroti">アプリケーションからのアプローチ</h3>
+<p>これは基本的に通信を減らすことで達成を試みます。
+通信量または通信回数を減らす方法がありますが、どっちかというと通信回数を減らすのが効果的です。
+通信量（データ量）が多いとリソースをその分使用するため減らすことに効果がないわけではないですが、通信回数を減らすことはサーバのリソースを使用しないことにつながります。
+アプリケーションに機能として組み込むので実装することで利用可能。<br />
+こちらもお財布と相談がいる方法（開発するので一時的にお金がかかる）</p>
+<p>通信以外にアルゴリズムやデータ構造を変えたりすることで計算量を減らしたり、SQL を書き換えてパフォーマンスを改善だったり、SSR と CSR の使い分けもテーマとして面白いですが別の機会にゆずります。特記することがあるとすれば Redis の keys コマンドは本番環境で使わないほうがいいと思います。</p>
+<hr />
+<p>通信回数を減らす方法の考察に入りますが、ひとつは「キャッシュ」を利用すること。<br />
+イメージしやすくするためにシーケンス図を用意しました ↓</p>
+<pre class="mermaid">
+sequenceDiagram
+actor user
+participant C as クライアント
+participant CC as クライアント&lt;br&gt;キャッシュ
+participant S as サーバ
+participant SC as サーバ&lt;br&gt;キャッシュ
+participant BK as マイクロサービス&lt;br&gt;データベースなど
+
+user-&gt;&gt;+C: open
+C-&gt;&gt;+S: request
+Note right of C: キャッシュなし時
+S-&gt;&gt;+BK: get data
+BK--&gt;&gt;-S: data
+S-&gt;&gt;+SC: save cache
+SC--&gt;&gt;-S: result
+S--&gt;&gt;-C: response
+C-&gt;&gt;+CC: save cache
+CC--&gt;&gt;-C: result
+C--&gt;&gt;-user: view
+
+user-&gt;&gt;+C: open
+C-&gt;&gt;+S: request
+Note right of C: サーバキャッシュ利用時
+S-&gt;&gt;+SC: get cache
+Note right of SC: バックエンドへの&lt;br&gt;通信削減
+SC--&gt;&gt;-S: data
+S--&gt;&gt;-C: response
+C-&gt;&gt;+CC: save cache
+CC--&gt;&gt;-C: result
+C--&gt;&gt;-user: view
+
+    user-&gt;&gt;+C: open
+    C-&gt;&gt;+CC: get data
+    Note right of C: クライアントキャッシュ利用時
+    Note right of CC: サーバへの&lt;br&gt;通信削減
+    CC--&gt;&gt;-C: data
+    C--&gt;&gt;-user: view
+</pre>
+<p>クライアントから見て外部リソースを使わなければ使わないほどパフォーマンスも良くなり、サーバ負荷も抑えることができるイメージができたかと思います。</p>
+<p>では次にどうやって実装するのかという話に入ります。</p>
+<p>HTTP には条件付きリクエスト（HTTP conditional requests）という概念が用意されていて、キャッシュ利用のプロトコルが定められています。詳しくはこちらを参照してもらうと丸わかりです →
+<a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Conditional_requests">HTTP 条件付きリクエスト - HTTP | MDN</a></p>
+<p>検証子や条件ヘッダーなど見たことある人もいるのではないでしょうか。</p>
+<p>サーバ側のキャッシュ制御についてはこちらも見ておくとさらに理解が進みます → <a href="https://developer.mozilla.org/ja/docs/Web/HTTP/Caching">HTTP キャッシュ - HTTP | MDN</a></p>
+<p>解説を MDN にぶん投げたままではちょっとアレなので、条件付きリクエストの動きをクライアント・サーバ・サーバのバックエンドのシーケンス図に落とし込んでみます。</p>
+<pre class="mermaid">
+sequenceDiagram
+actor user
+participant C as クライアント
+participant CC as クライアント&lt;br&gt;キャッシュ
+participant S as サーバ
+participant SC as サーバキャッシュ
+participant BK as マイクロサービス&lt;br&gt;データベースなど
+user-&gt;&gt;+C: open
+C-&gt;&gt;+S: GET &#x2F;doc HTTP&#x2F;1.1
+Note right of C: 初回リクエスト
+S-&gt;&gt;+BK: get data
+BK--&gt;&gt;-S: {&quot;foo&quot;:&quot;bar&quot;}
+S-&gt;&gt;+SC: save cache&lt;br&gt;Etag,Last-Modified,{&quot;foo&quot;:&quot;bar&quot;}
+SC--&gt;&gt;-S: result
+S-&gt;&gt;-C: HTTP&#x2F;1.1 200 OK&lt;br&gt;Last-Modified: date&lt;br&gt;Etag: &quot;xyz&quot;&lt;br&gt;{&quot;foo&quot;:&quot;bar&quot;}
+C-&gt;&gt;+CC: save {&quot;foo&quot;:&quot;bar&quot;}
+CC--&gt;&gt;-C: result
+C--&gt;&gt;-user: view
+
+    user-&gt;&gt;+C: open
+    C-&gt;&gt;+S: GET &#x2F;doc HTTP&#x2F;1.1&lt;br&gt;If-Modified-Since: date&lt;br&gt;If-None-Match: &quot;xyx&quot;
+    Note right of C: 2回目以降のリクエスト&lt;br&gt;リソースの更新なし
+    S-&gt;&gt;+SC: check Etag or Last-Modified
+    SC--&gt;&gt;-S: not modifed
+    S-&gt;&gt;-C: HTTP&#x2F;1.1 304 Not Modified
+    C-&gt;&gt;+CC: get data
+    CC--&gt;&gt;-C: {&quot;foo&quot;:&quot;bar&quot;}
+    C--&gt;&gt;-user: view
+
+    user-&gt;&gt;+C: open
+    C-&gt;&gt;+S: GET &#x2F;doc HTTP&#x2F;1.1&lt;br&gt;If-Modified-Since: date&lt;br&gt;If-None-Match: &quot;xyx&quot;
+    Note right of C: 3回目以降のリクエスト&lt;br&gt;リソースの更新あり
+    S-&gt;&gt;+SC: check Etag or Last-Modified
+    SC--&gt;&gt;-S: modifed
+    S-&gt;&gt;+BK: get data
+    BK--&gt;&gt;-S: {&quot;foo&quot;:&quot;buzz&quot;}
+    S-&gt;&gt;+SC: save cache&lt;br&gt;Etag,Last-Modified,{&quot;foo&quot;:&quot;buzz&quot;}
+    SC--&gt;&gt;-S: result
+    S-&gt;&gt;-C: HTTP&#x2F;1.1 200 OK&lt;br&gt;Last-Modified: date2&lt;br&gt;Etag: &quot;xyz2&quot;&lt;br&gt;{&quot;foo&quot;:&quot;buzz&quot;}
+    C-&gt;&gt;+CC: save {&quot;foo&quot;:&quot;buzz&quot;}
+    CC--&gt;&gt;-C: result
+    C--&gt;&gt;-user: view
+</pre>
+<p>リソースの変更の有無を確認して、変更がない場合はキャッシュを利用し、変更があった場合はリソースを更新するという動きに関するプロトコルが条件付きリクエストになります。<br />
+アプリケーションの特性によっては独自にキャッシュの利用ルールを定めることも選択肢の一つにはなり得ますが、HTTP のルールに則って実装するのも面白いと思うのでぜひ検討してほしいです。</p>
+<p><code>If-None-Match</code> や <code>Etag</code> , <code>Cache-Control</code> ヘッダーの使い方を理解してもらった上での補足ですが、条件付きリクエストが使えるのはクライアントとサーバ間の通信に限りません。</p>
+<p>上記シーケンス図を例にあげるとサーバとマイクロサービス間でも HTTP を使用していれば実装可能で、サーバの場合は <a href="https://httpwg.org/specs/rfc7234.html">RFC 7234</a> に準拠しているライブラリに任せることができます。</p>
+<p>Node.js の場合は <a href="https://www.npmjs.com/package/cacheable-request">cacheable-request</a> や <a href="https://www.npmjs.com/package/got">got</a> というライブラリが RFC 7234 に準拠しています。他の言語の場合も RFC 7234 対応 API クライアントを利用すると条件付きリクエストのヘッダに対応してくれるので開発も割と楽にできるんじゃないかと思います。</p>
+<hr />
+<p>ちなみに通信量を減らす方法は「圧縮」することで実現します。圧縮・展開にかかる時間は通信にかかる時間よりも少ない時間で行えるので通信のトータル時間は減ることになります。</p>
+<p>通信自体はいろんな方法で圧縮されており、たとえばブラウザでリクエストをのぞき見ると次のようなリクエストヘッダが送信されているのを確認できるかと思います。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>accept-encoding: gzip, deflate, br
+</span></code></pre>
+<p>gzip や deflate、br は圧縮アルゴリズムを指しています。</p>
+<p>圧縮のネゴシエーション自体はヘッダを設定することで可能ですが JavaScript でリクエストデータを送信したりサーバでデータを返す際は圧縮の実装が要ります。サーバの場合 Apache などのミドルウェアに任せるということも可能なので、それに任せるというのもアリだと思います。ちょっと雑な書き方してるのでこの辺は別の機会に書ければということでこのエントリおわります。</p>
+
+      
+  </article>
+</section>
+
+
+
+       
+
+      <footer>
+        
+          
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+          
+<ul class="social_list foot_list">
+    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+</ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
+
+        
+      </footer>
+    </body>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</html>
