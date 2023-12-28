@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> AWS の DVA に合格した話 | Niiko thought at that time </title>
+        
+        
+        <meta content="website" property="og:type"/>
+        <meta content="Niiko thought at that time" property="og:site_name"/>
+        <meta content="https://niikunihiro.github.io/passed-aws-certified-dva/" property="og:url"/>
+        <meta content="https://niikunihiro.github.io/passed-aws-certified-dva/" property="twitter:url"/>
+  
+        <meta content="AWS の DVA に合格した話" property="og:title"/>
+        <meta content="AWS の DVA に合格した話" property="twitter:title"/>
+  
+  
+  
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
+  
+
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
+
+        <!--  css -->
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        
+    </head>
+
+    <body onload="main();">
+      
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+        </ul>
+    </div>
+</div>
+
+
+
+      
+<nav id="overlord" class="overlord" >
+  
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+  
+
+
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;passed-aws-certified-dva&#x2F;" id="article_link">AWS の DVA に合格した話</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time" datetime="2023-12-28">December 28, 2023</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 1876 words </li>
+    <span class="dotDivider" ></span>
+    <li> 10 min </li>
+</ul>
+
+      <p>AWS Certified Developer - Associate (DVA-02) に合格したので、ふりかえりと言うか、むきなおりしようと思います。</p>
+<h2 id="qian-ti">前提</h2>
+<p>試験勉強を始める前の私の AWS 力についてはこのような感じです。</p>
+<ul>
+<li>CLF と SAA を保持</li>
+<li>SAA を取得してもうすぐ一年たつ</li>
+<li>日常的に AWS を使用してはいるものの、SAA で勉強したが使ってないサービスは全部忘れた。自分でもびっくりするくらいの忘れん坊だった。</li>
+</ul>
+<h2 id="mukinaori-ywt">むきなおり（YWT）</h2>
+<h3 id="mian-qiang-sitakotoyatutakoto">勉強したこと・やったこと</h3>
+<h4 id="shi-yan-gaido">試験ガイド</h4>
+<p>まずは <a href="https://d1.awsstatic.com/ja_JP/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf">AWS Certified Developer - Associate (DVA-C02) 試験ガイド</a>を確認して、領域が次であることを確認しました。</p>
+<blockquote>
+<ol>
+<li>AWS でのアプリケーションの開発および最適化</li>
+<li>継続的インテグレーションと継続的デリバリー (CI/CD) ワークフローを使用したパッケージ化およびデプロイ</li>
+<li>アプリケーションコードとデータの保護</li>
+<li>アプリケーションの問題の特定と解決</li>
+</ol>
+</blockquote>
+<h4 id="jp-contents-hub">JP Contents Hub</h4>
+<p>苦手分野の克服が必至だなと思い、CI/CD が弱い気がしたので JP Contents Hub を使って次のハンズオンを実施してみました。</p>
+<ul>
+<li><a href="https://catalog.workshops.aws/ecs-web-application-handson/ja-JP">ECS Web Application ハンズオン</a></li>
+<li><a href="https://dcj71ciaiav4i.cloudfront.net/CF2469D0-FE58-11EC-96B1-AB890FC54FAE/">Amazon ECS マイクロサービス &amp; CI/CD ハンズオン</a></li>
+</ul>
+<p>なんとなく分かった気になりましたが、自分はこれで試験問題を解けるようにはならないなと気付き、模擬試験をすることにしました。</p>
+<h4 id="mo-ni-shi-yan-udemy">模擬試験（Udemy）</h4>
+<ul>
+<li><a href="https://www.udemy.com/course/draft/5609942/">【DVA-C02】AWS Certified Developer - Associate | 模擬試験</a>
+<ul>
+<li>Udemy のセールの時に買ったので 1,200 円でした。</li>
+<li>日本語版なのに誤翻訳みたいな文章があって、逆に本番ぽかったです。</li>
+</ul>
+</li>
+</ul>
+<p>下の表のように知識領域ごとに理解度がわかるので、苦手な領域・サービスを把握するのに役立ちます。</p>
+<img src="https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/dc8856779b35e02a1a4526fbb393049e8979fba8/dva-practice-test.png" width="685" />
+<p>デプロイの知識をもうちょっと増やす必要あり。セキュリティ分野は知識がそもそもかけてるっぽいなぁという印象ですね。<br />
+とまぁ分かってない領域が判明したので、ここのサービスのチュートリアルをやってみることにしました。</p>
+<h4 id="aws-yuzagaidonotiyutoriaru">AWS ユーザーガイドのチュートリアル</h4>
+<p>今回一番役立ったと思うコンテンツです。テキストだけではわかりにくい個々のサービスの理解に役立ちました。
+いくつかリンクを載せておきます。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/tutorial-lambda-sam.html">アップデートされた Lambda CodeDeploy 関数と AWS のサーバーレスアプリケーションモデルをデプロイします。</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/with-s3-example.html">Amazon S3 トリガーを使用して Lambda 関数を呼び出す</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.Lambda.Tutorial.html">#1: AWS CLI を使用した Amazon DynamoDB と AWS Lambda での、フィルターを使ったすべてのイベントの処理</a></li>
+</ul>
+<h4 id="dui-ce-ben-noben-shi-yan-xiang-ding-wen-ti-ji">対策本の本試験想定問題集</h4>
+<p>対策本の『ポケットスタディ AWS 認定デベロッパーアソシエイト』を持っていたのを思い出したので巻末の模擬試験も受けました。
+問題と選択肢が簡潔に書かれているので読みやすかったです。
+あと、DynamoDB のキャパシティユニットの計算方法が違う気がしたんですが前のバージョンだったのか。DVA-C02 対応が先月出てたのに今気づいたのでリンク <a href="https://amzn.asia/d/1Qirp4L"><i class="fa fa-link"></i></a> 貼っておきます。</p>
+<h4 id="skill-builders-nomo-ni-tesuto">Skill Builders の模擬テスト</h4>
+<p>受験当日に試験に行く前の仕上げとして受験しました。20 問中 12 問くらいの正答率でした。よく受かったもんだ。</p>
+<p><a href="https://explore.skillbuilder.aws/learn/course/14060/aws-certified-developer-associate-official-practice-question-set-dva-c02-japanese">AWS Certified Developer - Associate Official Practice Question Set (DVA-C02 - Japanese)</a></p>
+<h3 id="fen-katutakotokousitarayokatutakoto">分かったこと・こうしたらよかったこと</h3>
+<ol>
+<li>試験ガイドの把握が重要だった</li>
+<li>早めに模擬試験を受けて、苦手分野を把握する</li>
+<li>得意分野・苦手分野ごとの対策を行う</li>
+</ol>
+<h4 id="shi-yan-gaidonoba-wo-gazhong-yao-datuta">試験ガイドの把握が重要だった</h4>
+<p>これは結構重要視しています。試験領域の各領域の中で何を問うかが試験ガイドの「推奨される AWS の知識」に書いてあるんですね。なので次のようなタスクをもっとやっておけば良かったなと思いました。</p>
+<blockquote>
+<ul>
+<li>AWS サービス API、AWS CLI、および SDK を使用したアプリケーションの開発および保護</li>
+<li>CI/CD パイプラインを使用した AWS でのアプリケーションのデプロイ</li>
+</ul>
+</blockquote>
+<h4 id="zao-menimo-ni-shi-yan-woshou-kete-ku-shou-fen-ye-woba-wo-suru">早めに模擬試験を受けて、苦手分野を把握する</h4>
+<p>これは今回特に思ったことです。次は試験ガイドを読んだらすぐに Skill Builders の模擬テストを受けようと思っています。</p>
+<h4 id="de-yi-fen-ye-ku-shou-fen-ye-gotonodui-ce-woxing-u">得意分野・苦手分野ごとの対策を行う</h4>
+<p>こんな感じでやるといいかなと思いました。</p>
+<ul>
+<li>得意な分野
+<ul>
+<li>模擬試験などで出題ケースになれる</li>
+</ul>
+</li>
+<li>理解が足りて無いな分野
+<ul>
+<li>模擬試験を解いて解説を読む</li>
+<li>Jp Contents Hub にあるハンズオンをやってみる</li>
+<li>AWS ユーザーガイドのチュートリアルをやってみる</li>
+</ul>
+</li>
+<li>全然分かってない分野
+<ul>
+<li>AWS ユーザーガイドを読む</li>
+<li>AWS ユーザーガイドのチュートリアルをやってみる</li>
+</ul>
+</li>
+</ul>
+<h4 id="sonota">その他</h4>
+<p>65 問を 130 分で回答する必要がある。単純計算で 1 問 2 分で解く必要があるので効率よく文章を読むようにしないとですね。<br />
+出題に対して複数のソリューションがある場合は何を求めているかを最初に把握するために問題文を下から読むのもありだなと思いました。コスト最適化なのかセキュリティ重視なのか運用負荷を下げたいのかなどを先に把握する方が早く答えられることもあると思うので。</p>
+<h3 id="ci-hakousiyoutosi-tuterukoto">次はこうしようと思ってること</h3>
+<p>次の試験ではこう進めるぜということを書いて終わろうと思います。</p>
+<ol>
+<li>試験ガイドで「コンテンツドメインと重み設定」から出題分野を確認する</li>
+<li>早期に模擬試験を受けて得意分野と苦手分野を把握する</li>
+<li>試験ガイドの「試験内容の概要」から
+<ol>
+<li>対象知識に書いてある用語やサービスで苦手分野のものや理解できていない物を調べていく
+<ol>
+<li>例えば「フォールトトレラントな設計パターン (エクスポネンシャルバックオフとジッターを使用した再試行、デッドレターキューなど)」だと「エクスポネンシャルバックオフ」が何かを調べる感じで</li>
+</ol>
+</li>
+<li>対象スキルに書いてある内容で苦手分野や、やったことがない・知識ゼロなことがあればチュートリアルなどをやってみる
+<ol>
+<li>例えば「シークレット管理サービスの使用による機密データの保護」とか「開発エンドポイントを使用したアプリケーションのテスト (Amazon API Gateway でのステージの設定など)」など色々書いてあるのでやったことないものがあれば試してみる。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>試験範囲の学習が終わったら、模擬試験を繰り返し受けて問題になれる。</li>
+<li>AWS 認定の短期決戦はやめて日常的に学習を行うカテゴリに入れる。</li>
+</ol>
+
+      
+  </article>
+</section>
+
+
+
+       
+
+      <footer>
+        
+          
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+          
+<ul class="social_list foot_list">
+    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+</ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
+
+        
+      </footer>
+    </body>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</html>
