@@ -47,7 +47,7 @@ AWS Certified Developer - Associate (DVA-02) に合格したので、ふりか�
 <img src="https://raw.githubusercontent.com/niikunihiro/niikunihiro.github.io/dc8856779b35e02a1a4526fbb393049e8979fba8/dva-practice-test.png" width="685" />
 
 デプロイの知識をもうちょっと増やす必要あり。セキュリティ分野は知識がそもそもかけてるっぽいなぁという印象ですね。  
-とまぁ分かってない領域が判明したので、ここのサービスのチュートリアルをやってみることにしました。
+とまぁ分かってない領域が判明したので、次のサービスのチュートリアルをやってみることにしました。
 
 #### AWS ユーザーガイドのチュートリアル
 
