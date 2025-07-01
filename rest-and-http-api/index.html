@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <!-- SEO -->
+        
+        <title> REST と HTTP API の違い：統一インターフェースの誤解 | Niiko thought at that time </title>
+        
+        
+        <meta content="website" property="og:type"/>
+        <meta content="Niiko thought at that time" property="og:site_name"/>
+        <meta content="https://niikunihiro.github.io/rest-and-http-api/" property="og:url"/>
+        <meta content="https://niikunihiro.github.io/rest-and-http-api/" property="twitter:url"/>
+  
+        <meta content="REST と HTTP API の違い：統一インターフェースの誤解" property="og:title"/>
+        <meta content="REST と HTTP API の違い：統一インターフェースの誤解" property="twitter:title"/>
+  
+  
+  
+        <meta content="summary_large_image" property="twitter:card"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="og:image"/>
+        <meta content="https://niikunihiro.github.io/images/cover.png" property="twitter:image"/>
+  
+
+
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" >
+
+        <!-- js -->
+        <script src="https:&#x2F;&#x2F;niikunihiro.github.io/theme_selector.js"></script>
+        <script src="https://kit.fontawesome.com/e307e34624.js" crossorigin="anonymous"></script>
+
+        <!--  css -->
+        <link id="themeCSS" rel="stylesheet"
+                            href="https:&#x2F;&#x2F;niikunihiro.github.io/default.css"
+                            />
+
+        <!-- fonts -->
+        <!-- preload  -->
+        <link rel="preload" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway" as="style">
+        <!-- load -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,300i,400,500,500i,600,700,800,900|Raleway">
+        
+    </head>
+
+    <body onload="main();">
+      
+<input type="checkbox" id="openSidebarMenu" class="openSidebarMenu">
+<label class="menu cross menu--1" for="openSidebarMenu">
+    <svg viewBox="0 0 75 75" xmlns="https://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" />
+        <path class="line--1" d="M0 40h62c13 0 6 28-4 18L35 35" />
+        <path class="line--2" d="M0 50h70" />
+        <path class="line--3" d="M0 60h62c13 0 6-28-4-18L35 65" />
+    </svg>
+</label>
+
+<div id="sidebarMenu">
+    <div class="menu_wrapper">
+        <ul class="sidebarMenuInner">
+            <li>
+                <a href="https:&#x2F;&#x2F;niikunihiro.github.io" >Niiko thought at that time</a>
+                <div class="menu_div" ></div>
+            </li>
+            
+            
+
+
+
+<li >
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+        </ul>
+    </div>
+</div>
+
+
+
+      
+<nav id="overlord" class="overlord" >
+  
+  
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+  
+
+
+
+</nav>
+
+<section class="post_container">
+  <article>
+    
+      <h1 class="article_title"><a href="https:&#x2F;&#x2F;niikunihiro.github.io&#x2F;rest-and-http-api&#x2F;" id="article_link">REST と HTTP API の違い：統一インターフェースの誤解</a></h1>
+      
+<ul class="frontmatter frontmatter_page" id="frontmatter">
+    <li>
+        <time class="article_time" datetime="2025-07-02">July 02, 2025</time>
+    </li>
+    <span class="dotDivider"></span>
+    <li> 2307 words </li>
+    <span class="dotDivider" ></span>
+    <li> 12 min </li>
+</ul>
+
+      <p>“REST API” という言葉はソフトウェア開発の現場で頻繁に使われています。しかし、「REST とは何か？」と問われると、意外とはっきり答えられないことがあります。「GET や POST を使っているから REST でしょ？」という感覚で使われていることも多いのではないでしょうか。</p>
+<p>この文書では、REST と HTTP API の違いを丁寧にひもときながら、その誤解を整理し、実際の API 設計に役立つ考え方へとつなげていきます。</p>
+<p>読み終える頃には、“REST API” と HTTP API の違いを説明できるようになり、今後の API 設計において、より良い判断ができるようになるはずです。</p>
+<h2 id="rest-to-http-api-noyokuaruwu-jie">REST と HTTP API のよくある誤解</h2>
+<p>多くの開発者が “REST API” と呼んでいるものは、実際には HTTP メソッド（GET, POST, PUT, DELETE など）を使ってデータの CRUD 操作を行っている API です。</p>
+<p>確かにこれは「HTTP を使った API」ではありますが、REST の設計原則に基づいているかというと、必ずしもそうとは言えません。Roy Fielding が 2000 年に提唱した REST は、単なる技術の使い方ではなく、Web システム全体のアーキテクチャスタイルです。</p>
+<p>HTTP を使っているから REST、というわけではないのです。</p>
+<h2 id="rest-tohahe-ka">REST とは何か</h2>
+<p>REST（Representational State Transfer）は、分散システム、特に Web における効率的で拡張可能なアーキテクチャを実現するための設計原則です。以下の 6 つの制約から構成されています：</p>
+<ol>
+<li>クライアント・サーバーの分離</li>
+<li>ステートレス性</li>
+<li>キャッシュ可能性</li>
+<li>統一インターフェース（これが REST の中核）</li>
+<li>階層化システム</li>
+<li>コードオンデマンド（任意）</li>
+</ol>
+<p>この中でも特に混乱が多いのが「統一インターフェース」です。この要素に焦点を当ててみましょう。</p>
+<h2 id="tong-yi-intahuesunoben-dang-noyi-wei">統一インターフェースの本当の意味</h2>
+<p>統一インターフェース（Uniform Interface）は、REST アーキテクチャの中核的な制約です。</p>
+<p>多くの人は、「GET で取得、POST で作成、PUT で更新、DELETE で削除」のような操作が揃っていれば REST だと考えがちですが、それは統一インターフェースのごく一部に過ぎません。</p>
+<p>統一インターフェースには、次の 4 つの要素が含まれています：</p>
+<h3 id="1-risosunoshi-bie">1. リソースの識別</h3>
+<p>すべてのリソースは URI によって一意に識別される必要があります。たとえば、/users/123 は「ID が 123 のユーザー」というリソースを指します。リソースとはデータの単なる集合ではなく、意味を持った“対象”であることが重要です。</p>
+<h3 id="2-risosunocao-zuo-habiao-xian-wotong-sitexing-u">2. リソースの操作は表現を通して行う</h3>
+<p>クライアントはリソースの本体に直接アクセスするのではなく、リソースの <strong>表現（representation）</strong> を通じて操作を行います。たとえば JSON 形式のユーザー情報を取得して表示したり、編集して送信したりするのがこれに当たります。<br />
+重要なのは、表現とリソースは別物であり、表現の形式（JSON、XML など）は交換可能であるという点です。</p>
+<h3 id="3-zi-ji-ji-shu-de-nametusezi">3. 自己記述的なメッセージ</h3>
+<p>自己記述的とは、クライアントが外部の仕様書や状態を保持せずとも、そのメッセージ単体で処理や意味を理解できることを意味します。これによりサーバ側の変更に対してもクライアントが柔軟に対応しやすくなります。</p>
+<p>たとえば、HTTP ヘッダーに含まれる Content-Type や Authorization などは、リクエストやレスポンスがどのように処理されるべきかを記述するための情報であり、自己記述性を実現するために不可欠な要素です。各メッセージには、その意味を解釈するための必要な情報が含まれていなければなりません。</p>
+<h3 id="4-haipamedeiawozhuang-tai-qian-yi-noshou-duan-tosuru-hateoas">4. ハイパーメディアを状態遷移の手段とする（HATEOAS）</h3>
+<p>クライアントが次に何をすべきか、どこにアクセスすべきかを、サーバーから提供されるリンクなどのハイパーメディアによって誘導するという考え方です。ユーザーが今できる操作をリンクとしてレスポンスに含める設計は、この HATEOAS の実践例となります。</p>
+<p>このうち最後の「ハイパーメディアによる制御（HATEOAS）」は特に難解で、現場であまり使われていない要素でもあります。</p>
+<h2 id="shi-li-nijian-ru-rest-de-nashe-ji-nojia-zhi">実例に見る REST 的な設計の価値</h2>
+<p>筆者がかつて開発したワークフローシステムでは、REST の考え方を部分的に応用しました。あるドキュメントを表示したとき、ユーザーのロールとドキュメントの状態に応じて、そのユーザーが可能な操作（たとえば「承認」「却下」など）をリンクとしてレスポンスに含めて返す仕組みです。</p>
+<p>これにより、クライアント側は操作の可否を判断する必要がなくなり、表示されるボタンはサーバーからのレスポンスに基づいて決まります。</p>
+<p>これは完全な HATEOAS 実装ではありませんが、REST の設計思想に含まれる「状態遷移をサーバーが導く」という考え方を取り入れたものであり、結果として：</p>
+<ul>
+<li>セキュリティの強化</li>
+<li>フロントエンドの単純化</li>
+<li>API の保守性向上</li>
+</ul>
+<p>といった効果が得られました。</p>
+<h2 id="rest-to-http-api-wojian-fen-kerushi-dian">REST と HTTP API を見分ける視点</h2>
+<p>以下の視点から、自身の API が REST の設計原則に沿っているかを確認できます：</p>
+<ul>
+<li>URI はリソースの識別子として機能しているか？</li>
+<li>各リクエスト／レスポンスは自己記述的か？</li>
+<li>状態遷移の手段はハードコードされたルールではなく、サーバーが示しているか？</li>
+<li>クライアントは操作を URI ではなくリンクから知ることができるか？</li>
+</ul>
+<p>もし、これらの問いに十分に答えられない場合、それは REST ではなく、単なる HTTP API である可能性があります。</p>
+<h2 id="sarani-rest-wohuo-kasuniha">さらに REST を活かすには？</h2>
+<p>この文書では、REST と HTTP API の違いを中心に、REST の設計原則がどのように API 設計に影響を与えるかを見てきました。ここからは、実際の開発現場で REST の思想をより効果的に活用するためのヒントをいくつか紹介します。</p>
+<h3 id="zhuang-tai-tororuniying-zitacao-zuo-zhi-yu">状態とロールに応じた操作制御</h3>
+<p>業務アプリケーションでは、リソースの状態とユーザーのロールの組み合わせによって許可される操作が変化するケースが多くあります。これをサーバー側で判断し、可能な操作をリンクやアクションとして明示的に返すことで、クライアント実装を簡素化でき、セキュリティも高まります。</p>
+<h3 id="zhuang-tai-qian-yi-noshe-ji-to-rest-noqin-he-xing">状態遷移の設計と REST の親和性</h3>
+<p>REST の設計は、リソースが持つ状態とその状態の遷移を明確に表現することに向いています。状態遷移のルールをステートマシンのように定義し、それに応じたリンクやアクションを提供することで、API の意図がより明確になります。</p>
+<h3 id="rinkubesushe-ji-nodao-ru">リンクベース設計の導入</h3>
+<p>サーバーが「今できる操作」をリンクとして返す設計は、柔軟な UI 実装にもつながります。ユーザーごとに異なる操作権限や状態に対応しやすくなり、将来的な拡張にも強い設計となります。JSON:API や HAL などの仕様もこの設計を後押ししてくれるでしょう。</p>
+<h3 id="she-ji-duan-jie-de-rest-noyuan-ze-woqu-riru-reru">設計段階で REST の原則を取り入れる</h3>
+<p>API 設計の初期段階から、REST の原則（リソースの識別、表現、操作、遷移）を意識することで、後々の拡張や保守が容易になります。機能ベースではなくリソースベースで考えることが、REST 的な設計の第一歩です。</p>
+<h3 id="ta-noji-shu-tonoshi-ifen-kewoyi-shi-suru">他の技術との使い分けを意識する</h3>
+<p>GraphQL や gRPC のような技術も、特定の要件においては有力な選択肢となります。ただし、状態管理や疎結合を求められるシーンでは、REST の設計が引き続き有効である場面も多くあります。目的に応じて使い分ける視点を持つことが重要です。</p>
+<h2 id="owarini">おわりに</h2>
+<p>REST は単なる技術用語ではなく、Web システムを健全に保ち、拡張性・保守性・安全性を高めるための設計思想です。</p>
+<p>HTTP API はその実装手段のひとつでしかなく、REST の本質を理解せずに API を設計してしまうと、思わぬ形で拡張性やセキュリティに問題が生じることがあります。</p>
+<p>この文書を通じて、REST と HTTP API の違いを見極める力を身につけ、より良い API 設計につなげていただければ幸いです。</p>
+
+      
+  </article>
+</section>
+
+
+
+       
+
+      <footer>
+        
+          
+          
+<figure class="mini_logo ">
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io" style="background-image: url(/img/profile.jpg)"></a>
+</figure>
+<h5>
+    <a href="https:&#x2F;&#x2F;niikunihiro.github.io">Niiko thought at that time</a>
+</h5>
+
+          
+<ul class="social_list foot_list">
+    
+
+
+
+<li class="button extra_small font_faint">
+    <a href="https:&#x2F;&#x2F;github.com&#x2F;niikunihiro" target="_blank">niikunihiro</a>
+    <i class="fab fa-github"></i>
+</li>
+
+
+
+
+
+</ul>
+
+          
+<select id="theme_selector" size=1>
+    <option value="default" selected>default</option>
+    
+    <option value="dark">dark</option>
+    
+</select>
+
+        
+      </footer>
+    </body>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</html>
